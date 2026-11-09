@@ -30,7 +30,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: node scripts/pages-status.mjs
-      - uses: actions/configure-pages@v5
+      - uses: actions/configure-pages@v6
         if: steps.pages.outputs.enabled == 'true'
       - name: Upload the only Pages artifact
         if: steps.pages.outputs.enabled == 'true'
