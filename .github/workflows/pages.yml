@@ -5,50 +5,48 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
+  pages: write
+  id-token: write
 concurrency:
   group: github-pages
   cancel-in-progress: false
 jobs:
-  build:
+  publish:
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    permissions:
-      contents: read
-      pages: read
-    outputs:
-      enabled: ${{ steps.pages.outputs.enabled }}
-    steps:
-      - uses: actions/checkout@v6
-      - uses: actions/setup-node@v6
-        with:
-          node-version: '24'
-          package-manager-cache: false
-      - run: npm ci --ignore-scripts
-      - run: npm run check
-      - name: Check Pages configuration
-        id: pages
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: node scripts/pages-status.mjs
-      - uses: actions/configure-pages@v5
-        if: steps.pages.outputs.enabled == 'true'
-      - name: Upload the only Pages artifact
-        if: steps.pages.outputs.enabled == 'true'
-        uses: actions/upload-pages-artifact@v4
-        with:
-          path: _site
-  deploy:
-    if: needs.build.outputs.enabled == 'true'
-    needs: build
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    permissions:
-      pages: write
-      id-token: write
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      url: ${{ steps.deploy.outputs.page_url }}
     steps:
-      - name: Deploy
-        id: deployment
-        uses: actions/deploy-pages@v4
+      - uses: actions/checkout@v6
+      - name: Check Pages setup
+        id: setup
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          node --input-type=module <<'JS'
+          import { appendFileSync } from 'node:fs';
+          const r = await fetch(`${process.env.GITHUB_API_URL}/repos/${process.env.GITHUB_REPOSITORY}/pages`, {
+            headers: { Authorization: `Bearer ${process.env.GH_TOKEN}`, Accept: 'application/vnd.github+json' }
+          });
+          if (!r.ok && r.status !== 404) throw Error(`Pages API: ${r.status}`);
+          const enabled = r.ok && (await r.json()).build_type === 'workflow';
+          appendFileSync(process.env.GITHUB_OUTPUT, `enabled=${enabled}\n`);
+          if (!enabled) appendFileSync(process.env.GITHUB_STEP_SUMMARY,
+            'Select **Settings → Pages → Source: GitHub Actions**, then run **Actions → Pages → Run workflow** on `main`.');
+          JS
+      - name: Prepare the page
+        if: steps.setup.outputs.enabled == 'true'
+        run: |
+          mkdir _site
+          cp pizza-computational-lab.html LICENSE _site/
+          touch _site/.nojekyll
+      - uses: actions/configure-pages@v5
+        if: steps.setup.outputs.enabled == 'true'
+      - uses: actions/upload-pages-artifact@v4
+        if: steps.setup.outputs.enabled == 'true'
+        with:
+          path: _site
+      - uses: actions/deploy-pages@v4
+        if: steps.setup.outputs.enabled == 'true'
+        id: deploy
