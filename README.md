@@ -25,6 +25,22 @@ Uno spazio di [Luca Amore](https://www.lucaamore.com) per ideare ricette, costru
 - **Esplorazione:** formule documentate, catalogo farine e curve esplorative della fermentazione.
 - **Lingue ed esportazione:** interfaccia italiana e inglese, scheda stampabile, PDF e calendario.
 
+#### L’app in azione
+
+**Esplora la lievitazione sul grafico.** La curva mostra sviluppo relativo, finestra consigliata stimata e orario della prima infornata; il cursore permette di esplorare una durata prima di confermarla. Le curve sono simulazioni indicative, non misure o previsioni validate.
+
+[![Grafico interattivo della lievitazione: curva di sviluppo, finestra consigliata e cursore della durata](assets/screenshots/pizza-lab-fermentation.jpg)](assets/screenshots/pizza-lab-fermentation.jpg)
+
+**Progetta il tuo impasto.** Metodo, idratazione, ingredienti e riepilogo del programma in un’unica interfaccia.
+
+[![Panoramica di Pizza Computational Lab con configurazione dell’impasto e ingredienti calcolati](assets/screenshots/pizza-lab-overview.jpg)](assets/screenshots/pizza-lab-overview.jpg)
+
+**Segui il viaggio dell’impasto.** Una timeline mette in relazione impasto Bimby, lievitazione, staglio, appretto e forno.
+
+[![Timeline delle lavorazioni con le fasi dell’impasto e gli orari programmati](assets/screenshots/pizza-lab-timeline.jpg)](assets/screenshots/pizza-lab-timeline.jpg)
+
+*Screenshot dell’app in italiano. Clicca sulle immagini per aprirle a dimensione originale.*
+
 #### Online oppure sul tuo PC
 
 Puoi scegliere come utilizzare il laboratorio:
@@ -60,6 +76,10 @@ A space by [Luca Amore](https://www.lucaamore.com) to develop recipes, build sma
 - **Quantities and workflow:** calculated ingredients, Bimby/Thermomix TM5/TM6/TM7 instructions, and a preparation timeline.
 - **Exploration:** documented formulas, a flour catalog, and exploratory fermentation curves.
 - **Languages and export:** Italian and English interface, printable recipe sheet, PDF, and calendar export.
+
+#### See the app in action
+
+[View the screenshots ↑](#lapp-in-azione): explore the interactive fermentation graph, dough configuration, and preparation timeline. Screenshots show the Italian interface; the app is also available in English. The curves are illustrative simulations, not validated predictions.
 
 #### Online or on your computer
 
