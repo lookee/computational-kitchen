@@ -1,0 +1,22 @@
+name: Experiment proposal / Nuovo esperimento
+description: Improve the kitchen with a concrete use case or a documented model.
+title: "[Idea] "
+body:
+  - type: textarea
+    id: usecase
+    attributes:
+      label: What are you trying to do?
+      description: English or Italian. Describe a concrete need.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed behaviour and alternatives
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Sources, assumptions or observations
+      description: For flour, fermentation or appliance changes, include primary sources and units where available.

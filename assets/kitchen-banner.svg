@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 430" role="img" aria-labelledby="title desc">
+  <title id="title">Computational Kitchen — Flour. Water. Algorithms.</title>
+  <desc id="desc">A white laboratory notebook with orange and green accents, an equation and an abstract pizza orbit.</desc>
+  <defs>
+    <pattern id="grid" width="28" height="28" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="1" fill="#dce2df"/></pattern>
+  </defs>
+  <rect width="1280" height="430" rx="20" fill="#fff"/>
+  <rect x="1" y="1" width="1278" height="428" rx="20" fill="url(#grid)" stroke="#dce2df"/>
+  <path d="M55 55h48" stroke="#ed6b35" stroke-width="5"/>
+  <g font-family="ui-monospace, SFMono-Regular, Consolas, monospace">
+    <text x="55" y="96" font-size="16" letter-spacing="4" fill="#57705f">LUCA AMORE / EXPERIMENT 001</text>
+    <text x="51" y="176" font-size="57" font-weight="700" fill="#182e26">Computational</text>
+    <text x="51" y="242" font-size="57" font-weight="700" fill="#182e26">Kitchen<tspan fill="#ed6b35">_</tspan></text>
+    <text x="55" y="296" font-size="21" fill="#52615a">Flour. Water. Algorithms.</text>
+    <text x="55" y="367" font-size="16" fill="#52615a">git commit -m "let it rise"</text>
+  </g>
+  <g transform="translate(1020 204)">
+    <circle r="143" fill="#f7faf7" stroke="#d1ded4"/>
+    <circle r="113" fill="none" stroke="#182e26" stroke-width="2"/>
+    <ellipse rx="166" ry="58" fill="none" stroke="#ed6b35" stroke-width="2" transform="rotate(-32)"/>
+    <circle cx="139" cy="-89" r="9" fill="#ed6b35"/>
+    <path d="M0-75 65 40H-65Z" fill="#fff3e6" stroke="#ed6b35" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M-60 41Q0 64 60 41" fill="none" stroke="#c5a478" stroke-width="12" stroke-linecap="round"/>
+    <g fill="#ed6b35"><circle cy="-27" r="9"/><circle cx="-22" cy="13" r="8"/><circle cx="25" cy="19" r="8"/></g>
+    <text x="0" y="121" text-anchor="middle" font-family="ui-monospace, monospace" font-size="16" fill="#182e26">F + H₂O + t → pizza</text>
+  </g>
+</svg>

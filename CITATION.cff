@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If you use this software in your work, please cite this repository and the exact commit or release you used."
+title: "Computational Kitchen: Pizza Computational Lab"
+type: software
+authors:
+  - family-names: Amore
+    given-names: Luca
+    website: "https://www.lucaamore.com"
+version: 0.1.0
+date-released: 2026-11-09
+license: GPL-3.0-only
+repository-code: "https://github.com/lookee/computational-kitchen"
+url: "https://github.com/lookee/computational-kitchen"
+abstract: "An open-source playground for AI-assisted experimental recipes, starting with a static, bilingual pizza dough planner with explicit equations, Thermomix procedures and exploratory fermentation models."
+keywords:
+  - pizza
+  - dough
+  - fermentation
+  - computational cooking

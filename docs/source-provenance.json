@@ -1,0 +1,12 @@
+{
+  "source": "Pizza Lab Playground standalone HTML",
+  "source_version": 21,
+  "source_commit": "3a1b9bf37d6980800b6b0706db96a6cb0e00f940",
+  "sha256": "617397431a2ad31a56f68670aa4111740859a0a51a1246446e4f7110e4fd85e7",
+  "date": "2026-11-09",
+  "distribution_changes": [
+    "Product title and hero renamed to Pizza Computational Lab",
+    "Source download filename updated; recipe engine unchanged"
+  ],
+  "distributed_sha256": "2d5d657ab8f11700a396f9994ab1825533bbbd8a3a5820c3608b72bfdc762009"
+}
