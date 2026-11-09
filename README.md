@@ -1,5 +1,7 @@
 # Computational Kitchen
 
+[![Margherita scientifica tra equazioni e luce — Scientific margherita pizza with equations](assets/images/margherita-scientifica.png)](assets/images/margherita-scientifica.png)
+
 ### 🍕 [Pizza Computational Lab (Bimby / Thermomix) →](https://lookee.github.io/computational-kitchen/pizza-computational-lab.html)
 
 [Italiano](#italiano) · [English](#english)
