@@ -1,6 +1,6 @@
 # Computational Kitchen
 
-### 🍕 [Pizza Computational Lab →](https://lookee.github.io/computational-kitchen/pizza-computational-lab.html)
+### 🍕 [Pizza Computational Lab (Bimby / Thermomix) →](https://lookee.github.io/computational-kitchen/pizza-computational-lab.html)
 
 [Italiano](#italiano) · [English](#english)
 
@@ -16,7 +16,7 @@ Uno spazio di [Luca Amore](https://www.lucaamore.com) per ideare ricette, costru
 
 **Il primo progetto di Computational Kitchen:** un laboratorio interattivo dedicato alla pizza, per progettare l’impasto dalle quantità alla prima infornata.
 
-**[Apri Pizza Computational Lab →](https://lookee.github.io/computational-kitchen/pizza-computational-lab.html)**
+**[Apri Pizza Computational Lab (Bimby) →](https://lookee.github.io/computational-kitchen/pizza-computational-lab.html)**
 
 - **Metodi di impasto:** diretto, poolish e biga, con autolisi e frigorifero opzionali.
 - **Dosi e lavorazioni:** ingredienti calcolati, passaggi Bimby TM5/TM6/TM7 e timeline delle lavorazioni.
@@ -47,7 +47,7 @@ A space by [Luca Amore](https://www.lucaamore.com) to develop recipes, build sma
 
 **The first project in Computational Kitchen:** an interactive pizza lab for planning your dough, from ingredient quantities to the first bake.
 
-**[Open Pizza Computational Lab →](https://lookee.github.io/computational-kitchen/pizza-computational-lab.html)**
+**[Open Pizza Computational Lab (Thermomix) →](https://lookee.github.io/computational-kitchen/pizza-computational-lab.html)**
 
 - **Dough methods:** direct dough, poolish, and biga, with optional autolyse and refrigeration.
 - **Quantities and workflow:** calculated ingredients, Bimby/Thermomix TM5/TM6/TM7 instructions, and a preparation timeline.
