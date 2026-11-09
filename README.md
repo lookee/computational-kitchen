@@ -23,9 +23,14 @@ Uno spazio di [Luca Amore](https://www.lucaamore.com) per ideare ricette, costru
 - **Esplorazione:** formule documentate, catalogo farine e curve esplorative della fermentazione.
 - **Lingue ed esportazione:** interfaccia italiana e inglese, scheda stampabile, PDF e calendario.
 
-#### Uso offline
+#### Online oppure sul tuo PC
 
-L’app è contenuta in un solo file: [pizza-computational-lab.html](pizza-computational-lab.html). Scaricalo e aprilo nel browser: funziona anche offline, senza installazioni, account o chiavi API.
+Puoi scegliere come utilizzare il laboratorio:
+
+- **Online:** [apri Pizza Computational Lab (Bimby)](https://lookee.github.io/computational-kitchen/pizza-computational-lab.html) e usalo direttamente nel browser.
+- **Sul tuo PC, anche offline:** apri la pagina online e premi **↓ Sorgente HTML** in fondo alla pagina. Salva il file [pizza-computational-lab.html](pizza-computational-lab.html) sul computer e aprilo con il browser quando vuoi, anche senza connessione.
+
+L’app è contenuta in un solo file e non richiede installazioni, account o chiavi API.
 
 L’app non integra un servizio AI; le curve sono simulazioni indicative, non previsioni validate.
 
@@ -54,9 +59,14 @@ A space by [Luca Amore](https://www.lucaamore.com) to develop recipes, build sma
 - **Exploration:** documented formulas, a flour catalog, and exploratory fermentation curves.
 - **Languages and export:** Italian and English interface, printable recipe sheet, PDF, and calendar export.
 
-#### Offline use
+#### Online or on your computer
 
-The app is contained in a single file: [pizza-computational-lab.html](pizza-computational-lab.html). Download it and open it in your browser: it also works offline, with no installation, account, or API keys required.
+Choose how you want to use the lab:
+
+- **Online:** [open Pizza Computational Lab (Thermomix)](https://lookee.github.io/computational-kitchen/pizza-computational-lab.html) and use it directly in your browser.
+- **On your computer, including offline:** open the online page and click **↓ HTML source** at the bottom. Save [pizza-computational-lab.html](pizza-computational-lab.html) to your computer, then open it in your browser whenever you like, even without an internet connection.
+
+The app is contained in a single file and requires no installation, account, or API keys.
 
 The app does not integrate an AI service; its curves are illustrative simulations, not validated predictions.
 
