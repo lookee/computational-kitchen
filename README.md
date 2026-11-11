@@ -34,7 +34,7 @@ Il progetto nasce dalla curiosità di unire cucina, matematica e sviluppo softwa
 | **Progetta** | Diretto, poolish e biga; autolisi e frigo opzionali | 11 varianti; stampi tondi, ciambelle e plumcake |
 | **Confronta** | Farine, idratazione e curve di fermentazione | 10 farine commerciali, incluse 4 Caputo; formulazioni e nutrienti |
 | **Esplora** | Finestre di lievitazione; alveolatura 3D del cornicione, stesura e cottura | Popolazione 3D di bolle, crescita, coalescenza e consolidamento |
-| **Prepara** | Passaggi Bimby e timeline con orari | Modalità cucina, timer e sonda al cuore opzionale, attiva di default |
+| **Prepara** | Passaggi Bimby, timeline e modalità cucina con timer e conferme manuali | Modalità cucina, timer e sonda al cuore opzionale, attiva di default |
 | **Conserva** | Scheda stampabile, PDF e calendario | Quaderno esperimenti, import/export JSON e stampa/PDF |
 | **Interfaccia** | Italiano / English | Italiano / English |
 | **Entra** | **[Apri Pizza Lab →](https://lookee.github.io/computational-kitchen/pizza-computational-lab.html)** | **[Apri Yogurt Lab →](https://lookee.github.io/computational-kitchen/yogurt-computational-lab.html)** |
@@ -94,7 +94,7 @@ This project brings together cooking, mathematics and software. AI helps design 
 | **Design** | Direct dough, poolish and biga; optional autolyse and cold fermentation | 11 variations; round, ring and loaf pans |
 | **Compare** | Flours, hydration and fermentation curves | 10 branded flours, including 4 Caputo profiles; formulations and nutrients |
 | **Explore** | Fermentation windows; 3D rim gas cells, shaping and baking | A 3D bubble population: growth, coalescence and matrix setting |
-| **Bake** | Thermomix steps and a preparation timeline | Cooking mode, manual timers and optional core-temperature readings, enabled by default |
+| **Bake** | Thermomix steps, preparation timeline and cooking mode with manual timers and confirmations | Cooking mode, manual timers and optional core-temperature readings, enabled by default |
 | **Keep** | Printable recipe, PDF and calendar export | Experiment notebook, JSON import/export and print/PDF |
 | **Interface** | English / Italian | English / Italian |
 | **Start** | **[Open Pizza Lab →](https://lookee.github.io/computational-kitchen/pizza-computational-lab.html)** | **[Open Yogurt Lab →](https://lookee.github.io/computational-kitchen/yogurt-computational-lab.html)** |

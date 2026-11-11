@@ -70,6 +70,36 @@ and copyright notices, included alongside their font data.
 @media(max-width:780px){.pc-body{padding:18px 14px}.pc-intro{flex-wrap:wrap;gap:6px}.pc-intro h3{font-size:30px}.pc-scene canvas{height:290px}.pc-grid{gap:15px 12px}.pc-stages{grid-template-columns:repeat(2,minmax(0,1fr))}.pc-readings strong{font-size:26px}.pc-controls-top{align-items:start}.pc-controls-top strong{font-size:13px}.pc-plane{flex-wrap:wrap}.pc-toolbar{gap:8px}.pc-badge{font-size:8px}}
 
 </style>
+<style id="pizza-kitchen-style">
+/* Same dialog, typography, spacing and controls as Yogurt Lab's cooking mode. */
+#kitchenDialog{border:1px solid #cbd8bf;border-radius:20px;background:var(--panel);color:var(--ink);width:min(680px,calc(100vw - 28px));max-height:94dvh;padding:0;box-shadow:0 24px 130px #1c2c1940;box-sizing:border-box}
+#kitchenDialog::backdrop{background:#18220f88;backdrop-filter:blur(5px)}
+#kitchenDialog .kitchen-shell{padding:28px 32px}
+#kitchenDialog .kitchen-top{display:flex;justify-content:space-between;gap:20px;align-items:center}
+#kitchenDialog .kitchen-top .eyebrow{font:9px var(--mono);margin:0;letter-spacing:.18em;color:var(--green)}
+#kitchenDialog .kitchen-progress{height:4px;border-radius:5px;background:#e3eadc;margin:24px 0}
+#kitchenDialog .kitchen-progress i{display:block;background:var(--green);height:100%;transition:width .2s}
+#kitchenDialog .micro-label{display:inline-block;font:9px/1.5 var(--mono);color:var(--green);letter-spacing:.07em;margin:10px 0 0}
+#kitchenDialog #kitchenTitle{font:34px/1.15 Georgia,serif;letter-spacing:-.02em;margin:12px 0 20px;overflow-wrap:anywhere}
+#kitchenDialog .machine-setting{font:10px/1.7 var(--mono);display:inline-block;background:#e6f0db;border:1px solid #c9d9b8;border-radius:5px;padding:6px 9px;color:#31551b;white-space:normal}
+#kitchenDialog #kitchenText{font-size:14px;color:var(--muted);line-height:1.85;margin:20px 0}
+#kitchenDialog #kitchenText p{margin:0 0 12px}
+#kitchenDialog #kitchenTimer{font:66px/1.2 Georgia,serif;text-align:center;font-variant-numeric:tabular-nums;margin:25px 0 5px}
+#kitchenDialog .hint{font-size:11px;color:var(--muted);margin:10px 0 0;line-height:1.65}
+#kitchenDialog #timerState{text-align:center}
+#kitchenDialog .kitchen-buttons{display:flex;gap:10px;justify-content:center;margin:20px 0 26px}
+#kitchenDialog .kitchen-navigation{display:flex;justify-content:space-between;gap:12px;border-top:1px solid var(--line);padding-top:22px;margin-top:24px}
+#kitchenDialog .secondary{background:#fff;border:1px solid #c6d2ba;color:var(--ink);border-radius:8px;padding:9px 12px;font-size:11px;line-height:1.5;display:inline-block;min-height:38px}
+#kitchenDialog .secondary:hover{background:#eef3e7}
+#kitchenDialog .primary-small,.kitchen-entry{background:var(--green);border-color:var(--green);color:white}
+#kitchenDialog .primary-small:hover,.kitchen-entry:hover{background:#355b20;color:white}
+#kitchenDialog .kitchen-overlap{background:#f1f6e9;border:1px solid var(--line);border-radius:7px;padding:10px 12px}
+#kitchenDialog .kitchen-schedule{font:10px/1.7 var(--mono)}
+#kitchenDialog #kitchenFeedback:empty{display:none}
+@media(max-width:780px){#kitchenDialog .kitchen-shell{padding:20px}#kitchenDialog .kitchen-top .eyebrow{font-size:8px}#kitchenDialog .kitchen-top .secondary{font-size:10px}#kitchenDialog #kitchenTitle{font-size:31px}#kitchenDialog #kitchenText{font-size:14px}#kitchenDialog #kitchenTimer{font-size:60px}#kitchenDialog .kitchen-navigation .secondary{font-size:11px}}
+@media print{#kitchenDialog{display:none!important}}
+
+</style>
 </head><body><div class="shell"><header><a class="brand" href="#"><span class="mark" aria-hidden="true">⌘</span><div><strong>NEOTOKIO</strong><span class="small">PIZZA LAB / V.0.1.0</span></div></a><div class="header-right"><a class="device-badge" href="#bimbySelect" aria-label="Modello Bimby selezionato"><span>Bimby®</span><strong id="bimbyBadge">TM6</strong></a><span class="status">Computational kitchen</span><a href="#fermentationLab">Grafici ↗</a><a href="#theory">Le formule ↗</a><label class="language-control" data-no-translate><span class="sr-only">Lingua / Language</span><select id="languageSelect" aria-label="Lingua / Language"><option value="it">Italiano</option><option value="en">English</option></select></label></div></header>
 <section class="hero"><div><div class="eyebrow">Farina. Acqua. Algoritmi.</div><h1>Pizza<br><em>Computational<br>Lab</em><span class="hero-device">per Bimby®</span></h1><p>Dal primo giro di Spiga all’ultima infornata. Progetta dosi, prefermenti e orari: il tuo laboratorio per la pizza, con Bimby.</p></div><div class="orbit" aria-hidden="true"><div class="orbit-inner"><div><b id="orbHydro">65<span style="font-size:20px">%</span></b><small>IDRATAZIONE</small></div></div><div class="sat">F + H₂O + t → 🍕</div></div></section>
 <main class="workspace"><aside class="sidebar"><div class="config-title"><strong>Il tuo esperimento</strong><span>INPUT / 01</span></div><form id="config" novalidate><div class="form-section device-config"><div class="section-label">00 / Il tuo Bimby</div><label class="field"><span>Modello Bimby®</span><select name="bimby" id="bimbySelect"><option value="TM6">Bimby® TM6</option><option value="TM5">Bimby® TM5</option><option value="TM7">Bimby® TM7</option></select></label><p class="hint">Passaggi adattati al modello selezionato.</p></div>
@@ -110,8 +140,8 @@ and copyright notices, included alongside their font data.
 <label class="field"><span>Cottura / pizza</span><span class="input-wrap"><input name="bakeMinutes" type="number" min="2" max="20" step="0.5" value="4"><small>min</small></span></label>
 <label class="field full"><span>Recupero forno tra pizze</span><span class="input-wrap"><input name="gap" type="number" min="0" max="10" step="0.5" value="1"><small>min</small></span></label></div><p class="hint">400 g di farina e 900 g di impasto per lotto sono limiti prudenziali scelti per questa pagina, non capacità certificate del modello. Rispetta il manuale e controlla lo sforzo del motore. Tempi del forno indicativi, da adattare al tuo apparecchio.</p></div></details>
 <div class="form-actions"><p class="hint" id="autoCalcStatus" role="status">Calcolo automatico: ingredienti, curva e orari si aggiornano mentre modifichi i parametri.</p></div><div class="form-footer">Dati salvati solo in questo browser. Nessun account aggiuntivo.</div></form></aside>
-<section id="result" aria-label="Ricetta e programma"><div class="print-title"><h1>NEOTOKIO / Pizza Lab</h1><p id="printSubtitle"></p></div><div id="error" class="error" role="alert" hidden></div><div id="stale" class="stale" hidden>Completa o correggi i parametri: il piano si aggiorna automaticamente.</div><div id="output"><div class="viewbar"><div class="eyebrow" id="resultLabel">OUTPUT / IL TUO PIANO</div><div class="actions"><button class="secondary" type="button" id="copyBtn">Copia ricetta</button><button class="secondary" type="button" id="calendarBtn">↓ Calendario</button><button class="secondary" type="button" id="printBtn">Anteprima e stampa</button><button class="secondary pdf-primary" type="button" id="pdfBtn">↓ PDF ricetta</button></div></div><div class="metrics" id="metrics"></div><div id="warnings"></div><div class="card"><div class="card-head"><h2><span>01</span>Il bilancio degli ingredienti</h2><span class="pill" id="methodPill">DIRETTO</span></div><div class="ingredients" id="ingredients"></div><div id="split"></div><div class="card-note" id="massNote"></div></div>
-<section class="card ff-card" id="fermentationLab" aria-labelledby="fermentationTitle"><div class="card-head"><h2 id="fermentationTitle"><span>LAB</span>La finestra di lievitazione</h2><a href="#ffDocumentation">Come leggere la curva ↗</a></div><div id="fermentationBody" data-no-translate></div></section><section class="card" id="alveolationLab" aria-labelledby="pizzaCrumbTitle" data-no-translate><div class="card-head"><h2 id="pizzaCrumbTitle"><span>LAB</span>Dentro il cornicione</h2></div><div id="pizzaCrumbBody" class="pc-body"></div></section><section class="card timeline-overview" aria-labelledby="overviewTitle"><div class="card-head"><h2 id="overviewTitle"><span>02</span>Il viaggio dell’impasto</h2><span class="pill">TUTTE LE FASI</span></div><div class="overview"><p class="overview-copy">Un colpo d’occhio dal primo ingrediente all’ultima pizza. Le barre condividono la stessa scala temporale.</p><section class="live-dashboard" aria-label="Avanzamento in tempo reale"><div class="live-top"><span class="live-indicator">IN TEMPO REALE</span><time id="liveClock"></time></div><div class="overall-line"><strong id="overallState"></strong><span id="overallPercent"></span></div><div class="live-meter overall-meter" id="overallProgress" role="progressbar" aria-label="Avanzamento temporale del programma" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i></i></div><p id="liveFocus" class="live-focus" aria-live="polite"></p><p id="nextAction" class="next-action"></p><div class="live-bottom"><span id="confirmationSummary"></span><button type="button" class="secondary" id="focusActionBtn" disabled>Vai all’azione →</button></div></section><div class="gantt-scroll" tabindex="0" aria-label="Timeline di tutte le fasi; su schermi piccoli scorri orizzontalmente"><div id="phaseOverview" class="gantt"></div></div><p class="gantt-note">La linea arancio indica «Adesso» quando il programma è in corso. Il forno comprende preriscaldamento e infornate: la sovrapposizione con l’appretto è intenzionale. Per fasi molto brevi la barra ha una larghezza minima visibile; gli orari riportano la durata esatta.</p><div id="overviewRange" class="overview-range"></div></div></section><div class="card timeline-card"><div class="card-head"><h2><span>03</span>Passo per passo · Bimby e tempi</h2><span class="pill" id="durationPill"></span></div><div class="phase-bar" id="phaseBar" aria-hidden="true"></div><div class="stats-inline" id="scheduleSummary"></div><div class="timeline-legend"><span><i class="dot"></i>MANI IN PASTA</span><span><i class="dot wait"></i>ATTESA</span><span><i class="dot parallel"></i>IN PARALLELO</span></div><div class="timeline" id="timeline"></div><div class="card-note">Barre e countdown misurano il tempo previsto, non rilevano l’esecuzione del Bimby. Conferma manualmente le azioni: bolle, volume e consistenza decidono quando l’impasto è pronto. Il piano si riferisce a pizza tonda e lievito di birra fresco.</div></div>
+<section id="result" aria-label="Ricetta e programma"><div class="print-title"><h1>NEOTOKIO / Pizza Lab</h1><p id="printSubtitle"></p></div><div id="error" class="error" role="alert" hidden></div><div id="stale" class="stale" hidden>Completa o correggi i parametri: il piano si aggiorna automaticamente.</div><div id="output"><div class="viewbar"><div class="eyebrow" id="resultLabel">OUTPUT / IL TUO PIANO</div><div class="actions"><button class="secondary" type="button" id="copyBtn">Copia ricetta</button><button class="secondary" type="button" id="calendarBtn">↓ Calendario</button><button class="secondary" type="button" id="printBtn">Anteprima e stampa</button><button class="secondary pdf-primary" type="button" id="pdfBtn">↓ PDF ricetta</button><button type="button" class="secondary kitchen-entry" id="openKitchen" data-no-translate disabled>Modalità cucina →</button></div></div><div class="metrics" id="metrics"></div><div id="warnings"></div><div class="card"><div class="card-head"><h2><span>01</span>Il bilancio degli ingredienti</h2><span class="pill" id="methodPill">DIRETTO</span></div><div class="ingredients" id="ingredients"></div><div id="split"></div><div class="card-note" id="massNote"></div></div>
+<section class="card ff-card" id="fermentationLab" aria-labelledby="fermentationTitle"><div class="card-head"><h2 id="fermentationTitle"><span>LAB</span>La finestra di lievitazione</h2><a href="#ffDocumentation">Come leggere la curva ↗</a></div><div id="fermentationBody" data-no-translate></div></section><section class="card" id="alveolationLab" aria-labelledby="pizzaCrumbTitle" data-no-translate><div class="card-head"><h2 id="pizzaCrumbTitle"><span>LAB</span>Dentro il cornicione</h2></div><div id="pizzaCrumbBody" class="pc-body"></div></section><section class="card timeline-overview" aria-labelledby="overviewTitle"><div class="card-head"><h2 id="overviewTitle"><span>02</span>Il viaggio dell’impasto</h2><span class="pill">TUTTE LE FASI</span></div><div class="overview"><p class="overview-copy">Un colpo d’occhio dal primo ingrediente all’ultima pizza. Le barre condividono la stessa scala temporale.</p><section class="live-dashboard" aria-label="Avanzamento in tempo reale"><div class="live-top"><span class="live-indicator">IN TEMPO REALE</span><time id="liveClock"></time></div><div class="overall-line"><strong id="overallState"></strong><span id="overallPercent"></span></div><div class="live-meter overall-meter" id="overallProgress" role="progressbar" aria-label="Avanzamento temporale del programma" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i></i></div><p id="liveFocus" class="live-focus" aria-live="polite"></p><p id="nextAction" class="next-action"></p><div class="live-bottom"><span id="confirmationSummary"></span><button type="button" class="secondary" id="focusActionBtn" disabled>Vai all’azione →</button></div></section><div class="gantt-scroll" tabindex="0" aria-label="Timeline di tutte le fasi; su schermi piccoli scorri orizzontalmente"><div id="phaseOverview" class="gantt"></div></div><p class="gantt-note">La linea arancio indica «Adesso» quando il programma è in corso. Il forno comprende preriscaldamento e infornate: la sovrapposizione con l’appretto è intenzionale. Per fasi molto brevi la barra ha una larghezza minima visibile; gli orari riportano la durata esatta.</p><div id="overviewRange" class="overview-range"></div></div></section><div class="card timeline-card"><div class="card-head"><h2><span>03</span>Passo per passo · Bimby e tempi</h2><button type="button" class="secondary kitchen-entry" id="openKitchen2" data-no-translate disabled>Apri modalità cucina →</button><span class="pill" id="durationPill"></span></div><div class="phase-bar" id="phaseBar" aria-hidden="true"></div><div class="stats-inline" id="scheduleSummary"></div><div class="timeline-legend"><span><i class="dot"></i>MANI IN PASTA</span><span><i class="dot wait"></i>ATTESA</span><span><i class="dot parallel"></i>IN PARALLELO</span></div><div class="timeline" id="timeline"></div><div class="card-note">Barre e countdown misurano il tempo previsto, non rilevano l’esecuzione del Bimby. Conferma manualmente le azioni: bolle, volume e consistenza decidono quando l’impasto è pronto. Il piano si riferisce a pizza tonda e lievito di birra fresco.</div></div>
 <details class="card formula-card" id="theory"><summary>⌘ Formule matematiche · guida al modello</summary><section id="fermentationTheory" class="formula-body" data-no-translate></section><div class="formula-body" id="formulas"></div></details><div class="card"><div class="card-head"><h2><span>04</span>Due strumenti che fanno la differenza</h2></div><div class="formula-body"><div class="grid2"><div><h3>La temperatura si misura.</h3><p>Usa un termometro: il display del boccale non è una misura affidabile del cuore dell’impasto. Mira indicativamente a 23–25 °C a fine lavorazione, adattando acqua e pause. Qui non scaldiamo a 37 °C.</p></div><div><h3>Il lievito si pesa al decimo.</h3><p>Il lievito è mostrato al decimo di grammo. Usa una bilancia esterna adatta: la risoluzione del display non garantisce l’accuratezza della pesata. Le dosi inferiori a 0,1 g richiedono una pesata più fine. Olio e sale entrano nel rinnovo, mai nel prefermento.</p></div></div></div></div></div></section></main><section class="legal-notes" id="legalNotes" aria-label="Marchi e licenza"><div class="legal-head"><strong>Un laboratorio indipendente.</strong><a href="https://www.gnu.org/licenses/gpl-3.0.html" target="_blank" rel="noopener" class="license-badge" data-no-translate>GNU GPL v3</a></div><p>Bimby® e Thermomix® sono marchi registrati del gruppo Vorwerk. Pizza Computational Lab è un progetto indipendente, non affiliato, sponsorizzato o approvato da Vorwerk. I nomi dei modelli sono usati per identificare l’apparecchio a cui si riferiscono i passaggi.</p><p>Tempi e dosi sono indicativi: verifica l’impasto e segui sempre il manuale e i limiti del tuo apparecchio.</p><p><strong>© 2026 Luca Amore.</strong> Software libero rilasciato sotto GNU General Public License, versione 3 (GPL-3.0-only). Puoi usarlo, studiarlo, modificarlo e ridistribuirlo secondo la licenza. Fornito senza garanzia, nei limiti consentiti dalla legge.</p><div class="legal-actions"><a href="" download="pizza-computational-lab.html" id="sourceDownload">↓ Sorgente HTML</a><button type="button" class="small-btn" id="licenseDownload">↓ Licenza GPLv3</button><a href="https://cookidoo.it/foundation/it-IT/disclaimer" target="_blank" rel="noopener">Informazioni sul marchio ↗</a></div><details><summary>Testo integrale GNU GPL v3</summary><pre id="licenseText" data-no-translate lang="en">                    GNU GENERAL PUBLIC LICENSE
                        Version 3, 29 June 2007
 
@@ -787,6 +817,7 @@ the library.  If this is what you want to do, use the GNU Lesser General
 Public License instead of this License.  But first, please read
 &lt;https://www.gnu.org/licenses/why-not-lgpl.html&gt;.
 </pre></details><p class="third-party-note">I font incorporati nei PDF mantengono la licenza SIL Open Font License 1.1; le relative note sono incluse nel sorgente.</p></section><footer class="footer"><span>NEOTOKIO / PIZZA LAB · <a href="https://www.lucaamore.com" target="_blank" rel="noopener">Luca Amore · www.lucaamore.com</a></span><span>Modelli espliciti. Buona pizza. Nessuna magia.</span></footer></div><div class="toast" id="toast" role="status" hidden></div>
+<dialog id="kitchenDialog" aria-labelledby="kitchenTitle" data-no-translate><div class="kitchen-shell"><div class="kitchen-top"><span class="eyebrow" id="kitchenModeLabel">NEOTOKIO / MODALITÀ CUCINA</span><button type="button" class="secondary" id="closeKitchen" aria-label="Chiudi modalità cucina">Chiudi ×</button></div><div class="kitchen-progress" role="progressbar" aria-label="Avanzamento passaggi" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="kitchenProgressBar"><i id="kitchenProgress"></i></div><p class="micro-label" id="kitchenStepLabel"></p><h2 id="kitchenTitle"></h2><span id="kitchenSetting" class="machine-setting"></span><div id="kitchenText"></div><p class="hint kitchen-schedule" id="kitchenSchedule"></p><div id="kitchenTimer" role="timer" aria-label="Tempo rimanente">00:00</div><p class="hint" id="timerState">Timer manuale. Nessun collegamento al Bimby.</p><div class="kitchen-buttons"><button type="button" class="secondary primary-small" id="timerToggle">Avvia timer ▶</button><button type="button" class="secondary" id="timerReset">Ricomincia ↻</button></div><p class="hint kitchen-overlap" id="kitchenOverlap" hidden></p><div class="kitchen-navigation"><button type="button" class="secondary" id="previousStep">← Precedente</button><button type="button" class="secondary primary-small" id="nextStep">Conferma e continua →</button></div><p class="hint" id="kitchenConfirmHint">Conferma ogni operazione dopo averla eseguita. Il tempo trascorso da solo non la completa.</p><p id="kitchenFeedback" class="hint" role="status"></p></div></dialog>
 <dialog id="worksheetDialog" aria-labelledby="sheetDialogTitle"><div class="sheet-toolbar"><strong id="sheetDialogTitle">Scheda della ricetta</strong><div><button class="secondary" id="sheetPdfBtn" type="button">↓ Scarica PDF</button><button class="secondary" id="sheetPrintBtn" type="button">Stampa scheda</button><button class="secondary" id="sheetCloseBtn" type="button">Chiudi</button></div></div><div id="worksheetPreview"></div></dialog><div id="printSheet"></div><script id="pizza-engine">
 (function(root){'use strict';
 const defaults={method:'diretto',yeastMode:'auto',yeastRatio:0,curveReferenceHours:0,curvePrefReferenceHours:0,pizzaStyle:'manuale',oilPercent:0,n:4,peso:250,H:65,olio:0,temp:22,farina:'Caputo Pizzeria',prefPct:30,prefHydro:100,prefHours:12,prefTemp:20,prefYeast:.2,finalYeast:0,hours:24,useFridge:false,autolysis:false,autolysisMinutes:30,saltAfterMix:true,cold:16,manualProof:false,proof:6,coldTemp:4,anchor:'start',when:'',bimby:'TM6',batchFlour:400,model:'empirico',initialTemp:24,tau:2,ea:55,beta:1.2,oven:'ferrari',preheat:20,bakeMinutes:4,gap:1};
@@ -1294,7 +1325,7 @@ else if(e.title.startsWith('Infornata'))description=`Indicative baking time: ${p
 else throw Error('Missing English event: '+e.title);
 return{...e,title,description,tag:e.type==='parallel'?'IN PARALLEL':e.steps?p.bimby:'PLANNED STAGE',steps:e.steps?.map(s=>englishStep(s,r,e))};}
 function context(r,plan){dynamic.clear();for(const e of plan.events){const en=englishEvent(e,r);for(const k of ['title','description','tag'])if(e[k])dynamic.set(e[k],en[k]);e.steps?.forEach((s,i)=>{for(const k of ['title','text','setting'])dynamic.set(s[k],en.steps[i][k]);});}}
-function apply(scope){if(typeof document==='undefined')return;const walker=document.createTreeWalker(scope||document.body,NodeFilter.SHOW_TEXT);let n;while(n=walker.nextNode()){if(n.parentElement?.closest('script,style,code,math,input,textarea,[data-no-translate]'))continue;let state=states.get(n);if(!state||n.nodeValue!==state.output)state={source:n.nodeValue};const value=text(state.source);if(n.nodeValue!==value)n.nodeValue=value;state.output=value;states.set(n,state);}for(const el of (scope||document.body).querySelectorAll('[aria-label],[title]'))for(const k of ['aria-label','title']){const src=el.dataset['i18n'+k.replace('-','')];if(src)el.setAttribute(k,text(src));else if(el.hasAttribute(k)){el.dataset['i18n'+k.replace('-','')]=el.getAttribute(k);el.setAttribute(k,text(el.getAttribute(k)));}}}
+function apply(scope){if(typeof document==='undefined')return;const walker=document.createTreeWalker(scope||document.body,NodeFilter.SHOW_TEXT);let n;while(n=walker.nextNode()){if(n.parentElement?.closest('script,style,code,math,input,textarea,[data-no-translate]'))continue;let state=states.get(n);if(!state||n.nodeValue!==state.output)state={source:n.nodeValue};const value=text(state.source);if(n.nodeValue!==value)n.nodeValue=value;state.output=value;states.set(n,state);}for(const el of Array.from((scope||document.body).querySelectorAll('[aria-label],[title]')).filter(el=>!el.closest('[data-no-translate]')))for(const k of ['aria-label','title']){const src=el.dataset['i18n'+k.replace('-','')];if(src)el.setAttribute(k,text(src));else if(el.hasAttribute(k)){el.dataset['i18n'+k.replace('-','')]=el.getAttribute(k);el.setAttribute(k,text(el.getAttribute(k)));}}}
 function set(lang){language=lang==='en'?'en':'it';if(typeof document!=='undefined'){document.documentElement.lang=language;document.title=productTitle(language)+' · Luca Amore';}try{localStorage.setItem('pizza-lab-language',language);}catch{}}
 root.PizzaLanguage={get:()=>language,set,locale,number,text,apply,context,englishEvent,englishStep,productTitle};
 })(typeof window==='undefined'?globalThis:window);
@@ -2486,6 +2517,150 @@ root.PizzaFermentation={modelOptions:()=>({customW:state?.customW||270,capFactor
 })(typeof window==='undefined'?globalThis:window);
 
 </script>
+<script id="pizza-kitchen-model">
+/* Pizza Lab cooking agenda and manual wall-clock timer. GPL-3.0-only */
+(function(root){
+  'use strict';
+  function build(r,plan,lang='it',I=root.PizzaLanguage){
+    // Partition the existing schedule at every start/end boundary. A long wait
+    // must never hide a fold or a preheat, and overlapping bakes cannot be added
+    // sequentially to inflate the original schedule.
+    const items=plan.events.flatMap((event,i)=>{
+      const e=lang==='en'?I.englishEvent(event,r):event;
+      return event.steps?event.steps.map((step,j)=>({key:`step:${i}:${j}`,parent:`event:${i}`,
+        title:e.steps[j].title,text:e.steps[j].text,setting:e.steps[j].setting,
+        context:e.title,kind:step.kind,start:Math.round(event.start+step.minute*60000),
+        end:Math.round(event.start+(step.minute+step.duration)*60000)})): [{key:`event:${i}`,parent:null,
+        title:e.title,text:e.description,setting:e.tag||'',context:e.title,kind:event.type,
+        start:Math.round(event.start),end:Math.round(event.end)}];
+    }).filter(s=>s.end>s.start);
+    const boundaries=[...new Set(items.flatMap(s=>[s.start,s.end]))].sort((a,b)=>a-b),cards=[];
+    for(let i=0;i<boundaries.length-1;i++){
+      const start=boundaries[i],end=boundaries[i+1];
+      const active=items.filter(s=>s.start<end&&s.end>start);
+      if(!active.length){
+        const oven=start>=plan.firstBake,en=lang==='en';
+        const title=oven?(en?'Oven recovery':'Recupero termico del forno'):(en?'Scheduled wait':'Attesa del programma');
+        cards.push({id:`${start-plan.start}:${end-plan.start}:gap`,start,end,seconds:(end-start)/1000,
+          title,primary:[{title,setting:en?'Wait':'Attesa',text:oven?(en?'Allow the oven to recover before the next pizza. Follow the planned interval and check the stone.':'Lascia recuperare il forno prima della prossima pizza. Rispetta l’intervallo previsto e verifica la pietra.'):(en?'Wait until the next planned operation.':'Attendi la prossima operazione del programma.')}],background:[],contributors:[],confirmKeys:[],continuation:false,interrupted:false,parallel:false});
+        continue;
+      }
+      const actions=active.filter(s=>s.kind!=='wait'),primary=actions.length?actions:active;
+      const ending=active.filter(s=>Math.abs(s.end-end)<.01);
+      cards.push({id:`${start-plan.start}:${end-plan.start}:${active.map(s=>s.key).join(',')}`,
+        start,end,seconds:(end-start)/1000,title:primary.map(s=>s.title).join(' + '),
+        primary,background:active.filter(s=>!primary.includes(s)),
+        contributors:active.map(s=>({key:s.key,parent:s.parent})),
+        confirmKeys:ending.map(s=>s.key),continuation:primary.some(s=>s.start<start),
+        interrupted:active.some(s=>s.end>end),parallel:actions.length>1});
+    }
+    return cards;
+  }
+  function completed(card,values={},segments=[]){
+    return segments.includes(card.id)||(card.contributors.length>0&&card.contributors.every(s=>values[s.key]===true||(s.parent&&values[s.parent]===true)));
+  }
+  function firstPending(cards,values,segments){const i=cards.findIndex(c=>!completed(c,values,segments));return i<0?0:i;}
+  function reconcile(cards,segments,before,after){
+    const unchecked=new Set(Object.keys(before).filter(k=>before[k]===true&&after[k]!==true));
+    if(!unchecked.size)return segments;
+    const invalid=new Set(cards.filter(c=>c.contributors.some(s=>unchecked.has(s.key)||unchecked.has(s.parent))).map(c=>c.id));
+    return segments.filter(id=>!invalid.has(id));
+  }
+  function timer(seconds){return{running:false,deadline:0,remaining:Math.max(0,seconds)};}
+  function remaining(t,now=Date.now()){return Math.max(0,t.running?(t.deadline-now)/1000:t.remaining);}
+  function toggle(t,seconds,now=Date.now()){
+    if(t.running)return{...t,running:false,remaining:remaining(t,now)};
+    const left=t.remaining>0?t.remaining:seconds;
+    return{running:true,deadline:now+left*1000,remaining:left};
+  }
+  function expire(t,now=Date.now()){return t.running&&now>=t.deadline?timer(0):t;}
+  function clock(seconds){const s=Math.max(0,Math.ceil(seconds)),h=Math.floor(s/3600),m=Math.floor(s%3600/60),ss=String(s%60).padStart(2,'0');return h?`${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${ss}`:`${String(m).padStart(2,'0')}:${ss}`;}
+  const api={build,completed,firstPending,reconcile,timer,remaining,toggle,expire,clock};root.PizzaKitchen=api;
+  if(typeof module!=='undefined'&&module.exports)module.exports=api;
+})(typeof window==='undefined'?globalThis:window);
+
+</script>
+<script id="pizza-kitchen-ui">
+/* Manual cooking mode, matching Yogurt Lab. No appliance control. GPL-3.0-only */
+(function(root){
+  'use strict';
+  const M=root.PizzaKitchen,$=id=>document.getElementById(id),dialog=$('kitchenDialog'),STORE='pizza-lab-kitchen-v1';
+  let state=null,index=0,done=[],timer=M.timer(0),opener=null;
+  const t=(it,en)=>state?.lang==='en'?en:it;
+  const esc=s=>String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  function persist(){try{localStorage.setItem(STORE,JSON.stringify({key:state.key,done}));}catch{}}
+  function sync(r,plan,options){
+    const changed=state?.key!==options.key;
+    state={r,plan,...options,cards:M.build(r,plan,options.lang)};
+    if(changed){
+      timer=M.timer(0);index=0;done=[];
+      if(dialog.open)dialog.close();
+      try{const saved=JSON.parse(localStorage.getItem(STORE)||'null');if(saved?.key===state.key&&Array.isArray(saved.done)){const ids=new Set(state.cards.map(c=>c.id));done=saved.done.filter(id=>ids.has(id)).slice(0,10000);}}catch{}
+    }
+    for(const id of ['openKitchen','openKitchen2']){$(id).disabled=!state.cards.length;$(id).textContent=id==='openKitchen'?t('Modalità cucina →','Cooking mode →'):t('Apri modalità cucina →','Open cooking mode →');}
+    $('closeKitchen').textContent=t('Chiudi ×','Close ×');$('closeKitchen').setAttribute('aria-label',t('Chiudi modalità cucina','Close cooking mode'));
+    $('kitchenModeLabel').textContent=t('NEOTOKIO / MODALITÀ CUCINA','NEOTOKIO / COOKING MODE');
+    $('kitchenProgressBar').setAttribute('aria-label',t('Avanzamento passaggi','Step progress'));
+    $('kitchenTimer').setAttribute('aria-label',t('Tempo rimanente','Time remaining'));
+    $('timerReset').textContent=t('Ricomincia ↻','Reset ↻');$('previousStep').textContent=t('← Precedente','← Previous');
+    $('kitchenConfirmHint').textContent=t('Conferma ogni operazione dopo averla eseguita. Il tempo trascorso da solo non la completa.','Confirm each operation after performing it. Elapsed time alone does not complete it.');
+    if(dialog.open)render(false);
+  }
+  function setConfirmed(values){if(state){done=M.reconcile(state.cards,done,state.confirmed,values);state.confirmed=values;persist();}}
+  function open(event){
+    if(!state?.cards.length)return;opener=event.currentTarget;
+    index=M.firstPending(state.cards,state.confirmed,done);render();dialog.showModal();
+    root.PizzaCrumbUI?.stop();
+  }
+  function render(reset=true){
+    const card=state.cards[index];if(!card)return;
+    if(reset)timer=M.timer(card.seconds);
+    const progress=index/state.cards.length*100;
+    $('kitchenProgress').style.width=progress+'%';$('kitchenProgressBar').setAttribute('aria-valuenow',Math.round(progress));
+    $('kitchenStepLabel').textContent=`${t('PASSAGGIO','STEP')} ${index+1} / ${state.cards.length} · ${state.r.p.bimby}${card.parallel?' · '+t('IN PARALLELO','IN PARALLEL'):card.continuation?' · '+t('CONTINUA','CONTINUED'):''}`;
+    $('kitchenTitle').textContent=card.title;
+    $('kitchenSetting').textContent=[...new Set(card.primary.map(s=>s.setting||t('Attesa','Wait')))].join(' · ');
+    $('kitchenText').innerHTML=card.primary.map(s=>`<p>${card.primary.length>1?'<strong>'+esc(s.title)+'</strong><br>':''}${esc(s.text)}</p>`).join('');
+    const format=ms=>new Intl.DateTimeFormat(state.lang==='en'?'en-GB':'it-IT',{timeZone:'Europe/Rome',day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit',second:'2-digit',hourCycle:'h23'}).format(ms);
+    $('kitchenSchedule').textContent=`${t('Orario previsto','Planned time')}: ${format(card.start)} → ${format(card.end)} · Europe/Rome`;
+    $('previousStep').disabled=index===0;$('nextStep').textContent=index===state.cards.length-1?t('Conferma e termina ✓','Confirm & finish ✓'):t('Conferma e continua →','Confirm & continue →');
+    const next=state.cards[index+1];
+    const notes=[];
+    if(card.background.length)notes.push(t('Nel frattempo: ','Meanwhile: ')+card.background.map(s=>s.title).join(' · ')+'.');
+    if(card.interrupted&&next)notes.push(t('Il timer copre il tratto fino alla prossima operazione: ','The timer covers the interval until the next operation: ')+next.title+'. '+t('Le fasi che continuano restano nel programma.','Continuing stages remain in the schedule.'));
+    $('kitchenOverlap').hidden=!notes.length;$('kitchenOverlap').textContent=notes.join(' ');
+    $('kitchenFeedback').textContent='';updateTimer();
+  }
+  function updateTimer(){
+    const seconds=M.remaining(timer);
+    $('kitchenTimer').textContent=M.clock(seconds);
+    $('timerToggle').textContent=timer.running?t('Pausa Ⅱ','Pause Ⅱ'):seconds<=0?t('Riparti ▶','Restart ▶'):t('Avvia timer ▶','Start timer ▶');
+    const device=state?.r.p.bimby||'Bimby';
+    $('timerState').textContent=timer.running?t(`Timer in corso. Nessun collegamento al Bimby ${device}.`,`Timer running. No connection to Thermomix ${device}.`):seconds<=0?t('Tempo terminato: verifica il risultato e conferma manualmente.','Time is up: check the result and confirm manually.'):t('Timer manuale. Nessun collegamento al Bimby.','Manual timer. No connection to Thermomix.');
+  }
+  function disable(){timer=M.timer(0);if(dialog.open)dialog.close();state=null;for(const id of ['openKitchen','openKitchen2'])$(id).disabled=true;}
+  for(const id of ['openKitchen','openKitchen2'])$(id).addEventListener('click',open);
+  $('closeKitchen').addEventListener('click',()=>dialog.close());
+  dialog.addEventListener('close',()=>{timer=M.timer(0);opener?.focus();});
+  $('timerToggle').addEventListener('click',()=>{if(!state)return;timer=M.toggle(timer,state.cards[index].seconds);updateTimer();});
+  $('timerReset').addEventListener('click',()=>{if(!state)return;timer=M.timer(state.cards[index].seconds);updateTimer();});
+  $('previousStep').addEventListener('click',()=>{if(index>0){index--;render();}});
+  $('nextStep').addEventListener('click',()=>{
+    if(!state)return;const card=state.cards[index];
+    state.confirmed=state.onConfirm(card.confirmKeys)||state.confirmed;
+    if(!done.includes(card.id))done.push(card.id);persist();
+    if(index<state.cards.length-1){index++;render();}
+    else{dialog.close();state.onComplete?.(t('Protocollo completato. Buona pizza!','Protocol complete. Enjoy your pizza!'));}
+  });
+  setInterval(()=>{
+    if(!dialog.open||!state)return;
+    const expired=M.expire(timer);if(expired!==timer){timer=expired;$('kitchenFeedback').textContent=t('Timer terminato. Controlla e conferma il passaggio.','Timer finished. Check and confirm the step.');}
+    updateTimer();
+  },250);
+  root.PizzaKitchenUI={sync,setConfirmed,disable};
+})(typeof window==='undefined'?globalThis:window);
+
+</script>
 <script id="pizza-ui">
 (function(){'use strict';const L=PizzaLab,I=PizzaLanguage,$=id=>document.getElementById(id),form=$('config'),numKeys=Object.keys(L.defaults).filter(k=>typeof L.defaults[k]==='number');let current=null,timer,liveNodes=[],phaseNodes=[],nowNodes=[],confirmed={},confirmationKey="",focusTarget=null;const STORE='neotokio-pizza-v1';function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}function f(n){return I.number(n)}function fy(n,raw=n){return L.yeastAmount(n,I.get(),raw)}function get(){let p={};for(const k of Object.keys(L.defaults))p[k]=form.elements[k]?(typeof L.defaults[k]==='boolean'?form.elements[k].checked:form.elements[k].value):L.defaults[k];for(const k of numKeys)p[k]=Number(p[k]);p.flourProfile=form.elements.flourProfile.value;const flour=PizzaFermentation.resolveProfile(p.flourProfile,p.farina);if(flour)p.farina=flour.name;p.when=PizzaSchedule.combine(form.elements.startDay.value,form.elements.startTime.value);form.elements.when.value=p.when;return p}function put(p){for(const[k,v]of Object.entries(p))if(form.elements[k]){if(typeof L.defaults[k]==='boolean')form.elements[k].checked=v;else form.elements[k].value=v};const split=PizzaSchedule.split(p.when);form.elements.startDay.value=split.day;form.elements.startTime.value=split.time;const flour=PizzaFermentation.resolveProfile(p.flourProfile,p.farina);form.elements.flourProfile.value=flour?.id||'custom';if(flour)form.elements.farina.value=flour.name;updateMethod(false)}function toast(s){$('toast').textContent=I.text(s);$('toast').hidden=false;clearTimeout(timer);timer=setTimeout(()=>$('toast').hidden=true,4500)}function save(p){try{localStorage.setItem(STORE,JSON.stringify({...p,settingsVersion:2}))}catch{}}
 function time(ms){return new Intl.DateTimeFormat(I.locale(),{timeZone:'Europe/Rome',hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).format(ms)}function stepTime(start,end){const a=time(start),b=time(end),nextDay=date(start)!==date(end);return a+(a!==b||nextDay?'–'+b:'')+(nextDay?' · '+date(end):'')}function precise(ms){return new Intl.DateTimeFormat(I.locale(),{timeZone:'Europe/Rome',hour:'2-digit',minute:'2-digit',second:'2-digit',hourCycle:'h23'}).format(ms)}function date(ms){return new Intl.DateTimeFormat(I.locale(),{timeZone:'Europe/Rome',weekday:'short',day:'2-digit',month:'short',year:'numeric'}).format(ms)}function full(ms){return`${date(ms)}, ${time(ms)}`}function duration(ms){const mins=Math.round(ms/60000),h=Math.floor(mins/60),m=mins%60;return h?`${h} h${m?` ${m} min`:''}`:`${m} min`}function grams(v,yeast=false){return`${yeast?fy(v):f(v)} g`}
@@ -2512,7 +2687,7 @@ const weighed=L.weighedTotals(r);if(p.method!=='diretto'){$('split').innerHTML=`
 PizzaFermentation.render(r,plan,I.get());PizzaCrumbUI.render(r,plan,I.get());renderOverview(plan);$('scheduleSummary').textContent=`INIZIO ${full(plan.start)} → ULTIMA PIZZA ${full(plan.end)} · Europe/Rome`;
 const parts=p.method==='diretto'?[[p.hours,'#8caa6e']]:[[p.prefHours,'#f4aa76'],[p.hours,'#8caa6e']];$('phaseBar').innerHTML=parts.map(([h,c])=>`<span style="background:${c};flex:${h}"></span>`).join('');
 $('timeline').innerHTML=plan.events.map((e,i)=>`<article class="event ${e.type}" id="event-${i}" data-event="${i}" data-time-start="${e.start}" data-time-end="${e.end}" data-confirm-key="event:${i}"><div><time datetime="${new Date(e.start).toISOString()}">${time(e.start)}</time><div class="date">${date(e.start)}</div><div class="end">fino ${time(e.end)}${date(e.end)!==date(e.start)?`<br>${date(e.end)}`:''}</div></div><div class="rail" aria-hidden="true"></div><div><h3>${esc(e.title)}</h3><div class="event-badges"><span class="mini ${e.type==='parallel'?'orange':''}">${esc(e.tag||duration(e.end-e.start))}</span></div><p>${esc(e.description)}</p>${progressMarkup(e.start,e.end,'Fase: '+e.title)}${e.steps?`<details class="bimby-steps" open><summary>${e.steps.length} passaggi Bimby · ${duration(e.end-e.start)} · quantità per questo lotto</summary><ol class="instructions">${e.steps.map((s,j)=>`<li id="step-${i}-${j}" data-time-start="${e.start+s.minute*60000}" data-time-end="${e.start+(s.minute+s.duration)*60000}" data-confirm-key="step:${i}:${j}"><div class="step-content"><div class="step-heading"><strong class="step-name">${String(j+1).padStart(2,'0')} / ${esc(s.title||'Operazione')}</strong><span class="subtime">${stepTime(e.start+s.minute*60000,e.start+(s.minute+s.duration)*60000)}</span></div><p>${esc(s.text)}</p><span class="setting ${s.kind==='macchina'?'machine-setting':''}">${esc(s.setting)}</span>${progressMarkup(e.start+s.minute*60000,e.start+(s.minute+s.duration)*60000,s.title)}<label class="check action-check"><input type="checkbox" data-step-check="step:${i}:${j}">Azione eseguita</label></div></li>`).join('')}</ol></details>`:''}<label class="check"><input type="checkbox" data-check="${i}">Passaggio completato</label></div></article>`).join('');
-$('formulas').innerHTML=formulas(r);setupLive();}catch(e){$('error').textContent=e.message;$('error').hidden=false;$('output').hidden=true;for(const id of['copyBtn','calendarBtn','printBtn','pdfBtn'])$(id).disabled=true;current=null;PizzaFermentation.markStale();PizzaCrumbUI.stop();I.apply();}}
+$('formulas').innerHTML=formulas(r);setupLive();PizzaKitchenUI.sync(r,plan,{lang:I.get(),key:confirmationKey,confirmed,onConfirm:keys=>updateConfirmations(keys,true),onComplete:toast});}catch(e){$('error').textContent=e.message;$('error').hidden=false;$('output').hidden=true;for(const id of['copyBtn','calendarBtn','printBtn','pdfBtn'])$(id).disabled=true;current=null;PizzaFermentation.markStale();PizzaCrumbUI.stop();PizzaKitchenUI.disable();I.apply();}}
 function renderOverview(plan){
 const all=plan.events,groups=[
  ['Prefermento','prefermento',e=>/^(Biga|Poolish) · preparazione|^Maturazione/.test(e.title)],
@@ -2534,9 +2709,10 @@ $('phaseOverview').innerHTML=out;$('overviewRange').textContent=`${full(start)} 
 function progressMarkup(start,end,label){return `<div class="time-progress"><div class="time-label"><span class="time-state"></span><span class="time-countdown"></span></div><div class="live-meter" role="progressbar" aria-label="${esc('Avanzamento temporale: '+label)}" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i></i></div></div>`;}
 function planIdentity(){const text=JSON.stringify({recipe:current.r.p,start:current.plan.start,end:current.plan.end,events:current.plan.events.map(e=>[e.title,e.start,e.end,e.steps?.map(s=>[s.title,s.minute,s.duration,s.text])])});let h=2166136261;for(const c of text){h^=c.charCodeAt(0);h=Math.imul(h,16777619);}return(h>>>0).toString(16);}
 function saveConfirmations(){try{localStorage.setItem('neotokio-pizza-confirmations-v1',JSON.stringify({key:confirmationKey,values:confirmed}));}catch{}}
+function updateConfirmations(keys,checked){for(const key of keys)confirmed=L.confirmAction(current.plan,confirmed,key,checked);for(const input of document.querySelectorAll('[data-check],[data-step-check]')){const id=input.dataset.stepCheck||`event:${input.dataset.check}`;input.checked=confirmed[id]===true;}saveConfirmations();updateLive();PizzaKitchenUI.setConfirmed(confirmed);return confirmed;}
 function setupLive(){
 confirmationKey=planIdentity();let saved;try{saved=JSON.parse(localStorage.getItem('neotokio-pizza-confirmations-v1')||'null');}catch{}confirmed=saved?.key===confirmationKey&&saved.values&&typeof saved.values==='object'?saved.values:{};
-for(const c of document.querySelectorAll('[data-check],[data-step-check]')){const key=c.dataset.stepCheck||`event:${c.dataset.check}`;c.checked=confirmed[key]===true;c.addEventListener('change',()=>{confirmed=L.confirmAction(current.plan,confirmed,key,c.checked);for(const input of document.querySelectorAll('[data-check],[data-step-check]')){const id=input.dataset.stepCheck||`event:${input.dataset.check}`;input.checked=confirmed[id]===true;}saveConfirmations();updateLive();});}
+for(const c of document.querySelectorAll('[data-check],[data-step-check]')){const key=c.dataset.stepCheck||`event:${c.dataset.check}`;c.checked=confirmed[key]===true;c.addEventListener('change',()=>updateConfirmations([key],c.checked));}
 liveNodes=Array.from(document.querySelectorAll('[data-time-start]')).map(node=>({node,start:Number(node.dataset.timeStart),end:Number(node.dataset.timeEnd),key:node.dataset.confirmKey,status:node.querySelector(':scope > div:last-child > .time-progress .time-state')||node.querySelector('.time-state'),countdown:node.querySelector(':scope > div:last-child > .time-progress .time-countdown')||node.querySelector('.time-countdown'),bar:node.querySelector(':scope > div:last-child > .time-progress .live-meter')||node.querySelector('.live-meter')}));
 phaseNodes=Array.from(document.querySelectorAll('[data-phase-start]')).map(node=>({node,start:Number(node.dataset.phaseStart),end:Number(node.dataset.phaseEnd),fill:node.querySelector('.gantt-fill'),status:node.querySelector('.phase-state')}));nowNodes=Array.from(document.querySelectorAll('[data-now-line]'));
 updateLive();}

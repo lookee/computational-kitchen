@@ -1,0 +1,27 @@
+/* Same dialog, typography, spacing and controls as Yogurt Lab's cooking mode. */
+#kitchenDialog{border:1px solid #cbd8bf;border-radius:20px;background:var(--panel);color:var(--ink);width:min(680px,calc(100vw - 28px));max-height:94dvh;padding:0;box-shadow:0 24px 130px #1c2c1940;box-sizing:border-box}
+#kitchenDialog::backdrop{background:#18220f88;backdrop-filter:blur(5px)}
+#kitchenDialog .kitchen-shell{padding:28px 32px}
+#kitchenDialog .kitchen-top{display:flex;justify-content:space-between;gap:20px;align-items:center}
+#kitchenDialog .kitchen-top .eyebrow{font:9px var(--mono);margin:0;letter-spacing:.18em;color:var(--green)}
+#kitchenDialog .kitchen-progress{height:4px;border-radius:5px;background:#e3eadc;margin:24px 0}
+#kitchenDialog .kitchen-progress i{display:block;background:var(--green);height:100%;transition:width .2s}
+#kitchenDialog .micro-label{display:inline-block;font:9px/1.5 var(--mono);color:var(--green);letter-spacing:.07em;margin:10px 0 0}
+#kitchenDialog #kitchenTitle{font:34px/1.15 Georgia,serif;letter-spacing:-.02em;margin:12px 0 20px;overflow-wrap:anywhere}
+#kitchenDialog .machine-setting{font:10px/1.7 var(--mono);display:inline-block;background:#e6f0db;border:1px solid #c9d9b8;border-radius:5px;padding:6px 9px;color:#31551b;white-space:normal}
+#kitchenDialog #kitchenText{font-size:14px;color:var(--muted);line-height:1.85;margin:20px 0}
+#kitchenDialog #kitchenText p{margin:0 0 12px}
+#kitchenDialog #kitchenTimer{font:66px/1.2 Georgia,serif;text-align:center;font-variant-numeric:tabular-nums;margin:25px 0 5px}
+#kitchenDialog .hint{font-size:11px;color:var(--muted);margin:10px 0 0;line-height:1.65}
+#kitchenDialog #timerState{text-align:center}
+#kitchenDialog .kitchen-buttons{display:flex;gap:10px;justify-content:center;margin:20px 0 26px}
+#kitchenDialog .kitchen-navigation{display:flex;justify-content:space-between;gap:12px;border-top:1px solid var(--line);padding-top:22px;margin-top:24px}
+#kitchenDialog .secondary{background:#fff;border:1px solid #c6d2ba;color:var(--ink);border-radius:8px;padding:9px 12px;font-size:11px;line-height:1.5;display:inline-block;min-height:38px}
+#kitchenDialog .secondary:hover{background:#eef3e7}
+#kitchenDialog .primary-small,.kitchen-entry{background:var(--green);border-color:var(--green);color:white}
+#kitchenDialog .primary-small:hover,.kitchen-entry:hover{background:#355b20;color:white}
+#kitchenDialog .kitchen-overlap{background:#f1f6e9;border:1px solid var(--line);border-radius:7px;padding:10px 12px}
+#kitchenDialog .kitchen-schedule{font:10px/1.7 var(--mono)}
+#kitchenDialog #kitchenFeedback:empty{display:none}
+@media(max-width:780px){#kitchenDialog .kitchen-shell{padding:20px}#kitchenDialog .kitchen-top .eyebrow{font-size:8px}#kitchenDialog .kitchen-top .secondary{font-size:10px}#kitchenDialog #kitchenTitle{font-size:31px}#kitchenDialog #kitchenText{font-size:14px}#kitchenDialog #kitchenTimer{font-size:60px}#kitchenDialog .kitchen-navigation .secondary{font-size:11px}}
+@media print{#kitchenDialog{display:none!important}}
