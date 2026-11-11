@@ -1,5 +1,5 @@
 window.YogurtSimulation=(()=>{
- const M=window.YogurtLab,P=window.YogurtPhysics,$=id=>document.getElementById(id),fmt=(v,d=1)=>v.toLocaleString('it-IT',{maximumFractionDigits:d});
+ const M=window.YogurtLab,P=window.YogurtPhysics,$=id=>document.getElementById(id),fmt=(v,d=1)=>v.toLocaleString(window.YogurtI18n.locale,{maximumFractionDigits:d});
  function panSVG(s,r,gradientId="pan-shadow"){
   const round=s.shape!=='loaf',rx=round?Math.min(90,s.diameter*3.2):100,ry=round?rx*.43:35,fill=M.clamp(r.total/s.batterDensity/(r.area*6),.05,.9),line='#a0b78c';let shape='';
   if(round){
@@ -29,7 +29,7 @@ window.YogurtSimulation=(()=>{
    c.beginPath();c.ellipse(x,y,rx+1,ry+1,0,0,Math.PI*2);c.fillStyle=cocoa?'#d5b498':'#fff1c4';c.fill();
    const p=c.createRadialGradient(x,y-ry*.2,0,x,y,Math.max(rx,ry));p.addColorStop(0,cocoa?'#5e402e':'#a48650');p.addColorStop(.6,cocoa?'#865f40':'#c5a66d');p.addColorStop(1,cocoa?'#b48b61':'#e0c391');c.fillStyle=p;c.beginPath();c.ellipse(x,y,rx,ry,0,0,Math.PI*2);c.fill();
   }
-  c.restore();c.font='10px ui-monospace,monospace';c.fillStyle='#738462';c.fillText(`PIANO FISSO z = ${fmt(plane*1000,0)} mm · ${visible} INTERSEZIONI`,30,330);
+  c.restore();c.font='10px ui-monospace,monospace';c.fillStyle='#738462';c.fillText(window.YogurtI18n.t(`PIANO FISSO z = ${fmt(plane*1000,0)} mm · ${visible} INTERSEZIONI`),30,330);
   $('seedDisplay').textContent=`SEED ${String(s.seed).padStart(4,'0')} · Δt 5 s`;$('simPhase').textContent=frame.setting>.8?'Struttura consolidata nel modello':frame.setting>.2?'Matrice in consolidamento':'Crescita e coalescenza';$('simTimeLabel').textContent=`${fmt(time,1)} min`;$('simTime').value=time;
   $('simReadings').innerHTML=`<div><span>VOLUME NEL MODELLO</span><strong>×${fmt(frame.expansion,2)}</strong><small>Rapporto calcolato, non altezza prevista</small></div><div><span>BOLLE NEL CAMPIONE 3D</span><strong>${frame.count} <small>/ ${frame.initialCount} iniziali</small></strong><small>${frame.merged} fusioni · ${frame.vented} aperture</small></div><div><span>DIAMETRO MEDIANO DELLE BOLLE</span><strong>${fmt(frame.medianDiameter,2)} mm</strong><small>Dimensione simulata, non misurata</small></div>`;
   $('physicsDiagnostics').innerHTML=`<span>T cuore modello <strong>${fmt(frame.temperature,1)} °C</strong></span><span>Consolidamento medio <strong>${fmt(frame.setting*100,0)}%</strong></span><span>Bilancio CO₂ <strong>|errore| ${Math.abs(frame.gasBalanceError).toExponential(1)} mol</strong></span>`;

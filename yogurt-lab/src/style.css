@@ -20,3 +20,5 @@
 /* Preserve the physical aspect ratio of the simulated section at every viewport. */
 .canvas-wrap canvas{height:auto;aspect-ratio:5 / 2}
 .shell{overflow-x:clip}
+
+.language-picker select{font:inherit;font-size:12px;border:1px solid var(--line,#d7dfcd);border-radius:20px;background:#fff;padding:7px 25px 7px 10px;color:inherit;max-width:115px;cursor:pointer}.language-picker{display:inline-flex;align-items:center}@media print{.language-picker{display:none}}

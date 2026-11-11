@@ -2,7 +2,7 @@ import { readFile, writeFile } from 'node:fs/promises';
 const dir=new URL('./src/',import.meta.url);
 let html=await readFile(new URL('index.html',dir),'utf8');
 const css=await readFile(new URL('style.css',dir),'utf8');
-const scriptNames=['model.js','physics.js','simulation-ui.js','nutrition-data.js','nutrition.js','nutrition-ui.js','comparisons.js','math.js','app.js'];
+const scriptNames=['translations.js','i18n.js','model.js','physics.js','simulation-ui.js','nutrition-data.js','nutrition.js','nutrition-ui.js','comparisons.js','math.js','app.js'];
 const scripts=await Promise.all(scriptNames.map(p=>readFile(new URL(p,dir),'utf8')));
 html=html.replace('<link rel="stylesheet" href="style.css">',()=>`<style>\n${css}\n</style>`);
 for(const name of scriptNames)html=html.replace(`<script defer src="${name}"></script>`,'');

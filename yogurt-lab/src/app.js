@@ -3,7 +3,7 @@
  'use strict';
  const M=window.YogurtLab,$=id=>document.getElementById(id),form=$('config');
  const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
- const fmt=(v,d=1)=>Number(v).toLocaleString('it-IT',{maximumFractionDigits:d});
+ const fmt=(v,d=1)=>Number(v).toLocaleString(window.YogurtI18n.locale,{maximumFractionDigits:d});
  const KEY='neotokio.yogurt-lab.v1';
  let state={...M.defaults},probes=[],checks=[false,false,false],experiments=[],done=[],stored=false;
  let simTime=state.bake,simView='section',chart='thermal',simPlaying=false,simFrame=0,kitchenIndex=0,timerRemaining=0,timerDeadline=0,timerRunning=false;
@@ -107,7 +107,7 @@
    const xMax=Math.max(65,...probes.map(p=>p.minute)),X=t=>58+t/xMax*650,Y=v=>222-(v-15)/95*190;
    html=svgStart('Curva termica didattica con letture reali della sonda, se presenti.');
    const comparisons=window.YogurtComparisons.series().slice(1);
-   for(const item of comparisons){const pts=[];for(let t=0;t<=xMax;t+=1)pts.push(`${X(t)},${Y(M.thermal(item.config,t).core)}`);html+=`<polyline points="${pts.join(' ')}" fill="none" stroke="${item.color}" stroke-width="1.4" stroke-dasharray="5 3" opacity=".75"><title>${esc(item.name)} · temperatura del modello</title></polyline>`;}
+   for(const item of comparisons){const pts=[];for(let t=0;t<=xMax;t+=1)pts.push(`${X(t)},${Y(M.thermal(item.config,t).core)}`);html+=`<polyline points="${pts.join(' ')}" fill="none" stroke="${item.color}" stroke-width="1.4" stroke-dasharray="5 3" opacity=".75"><title translate="no">${esc(item.name)} · ${window.YogurtI18n.t('temperatura del modello')}</title></polyline>`;}
 
    if(s.thermometer)html+=`<rect x="58" y="${Y(99)}" width="650" height="${Y(96)-Y(99)}" fill="#dce8c9"/>`;
    [20,40,60,80,100].forEach(v=>html+=`<line x1="58" x2="708" y1="${Y(v)}" y2="${Y(v)}" stroke="#dde5d5" stroke-width="1"/>${tickText(46,Y(v)+4,v+'°','end')}`);
@@ -118,7 +118,7 @@
    if(s.thermometer)probes.forEach(p=>html+=`<circle cx="${X(p.minute)}" cy="${Y(p.temp)}" r="4" fill="#426f85" stroke="white" stroke-width="1.5"><title>Sonda: ${fmt(p.temp,1)} °C a ${fmt(p.minute,1)} min</title></circle>`);
    html+=`<line id="chartCursor" x1="${X(simTime)}" x2="${X(simTime)}" y1="25" y2="222" stroke="#ae7341" stroke-dasharray="4 4"/><g id="chartTooltip" class="chart-tooltip"></g><rect id="chartOverlay" x="58" y="22" width="650" height="200" fill="transparent" class="chart-hover"/></svg><div class="chart-legend"><span><i class="legend-line"></i>Temperatura simulata</span><span><i class="legend-line orange"></i>Tempo della sezione</span>${s.thermometer?'<span><i class="legend-line point"></i>Sonda reale</span>':''}</div>`;
    $('chartCaption').textContent='Muovi il puntatore per leggere la curva; fai clic per sincronizzare la sezione. Anche il cursore del simulatore è utilizzabile da tastiera. Le varianti sono tratteggiate; se i parametri termici coincidono le curve si sovrappongono. Modello non calibrato: misura la temperatura reale per valutare la cottura.';
-   html+=`<div class="comparison-legend"><span><i style="background:#416b25"></i>La tua ricetta attuale · linea continua</span>${comparisons.map(item=>`<span><i style="background:${item.color}"></i>${esc(item.name)}</span>`).join('')}</div>`;
+   html+=`<div class="comparison-legend"><span><i style="background:#416b25"></i>La tua ricetta attuale · linea continua</span>${comparisons.map(item=>`<span translate="no"><i style="background:${item.color}"></i>${esc(item.name)}</span>`).join('')}</div>`;
    $('chartArea').innerHTML=html;
    const readEvent=e=>{const box=$('chartOverlay').getBoundingClientRect();return M.clamp((e.clientX-box.left)/box.width*xMax,0,xMax);};
    $('chartOverlay').addEventListener('pointermove',e=>{const t=readEvent(e),cx=M.clamp(X(t),145,610);$('chartTooltip').innerHTML=`<rect x="${cx-84}" y="7" width="168" height="26" rx="5" fill="#fff" stroke="#cbd8bd"/><text x="${cx}" y="24" text-anchor="middle">${fmt(t,1)} min · ${fmt(M.thermal(s,t).core,1)} °C</text>`;});
@@ -163,8 +163,8 @@
  if(!/^\d{4}-\d\d-\d\dT\d\d:\d\d$/.test(startAt))startAt=defaultStart();$('startAt').value=startAt;
  // Interpret the wall-clock input in Europe/Rome, independently of the computer timezone.
  function romeDate(value){let d=new Date(value+'Z');if(!Number.isFinite(d.getTime()))return new Date();for(let i=0;i<3;i++){const parts=new Intl.DateTimeFormat('sv-SE',{timeZone:'Europe/Rome',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}).format(d);const represented=new Date(parts.replace(' ','T')+'Z').getTime(),desired=new Date(value+'Z').getTime();const delta=desired-represented;if(!delta)break;d=new Date(d.getTime()+delta);}return d;}
- function timeString(d){return new Intl.DateTimeFormat('it-IT',{timeZone:'Europe/Rome',hour:'2-digit',minute:'2-digit'}).format(d);}
- function dayString(d){return new Intl.DateTimeFormat('it-IT',{timeZone:'Europe/Rome',day:'2-digit',month:'short'}).format(d);}
+ function timeString(d){return new Intl.DateTimeFormat(window.YogurtI18n.locale,{timeZone:'Europe/Rome',hour:'2-digit',minute:'2-digit'}).format(d);}
+ function dayString(d){return new Intl.DateTimeFormat(window.YogurtI18n.locale,{timeZone:'Europe/Rome',day:'2-digit',month:'short'}).format(d);}
  function renderTimeline(){
   let cursor=romeDate(startAt).getTime();const total=steps.reduce((n,s)=>n+s.seconds,0);
   $('protocolSummary').textContent=`${steps.length} passaggi · ${currentResult.batches} ${currentResult.batches===1?'lotto':'lotti'}\nDurata pianificata ${longDuration(total)} · confermati ${done.length}/${steps.length}`;
@@ -192,7 +192,7 @@
  $('goProbe').addEventListener('click',()=>dialog.close());
  function recipeText(){const r=currentResult,p=M.presets.find(p=>p.id===state.preset),n=window.YogurtNutrition.calculate(state);return `NEOTOKIO / YOGURT COMPUTATIONAL LAB\n${p.name} · ${state.device}\nStampo ${state.shape==='loaf'?`${state.length} × ${state.width} cm`:state.shape==='ring'?`ciambella Ø ${state.diameter} cm, foro ${state.hole} cm`:`tondo Ø ${state.diameter} cm`} · ${state.portions} porzioni\n\nINGREDIENTI\n${r.ingredients.map(i=>`${fmt(i.g,1)} g ${i.name}`).join('\n')}\nTotale ${fmt(r.total,1)} g · ${r.batches} lotti\n\nPROTOCOLLO\n${steps.map((s,i)=>`${i+1}. ${s.name}\n${s.setting}\n${s.text}`).join('\n\n')}\n\nNUTRIZIONE STIMATA\nPer 100 g cotti: ${fmt(n.per100.kJ,0)} kJ / ${fmt(n.per100.kcal,0)} kcal; grassi ${fmt(n.per100.fat,1)} g; saturi ${fmt(n.per100.sat,1)} g; carboidrati ${fmt(n.per100.carbs,1)} g; zuccheri ${n.per100.sugars===null?'n.d.':fmt(n.per100.sugars,1)+' g'}; fibre ${fmt(n.per100.fiber,1)} g; proteine ${fmt(n.per100.protein,1)} g; sale ${fmt(n.per100.salt,2)} g.\nPeso cotto ${n.measured?'misurato':'stimato'}: ${fmt(n.cooked,0)} g. Per porzione: ${fmt(n.portion.kcal,0)} kcal. Profili generici e/o etichette, fattori UE; non analisi certificata.\n\n${state.thermometer?'Termometro attivo: 96–99 °C al cuore come finestra orientativa, insieme a controlli di struttura. Non è una soglia validata.\n':''}Nuove formulazioni sperimentali; tempi da verificare nel tuo forno.\nRicetta di partenza: https://www.lucaamore.com/generative-ai-cooking-experiments-for-making-a-yogurt-cake-with-a-thermomix-bimby/\n`};
  function download(name,body,type='application/json'){const url=URL.createObjectURL(new Blob([body],{type})),a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),5000);}
- $('copyRecipe').addEventListener('click',async()=>{try{await navigator.clipboard.writeText(recipeText());toast('Ricetta e protocollo copiati.');}catch{download('yogurt-lab-ricetta.txt',recipeText(),'text/plain;charset=utf-8');toast('Ricetta scaricata come testo.');}});
+ $('copyRecipe').addEventListener('click',async()=>{try{await navigator.clipboard.writeText(window.YogurtI18n.t(recipeText()));toast('Ricetta e protocollo copiati.');}catch{download('yogurt-lab-ricetta.txt',window.YogurtI18n.t(recipeText()),'text/plain;charset=utf-8');toast('Ricetta scaricata come testo.');}});
  $('printRecipe').addEventListener('click',()=>window.print());
  $('experimentForm').addEventListener('submit',e=>{e.preventDefault();if(!e.target.reportValidity())return;if(experiments.length>=100){toast('Quaderno pieno: esporta e rimuovi qualche prova prima di aggiungerne altre.');return;}
   const name=$('experimentName').value.trim();if(!name)return;
@@ -201,7 +201,7 @@
  });
  function renderExperiments(){
   if(!experiments.length){$('experiments').innerHTML='<div class="empty-state">Il tuo primo esperimento comincia qui.<br>Registra una prova di riferimento, poi cambia una sola variabile.</div>';return;}
-  $('experiments').innerHTML=experiments.map((e,index)=>{const r=M.calculate(e.config),p=M.presets.find(p=>p.id===e.config.preset),date=new Intl.DateTimeFormat('it-IT',{timeZone:'Europe/Rome',dateStyle:'medium',timeStyle:'short'}).format(new Date(e.date));return `<article class="experiment"><div class="experiment-top"><div><h3>${esc(e.name)}</h3><div class="experiment-date">${date} · ${esc(p.name)} · ${e.config.device}</div></div><button type="button" class="experiment-delete" data-delete="${index}" aria-label="Elimina ${esc(e.name)}">Elimina ×</button></div><div class="experiment-meta"><span>${fmt(r.total,0)} g crudi</span><span>amido ${fmt(e.config.starch,0)}%</span>${e.height?`<span>altezza ${fmt(e.height,1)} cm</span>`:''}${e.weight?`<span>peso cotto ${fmt(e.weight,0)} g</span>`:''}${e.probes.length?`<span>ultima sonda ${fmt(e.probes.at(-1).temp,1)} °C</span>`:''}${e.weight&&e.weight<r.total?`<span>perdita massa ${fmt((1-e.weight/r.total)*100,1)}%</span>`:''}</div>${e.notes?`<p>${esc(e.notes)}</p>`:''}<div class="actions"><button type="button" class="secondary" data-load="${index}">Riprendi configurazione →</button><button type="button" class="secondary" data-entry-export="${index}">↓ JSON</button></div></article>`;}).join('');
+  $('experiments').innerHTML=experiments.map((e,index)=>{const r=M.calculate(e.config),p=M.presets.find(p=>p.id===e.config.preset),date=new Intl.DateTimeFormat(window.YogurtI18n.locale,{timeZone:'Europe/Rome',dateStyle:'medium',timeStyle:'short'}).format(new Date(e.date));return `<article class="experiment"><div class="experiment-top"><div><h3 translate="no">${esc(e.name)}</h3><div class="experiment-date">${date} · ${esc(p.name)} · ${e.config.device}</div></div><button type="button" class="experiment-delete" translate="no" data-delete="${index}" aria-label="${esc(window.YogurtI18n.t('Elimina')+' '+e.name)}">${window.YogurtI18n.t('Elimina')} ×</button></div><div class="experiment-meta"><span>${fmt(r.total,0)} g crudi</span><span>amido ${fmt(e.config.starch,0)}%</span>${e.height?`<span>altezza ${fmt(e.height,1)} cm</span>`:''}${e.weight?`<span>peso cotto ${fmt(e.weight,0)} g</span>`:''}${e.probes.length?`<span>ultima sonda ${fmt(e.probes.at(-1).temp,1)} °C</span>`:''}${e.weight&&e.weight<r.total?`<span>perdita massa ${fmt((1-e.weight/r.total)*100,1)}%</span>`:''}</div>${e.notes?`<p translate="no">${esc(e.notes)}</p>`:''}<div class="actions"><button type="button" class="secondary" data-load="${index}">Riprendi configurazione →</button><button type="button" class="secondary" data-entry-export="${index}">↓ JSON</button></div></article>`;}).join('');
   $('experiments').querySelectorAll('[data-load]').forEach(b=>b.addEventListener('click',()=>{const e=experiments[Number(b.dataset.load)];state=M.sanitize(e.config);writeForm();done=[];resetTimer();changedConfig();$('workspace').scrollIntoView({behavior:'auto'});toast('Configurazione ripresa. Le letture della cottura attuale sono conservate.');}));
   $('experiments').querySelectorAll('[data-entry-export]').forEach(b=>b.addEventListener('click',()=>{download('yogurt-lab-esperimento.json',JSON.stringify({schema:'neotokio-yogurt-lab',version:1,experiments:[experiments[Number(b.dataset.entryExport)]]},null,2));}));
   $('experiments').querySelectorAll('[data-delete]').forEach(b=>b.addEventListener('click',()=>{const removed=experiments.splice(Number(b.dataset.delete),1)[0];persist();renderExperiments();$('toast').innerHTML='Esperimento rimosso. <button type="button" id="undoDelete" class="text-button" style="display:inline;margin:0 0 0 12px">Annulla</button>';$('toast').hidden=false;clearTimeout(toastTimeout);$('undoDelete').addEventListener('click',()=>{experiments.unshift(removed);persist();renderExperiments();toast('Esperimento ripristinato.');});toastTimeout=setTimeout(()=>$('toast').hidden=true,10000);}));
@@ -210,7 +210,7 @@
  $('importNotebook').addEventListener('change',async e=>{const file=e.target.files[0];if(!file)return;try{if(file.size>2_000_000)throw new Error('File troppo grande: massimo 2 MB.');const data=JSON.parse(await file.text());if(data.schema!=='neotokio-yogurt-lab'||data.version!==1||!Array.isArray(data.experiments))throw new Error('Formato non riconosciuto. Usa un JSON esportato dal laboratorio.');const incoming=data.experiments.map(validEntry).filter(Boolean);if(incoming.length!==data.experiments.length)throw new Error('Il file contiene esperimenti non validi. Nessun dato importato.');const existing=new Set(experiments.map(e=>e.id));const added=incoming.filter(e=>{if(existing.has(e.id))return false;existing.add(e.id);return true;});if(added.length+experiments.length>100)throw new Error('Il quaderno può contenere al massimo 100 esperimenti.');experiments=[...added,...experiments];const restore=$('restoreCurrentImport').checked&&data.current&&data.current.config;if(restore){state=M.sanitize(data.current.config);probes=validProbes(data.current.probes);checks=validChecks(data.current.checks);done=[];resetTimer();writeForm();render();}persist();renderExperiments();renderChart();toast(`${added.length} esperimenti importati; configurazione e letture ${restore?'ripristinate dal backup':'correnti conservate'}.`);}catch(err){toast(err.message||'Impossibile leggere il file.');}finally{e.target.value='';}});
  const observer=new IntersectionObserver(entries=>{for(const entry of entries)if(entry.isIntersecting){document.querySelectorAll('.section-nav a').forEach(a=>a.classList.toggle('active',a.hash==='#'+entry.target.id));}},{rootMargin:'-10% 0px -70% 0px'});
  ['workspace','flours','protocol','notebook','method'].forEach(id=>observer.observe($(id)));
- window.addEventListener('beforeprint',()=>{stopSim();});
+ window.addEventListener('beforeprint',()=>{stopSim();window.YogurtI18n.apply();});
  const mobileQuery=window.matchMedia('(max-width:850px)');
  function configExpanded(expanded){$('configSidebar').classList.toggle('mobile-collapsed',!expanded);$('toggleConfig').setAttribute('aria-expanded',String(expanded));$('toggleConfig').textContent=expanded?'Nascondi −':'Parametri +';}
  configExpanded(!mobileQuery.matches);
@@ -218,6 +218,25 @@
  mobileQuery.addEventListener('change',e=>configExpanded(!e.matches));
  window.YogurtNutritionUI.attach({state:()=>state,toast,patch:patch=>{state=M.sanitize({...state,...patch});writeForm();render();persist();}});
  window.YogurtComparisons.attach({state:()=>state,experiments:()=>experiments,refresh:renderChart});
+ document.addEventListener('yogurt:languagechange',()=>{
+  const edits=[...$('nutrientInputs').querySelectorAll('[data-nutrient]')].map(el=>({
+   id:el.closest('tr').querySelector('[data-save-nutrients]').dataset.saveNutrients,
+   key:el.dataset.nutrient,value:el.value
+  }));
+  render();
+  for(const edit of edits){
+   const row=[...$('nutrientInputs').querySelectorAll('[data-save-nutrients]')].find(el=>el.dataset.saveNutrients===edit.id)?.closest('tr');
+   const input=row?.querySelector('[data-nutrient="'+edit.key+'"]');
+   if(input)input.value=edit.value;
+  }
+  renderExperiments();
+  if(dialog.open){
+   const remaining=timerRemaining,running=timerRunning,deadline=timerDeadline;
+   renderKitchen();timerRemaining=remaining;timerRunning=running;timerDeadline=deadline;updateTimerDisplay();
+  }
+  configExpanded($('toggleConfig').getAttribute('aria-expanded')==='true');
+ });
  render();renderExperiments();persist();
+ window.YogurtI18n.apply();
  if(stored) $('saveStatus').textContent=storageOkay?'Ultima configurazione ripristinata da questo browser.':'Salvataggio non disponibile: esporta il quaderno.';
 })();

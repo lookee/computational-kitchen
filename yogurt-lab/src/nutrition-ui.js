@@ -1,5 +1,5 @@
 window.YogurtNutritionUI=(()=>{
- const $=id=>document.getElementById(id),N=window.YogurtNutrition,fmt=(v,d=1)=>v===null?'n.d.':v.toLocaleString('it-IT',{maximumFractionDigits:d}),esc=v=>String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+ const $=id=>document.getElementById(id),N=window.YogurtNutrition,fmt=(v,d=1)=>v===null?'n.d.':v.toLocaleString(window.YogurtI18n.locale,{maximumFractionDigits:d}),esc=v=>String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
  let api;
  function attach(callbacks){api=callbacks;
   const updateWeight=()=>{const value=Number($('cookedWeight').value);if($('cookedWeight').checkValidity()&&value!==api.state().cookedWeight)api.patch({cookedWeight:value});};

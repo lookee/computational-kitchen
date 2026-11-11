@@ -13,7 +13,7 @@
 </tr>
 </table>
 
-**Browser-based · Offline-ready · No account or API key · Bimby / Thermomix TM5, TM6 & TM7**
+**Italiano / English in both labs · Browser-based · Offline-ready · No account or API key · Bimby / Thermomix TM5, TM6 & TM7**
 
 ---
 
@@ -22,6 +22,8 @@
 ### La ricetta è il punto di partenza. Il laboratorio è quello che succede dopo.
 
 Quanto cambia una torta scegliendo un’altra farina? Come si incastrano impasto, frigorifero e prima infornata? Computational Kitchen trasforma queste domande in strumenti da esplorare: modifica un parametro, osserva il modello, prepara la ricetta e confronta il risultato reale.
+
+Il progetto è ancora all’inizio: entrambe le prime ricette continueranno a evolvere attraverso nuove prove e confronti.
 
 Il progetto nasce dalla curiosità di unire cucina, matematica e sviluppo software. L’AI aiuta a progettare e costruire gli esperimenti; la prova ai fornelli rimane decisiva. Le app non richiedono un servizio AI durante l’uso.
 
@@ -34,8 +36,13 @@ Il progetto nasce dalla curiosità di unire cucina, matematica e sviluppo softwa
 | **Esplora** | Formule documentate e finestre di lievitazione indicative | Popolazione 3D di bolle, crescita, coalescenza e consolidamento |
 | **Prepara** | Passaggi Bimby e timeline con orari | Modalità cucina, timer e sonda al cuore opzionale, attiva di default |
 | **Conserva** | Scheda stampabile, PDF e calendario | Quaderno esperimenti, import/export JSON e stampa/PDF |
-| **Interfaccia** | Italiano / English | Italiano; documentazione del progetto bilingue |
+| **Interfaccia** | Italiano / English | Italiano / English |
 | **Entra** | **[Apri Pizza Lab →](https://lookee.github.io/computational-kitchen/pizza-computational-lab.html)** | **[Apri Yogurt Lab →](https://lookee.github.io/computational-kitchen/yogurt-computational-lab.html)** |
+
+Yogurt Lab include un selettore **Italiano / English** che memorizza la lingua nel browser. La traduzione comprende ricette, istruzioni Bimby/Thermomix, simulazione, grafici, nutrizione, modalità cucina, messaggi e ricetta copiata o stampata. Nomi e note personali nel quaderno mantengono il testo originale.
+
+- **[Torta allo yogurt — Bimby · Italiano →](https://lookee.github.io/computational-kitchen/yogurt-computational-lab.html?lang=it)**
+- **[Yogurt cake — Thermomix · English →](https://lookee.github.io/computational-kitchen/yogurt-computational-lab.html?lang=en)**
 
 ### Dal grafico alla cucina
 
@@ -70,6 +77,8 @@ Hai provato una variante? [Apri una issue](https://github.com/lookee/computation
 
 What changes when you choose a different flour? How do mixing, refrigeration and the first bake fit together? Computational Kitchen turns those questions into hands-on tools: change a parameter, explore the model, bake the recipe and compare it with the real result.
 
+The project is still at an early stage: both initial recipes will continue to evolve through new trials and comparisons.
+
 This project brings together cooking, mathematics and software. AI helps design and build the experiments; practical baking remains the deciding test. The apps do not need an AI service at runtime.
 
 ### Choose your experiment
@@ -81,8 +90,13 @@ This project brings together cooking, mathematics and software. AI helps design 
 | **Explore** | Documented formulas and indicative fermentation windows | A 3D bubble population: growth, coalescence and matrix setting |
 | **Bake** | Thermomix steps and a preparation timeline | Cooking mode, manual timers and optional core-temperature readings, enabled by default |
 | **Keep** | Printable recipe, PDF and calendar export | Experiment notebook, JSON import/export and print/PDF |
-| **Interface** | English / Italian | Italian; bilingual project documentation |
+| **Interface** | English / Italian | English / Italian |
 | **Start** | **[Open Pizza Lab →](https://lookee.github.io/computational-kitchen/pizza-computational-lab.html)** | **[Open Yogurt Lab →](https://lookee.github.io/computational-kitchen/yogurt-computational-lab.html)** |
+
+Yogurt Lab’s **Italiano / English** selector remembers your language in the browser. Recipes, Thermomix instructions, simulation, charts, nutrition, cooking mode, messages and copied or printed recipes follow the selected language. Personal notebook names and notes keep their original text.
+
+- **[Yogurt cake — Thermomix · English →](https://lookee.github.io/computational-kitchen/yogurt-computational-lab.html?lang=en)**
+- **[Torta allo yogurt — Bimby · Italiano →](https://lookee.github.io/computational-kitchen/yogurt-computational-lab.html?lang=it)**
 
 ### From the chart to your kitchen
 

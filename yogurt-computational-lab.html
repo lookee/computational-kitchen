@@ -24,9 +24,11 @@
 .canvas-wrap canvas{height:auto;aspect-ratio:5 / 2}
 .shell{overflow-x:clip}
 
+.language-picker select{font:inherit;font-size:12px;border:1px solid var(--line,#d7dfcd);border-radius:20px;background:#fff;padding:7px 25px 7px 10px;color:inherit;max-width:115px;cursor:pointer}.language-picker{display:inline-flex;align-items:center}@media print{.language-picker{display:none}}
+
 </style></head>
 <body><div class="shell">
-<header><a class="brand" href="#"><span class="mark" aria-hidden="true">⌘</span><span><strong>NEOTOKIO</strong><small>YOGURT LAB / V.1.0</small></span></a><div class="header-right"><a class="device-badge" href="#device"><span>Bimby®</span> <strong id="deviceBadge">TM6</strong></a><span class="status">Computational kitchen</span><a href="#structure">Grafici ↗</a><a href="#method">Le formule ↗</a><span class="local-badge">DATI LOCALI</span></div></header>
+<header><a class="brand" href="#"><span class="mark" aria-hidden="true">⌘</span><span><strong>NEOTOKIO</strong><small>YOGURT LAB / V.1.0</small></span></a><div class="header-right"><label class="language-picker"><span class="sr-only">Language / Lingua</span><select id="languageSelect" aria-label="Language / Lingua"><option value="it">Italiano</option><option value="en">English</option></select></label><a class="device-badge" href="#device"><span>Bimby®</span> <strong id="deviceBadge">TM6</strong></a><span class="status">Computational kitchen</span><a href="#structure">Grafici ↗</a><a href="#method">Le formule ↗</a><span class="local-badge">DATI LOCALI</span></div></header>
 <section class="hero"><div><p class="eyebrow">Yogurt. Aria. Algoritmi.</p><h1>Yogurt<br><em>Computational Lab</em><span class="hero-device">per Bimby® · TM5 / TM6 / TM7</span></h1><p>Dal primo uovo alla mollica perfetta. Progetta la tua torta, esplora la scienza degli ingredienti e trasforma ogni infornata in un esperimento.</p><div class="origin"><span class="dot"></span> Da <a href="https://www.lucaamore.com/generative-ai-cooking-experiments-for-making-a-yogurt-cake-with-a-thermomix-bimby/" target="_blank" rel="noopener">ai-pie v.0.1 di Luca Amore ↗</a> · 16 febbraio 2024</div></div><div class="orbit" aria-hidden="true"><div class="orbit-inner"><b id="orbitValue">12<span>%</span></b><small>AMIDO NELLA MISCELA</small></div><span class="sat">aria + calore → struttura</span><span class="sat bottom">PV = nRT</span></div></section>
 <nav class="section-nav" aria-label="Sezioni del laboratorio"><a href="#workspace" class="active">01 <span>Il laboratorio</span></a><a href="#flours">02 <span>Farine & struttura</span></a><a href="#protocol">03 <span>In cucina</span></a><a href="#notebook">04 <span>Quaderno</span></a><a href="#method">05 <span>Metodo & fonti</span></a></nav>
 <main class="workspace" id="workspace"><aside class="sidebar" id="configSidebar"><div class="config-title"><strong>Il tuo esperimento</strong><span>INPUT / 01</span><button type="button" id="toggleConfig" class="secondary config-toggle" aria-controls="config" aria-expanded="true">Nascondi −</button></div>
@@ -57,6 +59,818 @@
 </div><div id="toast" role="status" hidden></div>
 <dialog id="kitchenDialog" aria-labelledby="kitchenTitle"><div class="kitchen-shell"><div class="kitchen-top"><span class="eyebrow">NEOTOKIO / MODALITÀ CUCINA</span><button type="button" class="secondary" id="closeKitchen" aria-label="Chiudi modalità cucina">Chiudi ×</button></div><div class="kitchen-progress"><i id="kitchenProgress"></i></div><p class="micro-label" id="kitchenStepLabel"></p><h2 id="kitchenTitle"></h2><span id="kitchenSetting" class="machine-setting"></span><p id="kitchenText"></p><div id="kitchenTimer" role="timer" aria-label="Tempo rimanente">00:00</div><p class="hint" id="timerState">Timer manuale. Nessun collegamento al Bimby.</p><div class="kitchen-buttons"><button type="button" class="secondary primary-small" id="timerToggle">Avvia timer ▶</button><button type="button" class="secondary" id="timerReset">Ricomincia ↻</button></div><div id="kitchenThermometer" hidden><a href="#thermometerCard" id="goProbe">Apri il pannello della sonda →</a></div><div class="kitchen-navigation"><button type="button" class="secondary" id="previousStep">← Precedente</button><button type="button" class="secondary primary-small" id="nextStep">Conferma e continua →</button></div><p class="hint">Conferma ogni operazione dopo averla eseguita. Il tempo trascorso da solo non la completa.</p></div></dialog>
 <noscript>Attiva JavaScript per usare calcoli, grafici e quaderno del laboratorio.</noscript><script>
+/* Presentation messages · ©2026 Luca Amore · GPL-3.0-only */
+window.YogurtTranslations={
+  "Il laboratorio scientifico della torta allo yogurt. Formule, farine, simulazione della mollica e protocollo Bimby TM5, TM6 e TM7. Tutto in locale.": "The scientific yogurt cake lab. Formulas, flours, crumb simulation and Thermomix TM5, TM6 and TM7 instructions. Everything runs locally.",
+  "Bimby®": "Thermomix®",
+  "Grafici ↗": "Charts ↗",
+  "Le formule ↗": "The formulas ↗",
+  "DATI LOCALI": "LOCAL DATA",
+  "Yogurt. Aria. Algoritmi.": "Yogurt. Air. Algorithms.",
+  "per Bimby® · TM5 / TM6 / TM7": "for Thermomix® · TM5 / TM6 / TM7",
+  "Dal primo uovo alla mollica perfetta. Progetta la tua torta, esplora la scienza degli ingredienti e trasforma ogni infornata in un esperimento.": "From the first egg to the perfect crumb. Design your cake, explore ingredient science and turn every bake into an experiment.",
+  "Da": "From",
+  "ai-pie v.0.1 di Luca Amore ↗": "ai-pie v.0.1 by Luca Amore ↗",
+  "· 16 febbraio 2024": "· 16 February 2024",
+  "AMIDO NELLA MISCELA": "STARCH IN THE BLEND",
+  "aria + calore → struttura": "air + heat → structure",
+  "Sezioni del laboratorio": "Lab sections",
+  "Il laboratorio": "The lab",
+  "Farine & struttura": "Flours & structure",
+  "In cucina": "In the kitchen",
+  "Quaderno": "Notebook",
+  "Metodo & fonti": "Method & sources",
+  "Il tuo esperimento": "Your experiment",
+  "Nascondi −": "Hide −",
+  "00 / Il tuo Bimby": "00 / Your Thermomix",
+  "Modello Bimby®": "Thermomix® model",
+  "01 / Punto di partenza": "01 / Starting point",
+  "Ricetta & variazioni": "Recipe & variations",
+  "↳ Ripristina le dosi di questa variante": "↳ Restore this variation’s quantities",
+  "02 / Lo stampo": "02 / The pan",
+  "Forma dello stampo": "Pan shape",
+  "Tondo": "Round",
+  "Ciambella": "Ring",
+  "Plumcake rettangolare": "Rectangular loaf pan",
+  "Diametro interno": "Internal diameter",
+  "Diametro del foro": "Hole diameter",
+  "Lunghezza interna": "Internal length",
+  "Larghezza interna": "Internal width",
+  "Porzioni": "Servings",
+  "Dosi scalate per area, a spessore d’impasto costante. Tempi forno da verificare. Stampo alto almeno 6 cm; non oltre 2/3.": "Quantities scale by area, keeping batter depth constant. Check baking times. Pan at least 6 cm tall; fill no more than 2/3.",
+  "03 / La miscela secca": "03 / The dry blend",
+  "Farina principale": "Main flour",
+  "Miscela base · prima dello scaling": "Base blend · before scaling",
+  "Amido di mais": "Cornstarch",
+  "Frutta secca": "Nuts",
+  "Proteine farina · dalla tua etichetta": "Flour protein · from your label",
+  "Valori iniziali dei profili generici, non analisi del tuo sacchetto. Amido e frutta secca sostituiscono parte della miscela, non si aggiungono al totale.": "Starting values from generic profiles, not an analysis of your bag. Starch and nuts replace part of the blend; they do not add to the total.",
+  "04 / Il bilancio umido": "04 / The wet balance",
+  "Uova sgusciate": "Shelled eggs",
+  "Tipo di yogurt": "Yogurt type",
+  "Bianco intero · non zuccherato": "Plain whole milk · unsweetened",
+  "Greco 5% · riferimento FAGE": "Greek 5% · FAGE reference",
+  "Greco 0% · profilo magro": "Greek 0% · low-fat profile",
+  "Bianco senza lattosio": "Plain lactose-free",
+  "Soia bianco · non zuccherato": "Plain soy · unsweetened",
+  "Dolcificante": "Sweetener",
+  "Zucchero": "Sugar",
+  "Miele": "Honey",
+  "Quantità": "Quantity",
+  "Olio": "Oil",
+  "Tipo di olio": "Oil type",
+  "Semi": "Seed",
+  "Cocco": "Coconut",
+  "Lievito per dolci": "Baking powder",
+  "Latte aggiunto": "Added milk",
+  "Tutte queste dosi sono riferite allo stampo base Ø 24 cm. Le quantità effettive sono nel risultato. 150 g di uova ≈ 3 uova medie: pesa il contenuto.": "All these quantities refer to the base Ø 24 cm pan. Actual amounts appear in the results. 150 g of eggs ≈ 3 medium eggs: weigh the contents.",
+  "05 / Aromi & inclusioni": "05 / Flavours & additions",
+  "Ingrediente extra": "Extra ingredient",
+  "Scorza di limone": "Lemon zest",
+  "Scorza d’arancia": "Orange zest",
+  "Scorza + semi di papavero": "Zest + poppy seeds",
+  "Cacao amaro": "Unsweetened cocoa",
+  "Mirtilli": "Blueberries",
+  "Espresso freddo": "Cold espresso",
+  "Nessuno": "None",
+  "Quantità extra · base Ø 24 cm": "Extra quantity · base Ø 24 cm",
+  "Le inclusioni non riequilibrano automaticamente la ricetta. Per cacao e frutta parti dalle varianti dedicate. Vaniglia a piacere, non inclusa nel bilancio.": "Additions do not automatically rebalance the recipe. For cocoa and fruit, start with the dedicated variations. Vanilla to taste, excluded from the balance.",
+  "Fisica delle bolle · parametri esplorativi": "Bubble physics · exploratory parameters",
+  "Aria di base prima della montata": "Base air before whisking",
+  "Viscosità efficace μ₀": "Effective viscosity μ₀",
+  "Resa CO₂ del lievito": "Baking powder CO₂ yield",
+  "CO₂ che entra nel campione": "CO₂ entering the sample",
+  "Riferimento di consolidamento": "Setting reference temperature",
+  "Tempo del consolidamento": "Setting time",
+  "Modulo elastico finale": "Final elastic modulus",
+  "Drenaggio dei film · base": "Film drainage · baseline",
+  "Tensione superficiale γ": "Surface tension γ",
+  "Attività acqua · ipotesi": "Water activity · assumption",
+  "Densità impasto · ipotesi o tua misura": "Batter density · assumption or your measurement",
+  "Questi valori sono ipotesi libere, non proprietà misurate di Caputo o del Bimby. Farine con gli stessi input reologici possono avere curve uguali: il W non è trasformato in viscosità. La montata modifica aria e numero iniziali; il mix lungo perde aria. Farina, acqua, grassi e zucchero modificano viscosità e consolidamento con chiusure empiriche. L’attività dell’acqua non è ricavata dallo yogurt e non è usata per valutare conservazione o sicurezza.": "These values are free assumptions, not measured Caputo or Thermomix properties. Flours with the same rheological inputs may produce identical curves: W is not converted into viscosity. Whisking changes initial air and bubble count; long mixing loses air. Flour, water, fat and sugar change viscosity and setting through empirical closures. Water activity is not derived from yogurt and is not used to assess shelf life or safety.",
+  "06 / Processo & cottura": "06 / Process & baking",
+  "Montata totale": "Total whisking time",
+  "Mix dopo farina": "Mixing after flour",
+  "Temperatura forno": "Oven temperature",
+  "Cottura prevista": "Planned baking time",
+  "Modalità del forno": "Oven mode",
+  "Statico": "Conventional",
+  "Ventilato": "Fan",
+  "Usa il termometro": "Use the thermometer",
+  "Sonda al cuore + controlli della mollica": "Core probe + crumb checks",
+  "Lievito chimico per dolci, non lievito di birra. Non aggiungere bicarbonato a intuito: pH e acidità titolabile dello yogurt sono cose diverse.": "Use baking powder, not baker’s yeast. Do not add baking soda by guesswork: yogurt pH and titratable acidity are different things.",
+  "Parametri del modello didattico": "Educational model parameters",
+  "Temperatura iniziale": "Initial temperature",
+  "Inerzia termica τ": "Thermal inertia τ",
+  "Limite prudenziale per lotto": "Conservative batch limit",
+  "τ è un parametro libero, non stimato da stampo o forno. Nessuna curva certifica cottura, volume o sicurezza. Il limite per lotto non sostituisce la tacca 2,2 L.": "τ is a free parameter, not estimated from the pan or oven. No curve certifies doneness, volume or safety. The batch limit does not replace the 2.2 L mark.",
+  "Parametri salvati solo in questo browser.": "Parameters saved only in this browser.",
+  "Ricetta e laboratorio": "Recipe and lab",
+  "Copia ricetta": "Copy recipe",
+  "Stampa / PDF": "Print / PDF",
+  "Modalità cucina →": "Cooking mode →",
+  "Il bilancio degli ingredienti": "The ingredient balance",
+  "Quantità per ciascun lotto": "Quantities for each batch",
+  "La tua torta, in etichetta": "Your cake’s nutrition label",
+  "VALORI NUTRIZIONALI STIMATI": "ESTIMATED NUTRITION VALUES",
+  "Peso cotto misurato · 0 = usa stima": "Measured cooked weight · 0 = use estimate",
+  "Perdita di massa stimata in cottura": "Estimated mass loss during baking",
+  "Ingredienti: fonti e valori della tua etichetta": "Ingredients: sources and your label values",
+  "Tutti i valori sono g per 100 g d’ingrediente. Per Caputo sono ufficiali le proteine; gli altri macro partono dal profilo generico indicato. Puoi sostituire ogni riga con i dati del tuo sacchetto. Il lievito contribuisce al sale.": "All values are grams per 100 g of ingredient. Caputo protein values are official; other macros start from the stated generic profile. Replace any row with your bag’s label. Baking powder contributes to salt.",
+  "↳ Ripristina i profili nutrizionali di riferimento": "↳ Restore reference nutrition profiles",
+  "Somma degli ingredienti e normalizzazione sul peso cotto. Energia calcolata con 4/4/9/2 kcal per grammo di proteine/carboidrati/grassi/fibre; kJ con 17/17/37/8. Perdita assunta come sola evaporazione, nutrienti trattenuti; acidi organici e trasformazioni di cottura non modellati. Tabella in stile UE per uso personale, non dichiarazione commerciale certificata.": "Ingredients summed and normalised to cooked weight. Energy uses 4/4/9/2 kcal per gram of protein/carbohydrate/fat/fibre; kJ uses 17/17/37/8. Loss is assumed to be evaporation only, with nutrients retained; organic acids and baking transformations are not modelled. EU-style table for personal use, not a certified commercial declaration.",
+  "Fattori energetici UE ↗": "EU energy factors ↗",
+  "Dentro la mollica": "Inside the crumb",
+  "FISICA SEMPLIFICATA · NON CALIBRATA": "SIMPLIFIED PHYSICS · UNCALIBRATED",
+  "Una popolazione di bolle evolve con gas, calore e resistenza della matrice.": "A bubble population evolves with gas, heat and matrix resistance.",
+  "Le cavità sono": "The cavities are",
+  "sezioni delle bolle simulate in 3D": "cross-sections of bubbles simulated in 3D",
+  ", sullo stesso piano nel tempo.": ", on the same plane over time.",
+  "Vista della simulazione": "Simulation view",
+  "Sezione": "Cross-section",
+  "Microstruttura": "Microstructure",
+  "Simulazione didattica della sezione della torta e delle cavità della mollica": "Educational simulation of a cake cross-section and crumb cavities",
+  "Consolidamento progressivo": "Progressive setting",
+  "Avvia simulazione": "Start simulation",
+  "Tempo simulato in forno": "Simulated time in the oven",
+  "Nuova sezione ↻": "New cross-section ↻",
+  "Simulazione numerica di un campione 60 × 28 × 8 mm: crescita, gas, fusioni e aperture superficiali. Il seme cambia solo le condizioni iniziali. Lo stesso campione evolve nel tempo; le regole di coalescenza e le proprietà della matrice sono ipotesi da calibrare, non dati di questa ricetta. Il disegno della fetta è illustrativo e non in scala.": "Numerical simulation of a 60 × 28 × 8 mm sample: growth, gas, merging and surface venting. The seed changes only the initial conditions. The same sample evolves over time; coalescence rules and matrix properties are assumptions to calibrate, not data measured for this recipe. The slice drawing is illustrative and not to scale.",
+  "Le curve del tuo esperimento": "Your experiment’s curves",
+  "Come leggere i modelli ↗": "How to read the models ↗",
+  "Tipo di grafico": "Chart type",
+  "Cottura": "Baking",
+  "Formulazione": "Formulation",
+  "Confronta ricette": "Compare recipes",
+  "Nutrizione": "Nutrition",
+  "Alveolatura": "Crumb structure",
+  "Confronta la tua ricetta con…": "Compare your recipe with…",
+  "Tutte le ricette +": "All recipes +",
+  "Solo la mia": "Only mine",
+  "Scegli le varianti e gli esperimenti del quaderno": "Choose variations and notebook experiments",
+  "Cosa confrontare": "What to compare",
+  "Energia · kcal": "Energy · kcal",
+  "Grassi": "Fat",
+  "Saturi": "Saturates",
+  "Carboidrati": "Carbohydrate",
+  "Zuccheri": "Sugars",
+  "Fibre": "Fibre",
+  "Proteine": "Protein",
+  "Sale": "Salt",
+  "Base del confronto": "Comparison basis",
+  "Per 100 g di torta cotta": "Per 100 g of cooked cake",
+  "Per porzione di ogni ricetta": "Per serving of each recipe",
+  "Intera torta": "Whole cake",
+  "Osservabile del modello fisico": "Physical model observable",
+  "Diametro mediano delle bolle · mm": "Median bubble diameter · mm",
+  "Rapporto di volume · × iniziale": "Volume ratio · × initial",
+  "Numero di bolle nel campione": "Number of bubbles in the sample",
+  "Consolidamento medio · %": "Mean setting · %",
+  "Frazione gassosa del campione · %": "Sample gas fraction · %",
+  "Il cuore dice di più": "The core tells you more",
+  "SONDA REALE · INPUT MANUALE": "REAL PROBE · MANUAL INPUT",
+  "FINESTRA DI CONTROLLO": "CHECKING WINDOW",
+  "Orientativa per questa prova, da validare.": "Indicative for this experiment; needs validation.",
+  "Misura verso fine cottura, con sonda sottile al centro della mollica. Evita metallo, frutta e cavità. Controlla due punti e attendi una lettura stabile. Una lettura nella fascia richiede ancora i controlli qui sotto.": "Measure near the end of baking, using a thin probe in the centre of the crumb. Avoid metal, fruit and cavities. Check two points and wait for a stable reading. A reading in this range still requires the checks below.",
+  "Minuti trascorsi": "Elapsed minutes",
+  "Temperatura misurata": "Measured temperature",
+  "es. 97,5": "e.g. 97.5",
+  "Registra lettura +": "Record reading +",
+  "Nessuna lettura. I dati della sonda non sono generati dalla simulazione.": "No readings. Probe data is not generated by the simulation.",
+  "Il centro torna su a una lieve pressione": "The centre springs back under gentle pressure",
+  "Stecchino senza impasto crudo": "Skewer comes out without raw batter",
+  "Superficie e bordi sono assestati": "Surface and edges are set",
+  "Azzera le letture e i controlli di questa infornata": "Reset readings and checks for this bake",
+  "La letteratura pratica riporta circa 93–99 °C secondo la formulazione. Qui 96–99 °C è una finestra esplorativa scelta per il laboratorio, non una soglia validata per ai-pie né una certificazione di sicurezza. In quota il punto di ebollizione cambia.": "Practical baking sources report about 93–99 °C depending on formulation. Here, 96–99 °C is an exploratory window chosen for the lab, not a validated ai-pie threshold or a safety certification. Boiling temperature changes with altitude.",
+  "Fonte e limiti ↗": "Source and limits ↗",
+  "La farina è una scelta di struttura": "Flour is a structural choice",
+  "00 ≠ FORZA": "00 ≠ STRENGTH",
+  "Per una mollica fine parti da una farina debole per torte. La farina “migliore” è quella coerente con la struttura che cerchi.": "For a fine crumb, start with a low-strength cake flour. The “best” flour matches the structure you want.",
+  "PUNTO DI PARTENZA": "STARTING POINT",
+  "Debole per dolci": "Low-strength cake flour",
+  "Rete meno tenace, lavorazione breve.": "Less tenacious network, brief mixing.",
+  "Intervallo proposto, non optimum sperimentale.": "Suggested range, not an experimental optimum.",
+  "IL TUO SACCHETTO": "YOUR BAG",
+  "00 comune + amido": "Ordinary 00 + starch",
+  "Leggi l’etichetta": "Read the label",
+  "Prova il 10–15% di amido per confronto.": "Try 10–15% starch for comparison.",
+  "Non rende tutte le farine equivalenti.": "This does not make all flours equivalent.",
+  "ESPERIMENTO DI CONTROLLO": "CONTROL EXPERIMENT",
+  "Più potenziale di tenacità.": "Greater potential for toughness.",
+  "Interessante da confrontare, non il default.": "Interesting to compare, not the default.",
+  "Le farine, per nome e cognome.": "The flours, by name.",
+  "Profili commerciali da schede ufficiali. Seleziona una scheda per usarla nella ricetta; le dosi restano quelle impostate. Caputo Pasticceria è il punto di partenza consigliato tra le Caputo.": "Commercial profiles from official specifications. Select a card to use it in your recipe; quantities remain as set. Caputo Pasticceria is the suggested starting point among Caputo flours.",
+  "Proteine ≠ glutine sviluppato": "Protein ≠ developed gluten",
+  "Quantità, qualità delle proteine, idratazione e lavoro meccanico interagiscono. Il W non si ricava da una semplice percentuale proteica.": "Protein quantity and quality, hydration and mechanical work interact. W cannot be derived from a simple protein percentage.",
+  "Amido, con misura": "Starch, in moderation",
+  "Diluisce le proteine del frumento. Parti da 0% e 12% in due prove: troppo amido può dare una mollica fragile. Una cake flour trattata resta diversa.": "It dilutes wheat proteins. Try 0% and 12% in two separate bakes: too much starch can make the crumb fragile. Treated cake flour remains different.",
+  "Integrale & alternative": "Wholemeal & alternatives",
+  "Crusca, avena, riso e mandorle modificano struttura e acqua disponibile. Non scambiarli 1:1 aspettandoti lo stesso risultato.": "Bran, oats, rice and almonds change structure and available water. Do not swap them 1:1 expecting the same result.",
+  "Esempio documentato: Dallagiovanna propone farine tutte 00 con W molto diversi, tra cui W 170 per torte da forno.": "Documented example: Dallagiovanna offers 00 flours with very different W values, including W 170 for cakes.",
+  "Schede del molino ↗": "Mill specifications ↗",
+  "Passo per passo · Bimby & forno": "Step by step · Thermomix & oven",
+  "Apri modalità cucina →": "Open cooking mode →",
+  "Inizio previsto · Europe/Rome": "Planned start · Europe/Rome",
+  "PREPARAZIONE": "PREPARATION",
+  "FORNO": "OVEN",
+  "ATTESA": "WAITING",
+  "Procedura manuale adattata a TM5, TM6 e TM7; nessun comando viene inviato all’apparecchio. Coperchio e accessori secondo il manuale del tuo modello. Le conferme sono manuali e i timer non verificano l’esecuzione.": "Manual procedure adapted to TM5, TM6 and TM7; no commands are sent to the appliance. Use the lid and accessories according to your model’s manual. Confirmations are manual and timers do not verify execution.",
+  "Il quaderno di laboratorio": "The lab notebook",
+  "DATI NEL TUO BROWSER": "DATA IN YOUR BROWSER",
+  "Una variabile alla volta. Salva dosi, misure e osservazioni per capire cosa migliora davvero la tua torta.": "One variable at a time. Save quantities, measurements and observations to find out what really improves your cake.",
+  "Nome dell’esperimento": "Experiment name",
+  "Es. 12% amido · limone · prima prova": "E.g. 12% starch · lemon · first trial",
+  "Altezza al centro · torta fredda": "Centre height · cooled cake",
+  "Peso dopo raffreddamento": "Weight after cooling",
+  "Osservazioni · taglio, umidità, aroma, struttura": "Observations · slice, moisture, flavour, structure",
+  "Cosa hai cambiato? Come appare la mollica? Com’è il giorno dopo?": "What did you change? What does the crumb look like? How is it the next day?",
+  "Salva esperimento +": "Save experiment +",
+  "↓ Esporta quaderno": "↓ Export notebook",
+  "↑ Importa JSON": "↑ Import JSON",
+  "All’importazione ripristina anche configurazione e letture correnti dal backup": "Also restore the current configuration and readings from the backup when importing",
+  "Il salvataggio include configurazione, letture della sonda e controlli. Esporta un backup: cancellare i dati del browser elimina il quaderno.": "Saving includes configuration, probe readings and checks. Export a backup: clearing browser data deletes the notebook.",
+  "La scienza, con i suoi limiti": "Science, with its limits",
+  "METODO APERTO": "OPEN METHOD",
+  "Un modello utile sa dire cosa non sa.": "A useful model knows what it does not know.",
+  "Misure. Calcoli. Ipotesi.": "Measurements. Calculations. Assumptions.",
+  "Questa app è un laboratorio indipendente ispirato alle ricette nei commenti del blog. Le nuove varianti e i protocolli sono proposte da provare: nessuna ottimizzazione è stata validata con una serie di cotture reali.": "This independent lab is inspired by recipes in the blog comments. New variations and procedures are proposals to try: no optimisation has been validated by a series of real bakes.",
+  "01 / Scaling geometrico e percentuali": "01 / Geometric scaling and percentages",
+  "È un calcolo geometrico, valido mantenendo lo stesso spessore iniziale. Stampi svasati e arrotondati sono approssimati. La ricetta originale non dichiara il diametro: Ø 24 cm è una convenzione dell’app. Le porzioni dividono la torta e non ridimensionano l’impasto. Il tempo non scala con k.": "This is a geometric calculation, valid when initial depth stays constant. Tapered and rounded pans are approximated. The original recipe gives no diameter: Ø 24 cm is the app’s convention. Servings divide the cake without resizing the batter. Time does not scale with k.",
+  "Il denominatore delle percentuali è la miscela di farina, amido e frutta secca. Cacao ed extra sono fuori dal denominatore. I valori mostrati sono arrotondati; i calcoli conservano la precisione.": "The percentage denominator is the flour, starch and nut blend. Cocoa and extras are excluded. Displayed values are rounded; calculations retain their precision.",
+  "02 / Acqua e proteine: un bilancio approssimativo": "02 / Water and protein: an approximate balance",
+  "Frazioni d’acqua convenzionali: uova 76%, yogurt intero o senza lattosio 87%, greco 5% 80%, greco 0% 85%, soia 90%, latte 88%, miele 17%, espresso 98%. Proteine convenzionali della frutta secca: mandorle 21%, nocciole 15%; amido assunto 0%. Sono ipotesi compositive modificabili nel codice, non analisi di laboratorio. L’acqua di farine, scorze e frutta non è conteggiata: il bilancio non rappresenta l’acqua totale della torta.": "Assumed water fractions: eggs 76%, whole or lactose-free yogurt 87%, Greek 5% 80%, Greek 0% 85%, soy 90%, milk 88%, honey 17%, espresso 98%. Assumed nut protein: almonds 21%, hazelnuts 15%; starch assumed 0%. These compositional assumptions can be changed in the code; they are not laboratory analyses. Water in flour, zest and fruit is excluded: the balance does not represent the cake’s total water.",
+  "Non è l’idratazione panaria, non è attività dell’acqua e non permette di ricavare shelf life, acidità o sicurezza. Le proteine di riso, avena e mandorle non hanno la funzione del glutine del frumento.": "This is not bread hydration or water activity, and it cannot determine shelf life, acidity or safety. Rice, oat and almond proteins do not perform the same function as wheat gluten.",
+  "03 / Curva termica, gas e alveoli procedurali": "03 / Thermal curve, gas and procedural pores",
+  "La forma esponenziale e i coefficienti sono scelti per illustrare un riscaldamento con inerzia. Non risolvono il trasporto di calore, non risolvono esattamente geometria, evaporazione o termostato. Il tempo caratteristico dipende anche dallo spessore iniziale stimato, dalla forma e dal forno, con coefficienti dichiarati e non calibrati. Le letture reali sono punti distinti e non modificano automaticamente il modello.": "The exponential form and coefficients illustrate heating with inertia. They do not solve heat transport or fully resolve geometry, evaporation or thermostat behaviour. The characteristic time also depends on estimated initial depth, shape and oven mode, with stated, uncalibrated coefficients. Real readings are separate points and do not automatically change the model.",
+  "Le cavità ora provengono da una popolazione 3D integrata ogni 5 secondi, non da cerchi rigenerati a ogni fotogramma. Il piano di taglio è fisso: il raggio della sezione è √(R² − d²) quando la sfera interseca il piano. La vista microstruttura preserva il rapporto geometrico del campione; la fetta resta illustrativa.": "Cavities now come from a 3D population integrated every 5 seconds, rather than circles regenerated each frame. The cutting plane is fixed: the section radius is √(R² − d²) when the sphere intersects it. The microstructure view preserves the sample’s geometric proportions; the slice remains illustrative.",
+  "La CO₂ nasce da una resa libera del lievito, con 20% di rilascio iniziale e 80% attivato dalla temperatura. Una quota impostata entra nella riserva e si trasferisce alle bolle con tempo 35 s; il resto è contato come gas non trattenuto. Il vapore si avvicina ad a_w p_sat(T) con tempo 20 s. p_sat è una stima di Clausius–Clapeyron, limitata nel codice per mantenere stabile la pressione efficace.": "CO₂ comes from a free baking-powder yield parameter, with 20% released initially and 80% activated by temperature. A set fraction enters the reserve and transfers to bubbles with a 35 s time constant; the rest counts as unretained gas. Vapour approaches a_w p_sat(T) with a 20 s time constant. p_sat is a Clausius–Clapeyron estimate, capped in the code to keep effective pressure stable.",
+  "La viscosità cresce come μ₀ F_ricetta exp[−0,025(T−T₀)+12S]. F_ricetta dipende da rapporto secchi/umidi, proteine del frumento, frutta secca e olio: coefficienti empirici, non schede reologiche dei prodotti. La temperatura di consolidamento è corretta dal rapporto zucchero/miscela; il modulo elastico aumenta come S³.": "Viscosity grows as μ₀ F_recipe exp[−0.025(T−T₀)+12S]. F_recipe depends on the dry/wet ratio, wheat proteins, nuts and oil: empirical coefficients, not product rheological specifications. Setting temperature is adjusted by the sugar/blend ratio; elastic modulus grows as S³.",
+  "Due bolle vicine fondono se il film resta a contatto abbastanza a lungo: il tempo di drenaggio è un parametro libero, dipendente da viscosità, temperatura e consolidamento. Le bolle che raggiungono la superficie prima del fissaggio possono aprirsi e perdere gas. Il contatto è inoltre rilassato geometricamente, ammettendo una piccola deformazione mentre il film drena e separando i centri dopo il consolidamento. Anche questa è una chiusura di impacchettamento, non una soluzione delle tensioni della schiuma. Queste regole sono fenomenologiche e da calibrare.": "Two nearby bubbles merge if their films stay in contact long enough: drainage time is a free parameter depending on viscosity, temperature and setting. Bubbles reaching the surface before setting may open and lose gas. Contact is also relaxed geometrically, allowing slight deformation while the film drains and separating centres after setting. This is another packing closure, not a solution for foam stresses. These rules are phenomenological and need calibration.",
+  "Limiti:": "Limits:",
+  "niente distribuzione reale di deformazioni nella fetta, trasporto di calore 3D, chimica dettagliata del lievito, diffusione molecolare o meccanica della crosta. Pressione ambiente fissa a 101 325 Pa. Non sono state misurate viscosità, tensione superficiale, a_w o parametri di setting di questa ricetta. La simulazione mostra meccanismi e sensibilità: non prevede la mollica reale e non classifica le farine con accuratezza certificata.": "no real strain distribution in the slice, 3D heat transport, detailed baking-powder chemistry, molecular diffusion or crust mechanics. Ambient pressure is fixed at 101,325 Pa. Viscosity, surface tension, a_w and setting parameters have not been measured for this recipe. The simulation illustrates mechanisms and sensitivity: it does not predict actual crumb or rank flours with certified accuracy.",
+  "04 / Dalla ricetta del blog al protocollo del laboratorio": "04 / From the blog recipe to the lab procedure",
+  "0.1: conserviamo le dosi, convertendo 100 ml di olio in circa 92 g e assumendo una bustina da 16 g. 0.2: conserviamo avena, mandorle, miele, yogurt greco e olio di cocco; la frutta opzionale si può aggiungere. Non riprendiamo le promesse salutistiche del testo generato.": "0.1: quantities are retained, converting 100 ml of oil to about 92 g and assuming a 16 g baking-powder sachet. 0.2: oats, almonds, honey, Greek yogurt and coconut oil are retained; optional fruit can be added. Health claims from the generated text are not adopted.",
+  "In entrambe le versioni rimuoviamo la farfalla prima delle polveri e usiamo la spatola esclusivamente a macchina ferma e senza farfalla. Nel protocollo modificato le polveri entrano a velocità 3, per una durata iniziale breve. La Signature riduce lo zucchero, aumenta lo yogurt e introduce il 12% di amido: è una formulazione nuova, non la ricetta originale e non una promessa di superiorità.": "In both versions, remove the butterfly whisk before adding dry ingredients and use the spatula only with the machine stopped and whisk removed. The modified procedure mixes dry ingredients at speed 3 for a short initial duration. Signature reduces sugar, increases yogurt and introduces 12% starch: a new formulation, not the original recipe or a promise of superiority.",
+  "Sostituzioni: miele e zucchero non sono equivalenti; olio e burro non sono intercambiabili per massa; lo yogurt senza lattosio contiene latte; il farro contiene glutine. Le varianti con soia contengono uova e non sono vegane. L’app non certifica la gestione degli allergeni.": "Substitutions: honey and sugar are not equivalent; oil and butter cannot be swapped by mass; lactose-free yogurt contains milk; spelt contains gluten. Soy variations contain eggs and are not vegan. The app does not certify allergen management.",
+  "Le fonti del laboratorio": "The lab’s sources",
+  "RICETTA DI PARTENZA": "STARTING RECIPE",
+  "Luca Amore · ai-pie 0.1 e 0.2 nei commenti": "Luca Amore · ai-pie 0.1 and 0.2 in the comments",
+  "Dosi e procedure del primo esperimento · 2024 ↗": "Quantities and procedures from the first experiment · 2024 ↗",
+  "FARINE / PRODUTTORE": "FLOURS / MANUFACTURER",
+  "Tipo 00 e forza W sono informazioni diverse ↗": "Type 00 and W strength are different information ↗",
+  "AMIDO / TEST KITCHEN": "STARCH / TEST KITCHEN",
+  "Sostituzione pratica, non equivalenza completa ↗": "Practical substitution, not full equivalence ↗",
+  "RICERCA / STUDIO PRIMARIO": "RESEARCH / PRIMARY STUDY",
+  "Aerazione e struttura del cake": "Cake aeration and structure",
+  "Perché più aria iniziale non basta ↗": "Why more initial air is not enough ↗",
+  "Transizioni termiche nell’impasto": "Thermal transitions in batter",
+  "Gelatinizzazione e composizione · 2015 ↗": "Gelatinisation and composition · 2015 ↗",
+  "ZUCCHERO / ESPERIMENTO": "SUGAR / EXPERIMENT",
+  "Riduzioni graduali e dipendenza dal metodo ↗": "Gradual reductions and method dependence ↗",
+  "COTTURA / TERMOMETRO": "BAKING / THERMOMETER",
+  "Temperatura e segni strutturali da usare insieme ↗": "Use temperature and structural signs together ↗",
+  "VORWERK / ACCESSORI": "VORWERK / ACCESSORIES",
+  "Farfalla: velocità massima 4": "Butterfly whisk: maximum speed 4",
+  "Montaggio e incompatibilità con la spatola ↗": "Fitting and incompatibility with the spatula ↗",
+  "MODELLO / STUDIO PRIMARIO": "MODEL / PRIMARY STUDY",
+  "Pressioni, gas e crescita viscosa; studio su biscotti, non calibrazione della torta ↗": "Pressure, gas and viscous growth; a biscuit study, not cake calibration ↗",
+  "AERAZIONE / STUDIO PRIMARIO": "AERATION / PRIMARY STUDY",
+  "Miscelazione, popolazione delle bolle e reologia ↗": "Mixing, bubble population and rheology ↗",
+  "SETTING / STUDIO PRIMARIO": "SETTING / PRIMARY STUDY",
+  "Espansione, zucchero e fissaggio: transizioni dipendenti dalla ricetta ↗": "Expansion, sugar and setting: recipe-dependent transitions ↗",
+  "NUTRIZIONE / DATI PRIMARI": "NUTRITION / PRIMARY DATA",
+  "Profili per parte edibile; carboidrati adattati sottraendo la fibra ↗": "Edible-portion profiles; carbohydrate adjusted by subtracting fibre ↗",
+  "Manuali e limiti:": "Manuals and limits:",
+  "Fonti consultate il 10–11 novembre 2026. I dati del produttore prevalgono sui profili generici dell’app.": "Sources consulted on 10–11 November 2026. Manufacturer data takes precedence over the app’s generic profiles.",
+  "Un laboratorio indipendente di Luca Amore. Dalla pizza alla torta, la curiosità resta la stessa.": "An independent lab by Luca Amore. From pizza to cake, the curiosity stays the same.",
+  "Bimby® e Thermomix® sono marchi Vorwerk.": "Bimby® and Thermomix® are Vorwerk trademarks.",
+  "Progetto indipendente, non affiliato o approvato da Vorwerk.": "Independent project, not affiliated with or approved by Vorwerk.",
+  "NEOTOKIO / MODALITÀ CUCINA": "NEOTOKIO / COOKING MODE",
+  "Chiudi modalità cucina": "Close cooking mode",
+  "Chiudi ×": "Close ×",
+  "Tempo rimanente": "Time remaining",
+  "Timer manuale. Nessun collegamento al Bimby.": "Manual timer. No connection to the Thermomix.",
+  "Avvia timer ▶": "Start timer ▶",
+  "Ricomincia ↻": "Restart ↻",
+  "Apri il pannello della sonda →": "Open the probe panel →",
+  "← Precedente": "← Previous",
+  "Conferma e continua →": "Confirm and continue →",
+  "Conferma ogni operazione dopo averla eseguita. Il tempo trascorso da solo non la completa.": "Confirm each operation after completing it. Elapsed time alone does not complete it.",
+  "Attiva JavaScript per usare calcoli, grafici e quaderno del laboratorio.": "Enable JavaScript to use the lab’s calculations, charts and notebook.",
+  "00 comune": "Ordinary 00",
+  "Forte / Manitoba": "Strong / Manitoba",
+  "Integrale di frumento": "Wholemeal wheat",
+  "Farro": "Spelt",
+  "Avena": "Oats",
+  "Riso finissimo": "Very fine rice flour",
+  "non dichiarato nella fonte": "not stated in the source",
+  "non espresso dal produttore": "not stated by the manufacturer",
+  "non dichiarato": "not stated",
+  "non applicabile": "not applicable",
+  "variabile": "variable",
+  "Punto di partenza consigliato. Cerca una farina per torte e controlla la scheda: «00» da solo non basta.": "Suggested starting point. Look for cake flour and check the specifications: “00” alone is not enough.",
+  "Il tipo 00 descrive la raffinazione, non la forza. Proteine e W vanno letti sull’etichetta o sulla scheda.": "Type 00 describes refinement, not strength. Read protein and W on the label or specifications.",
+  "Utile al pane, meno adatta a una mollica tenera. Non è la scelta iniziale per questa torta.": "Useful for bread, less suited to a tender crumb. Not the starting choice for this cake.",
+  "La crusca modifica assorbimento e struttura. Comincia sostituendo il 25–30% della farina, in una prova separata.": "Bran changes absorption and structure. Start by replacing 25–30% of the flour in a separate trial.",
+  "Aroma più marcato e reologia diversa dal frumento comune. Non è senza glutine.": "Stronger flavour and different rheology from common wheat. Not gluten-free.",
+  "Non costruisce la rete del frumento. Per uso senza glutine serve avena certificata; l’impasto tende a essere più compatto.": "Does not build a wheat gluten network. Gluten-free use requires certified oats; the batter tends to be denser.",
+  "Non forma glutine. La finezza è importante; struttura affidata soprattutto a uova e amidi. Versione sperimentale.": "Does not form gluten. Fineness matters; structure relies mainly on eggs and starches. Experimental version.",
+  "Prima scelta Caputo domestica: il molino la dedica a pan di spagna, biscotti e dolci. W 200–220; non coincide con la Frolla professionale.": "First Caputo choice for home use: the mill recommends it for sponge cakes, biscuits and desserts. W 200–220; different from professional Frolla.",
+  "Farina debole professionale, indicata anche per pan di spagna. La scheda consultata è del sacco da 25 kg. Da provare per una mollica tenera.": "Professional low-strength flour, also suitable for sponge cakes. The specifications consulted cover the 25 kg bag. Worth testing for a tender crumb.",
+  "Classica e Doppio Zero sono lo stesso profilo del produttore: un’unica voce. Farina versatile da dispensa, meno specifica della Pasticceria per questa torta.": "Classica and Doppio Zero share the same manufacturer profile: one entry. A versatile pantry flour, less specific to this cake than Pasticceria.",
+  "Inserita come confronto per chi arriva da Pizza Lab. È pensata per pizza e focaccia: non la prima scelta per una torta tenera. Alveoli della pizza e mollica del cake non sono equivalenti.": "Included for comparison for Pizza Lab users. Designed for pizza and focaccia: not the first choice for a tender cake. Pizza air pockets and cake crumb are not equivalent.",
+  "LeDolcissime / Far Dolci Frolla, adatta anche a torte da forno e pan di spagna. Dati della scheda italiana 5 kg; controlla la tua confezione.": "LeDolcissime / Far Dolci Frolla, also suitable for cakes and sponge cakes. Data from the Italian 5 kg specifications; check your pack.",
+  "Farina specifica per torte e biscotti. Proteine nutrizionali 12 g/100 g: il minimo tecnico dell’11% su sostanza secca non è la stessa misura.": "Flour specifically for cakes and biscuits. Nutrition protein is 12 g/100 g: the technical minimum of 11% on a dry-matter basis is a different measure.",
+  "Il produttore la descrive come debole per torte soffici e ciambelle. W e proteine non verificati nella fonte attuale: il 9% iniziale è un segnaposto da sostituire con la tua etichetta.": "The manufacturer describes it as low-strength for soft cakes and ring cakes. W and protein are unverified in the current source: the initial 9% is a placeholder to replace with your label.",
+  "Spadoni Almaverde Bio: farina debole specifica per torte e dolci. Non è una miscela autolievitante; il lievito si pesa separatamente.": "Spadoni Almaverde Bio: low-strength flour specifically for cakes and desserts. Not self-raising; weigh the baking powder separately.",
+  "Opzione comune da dispensa. Proteine 11 g/100 g; il sito non dichiara il W. Non lo deduciamo dalle proteine.": "A common pantry option. Protein 11 g/100 g; the website does not state W. We do not infer it from protein.",
+  "Profilo aromatico tipo 1, ricco di fibre. Petra non esprime W/P-L per questo prodotto: la fibra rende poco significativo il test alveografico. Il 13% proteico non la rende automaticamente una Manitoba.": "Aromatic, fibre-rich type 1 profile. Petra does not state W/P-L for this product: fibre makes the alveograph test less meaningful. Its 13% protein does not automatically make it Manitoba flour.",
+  "Signature · limone & vaniglia": "Signature · lemon & vanilla",
+  "ai-pie v.0.1 · originale": "ai-pie v.0.1 · original",
+  "ai-pie v.0.2 · avena & mandorle": "ai-pie v.0.2 · oats & almonds",
+  "Limone & semi di papavero": "Lemon & poppy seeds",
+  "Cacao fondente": "Dark cocoa",
+  "Mirtilli & vaniglia": "Blueberries & vanilla",
+  "Olio EVO & arancia": "Extra virgin olive oil & orange",
+  "Caffè & nocciola": "Coffee & hazelnut",
+  "Riso & mandorla · senza frumento": "Rice & almond · wheat-free",
+  "Yogurt senza lattosio": "Lactose-free yogurt",
+  "Yogurt di soia · con uova": "Soy yogurt · with eggs",
+  "LA NOSTRA PROPOSTA": "OUR PROPOSAL",
+  "DAL BLOG / 2024": "FROM THE BLOG / 2024",
+  "AGRUMATA": "CITRUS",
+  "CIOCCOLATO": "CHOCOLATE",
+  "FRUTTA": "FRUIT",
+  "MEDITERRANEA": "MEDITERRANEAN",
+  "TOSTATA": "TOASTED",
+  "SPERIMENTALE": "EXPERIMENTAL",
+  "SOSTITUZIONE MIRATA": "TARGETED SUBSTITUTION",
+  "SENZA LATTE AGGIUNTO": "NO ADDED MILK",
+  "Farina debole, 12% di amido, più yogurt. Una base di ricerca per una mollica fine, da validare nel tuo forno.": "Low-strength flour, 12% starch, more yogurt. A research starting point for a fine crumb, to validate in your oven.",
+  "Le dosi del primo commento: 3 uova, 300 g farina, 250 g zucchero, 125 g yogurt, 100 ml olio. Protocollo reso più prudente.": "Quantities from the first comment: 3 eggs, 300 g flour, 250 g sugar, 125 g yogurt, 100 ml oil. Procedure adapted for greater care.",
+  "Le dosi del commento 0.2. Miele, avena e mandorle cambiano la struttura: non è l’equivalente della versione classica. Yogurt greco 0% come riferimento magro.": "Quantities from comment 0.2. Honey, oats and almonds change the structure: not equivalent to the classic version. Greek 0% yogurt is the low-fat reference.",
+  "Scorza fine di limone e semi di papavero. Il succo resta fuori per non modificare inutilmente acqua e acidità.": "Finely grated lemon zest and poppy seeds. Juice is excluded to avoid unnecessary changes to water and acidity.",
+  "25 g di cacao sostituiscono parte della miscela; 25 g di latte come prima correzione da verificare.": "25 g cocoa replaces part of the blend; 25 g milk is an initial adjustment to test.",
+  "120 g di mirtilli asciutti incorporati a mano. La frutta aumenta l’acqua locale: controlla il centro e prolunga solo se serve.": "120 g dry blueberries folded in by hand. Fruit increases local water: check the centre and extend baking only if needed.",
+  "Un extravergine delicato e scorza d’arancia. Il profilo dell’olio conta più di una generica etichetta di qualità.": "Mild extra virgin olive oil and orange zest. The oil’s flavour profile matters more than a generic quality label.",
+  "10% di nocciole nella miscela e 20 g di espresso freddo. La frutta secca aggiunge grassi, non glutine.": "10% hazelnuts in the blend and 20 g cold espresso. Nuts add fat, not gluten.",
+  "Riso fine, amido e mandorle. Per una torta senza glutine usa ingredienti certificati e attrezzatura idonea.": "Fine rice flour, starch and almonds. For a gluten-free cake, use certified ingredients and suitable equipment.",
+  "Yogurt bianco senza lattosio con composizione simile a quello intero. Contiene comunque proteine del latte.": "Plain lactose-free yogurt with a composition similar to whole-milk yogurt. Still contains milk proteins.",
+  "Yogurt di soia bianco non zuccherato. Le uova restano; controlla ingredienti e allergeni di ogni prodotto.": "Plain unsweetened soy yogurt. Eggs remain; check each product’s ingredients and allergens.",
+  "Scorza + papavero": "Zest + poppy seeds",
+  "Nessun extra": "No extra",
+  "Yogurt bianco intero": "Plain whole-milk yogurt",
+  "Yogurt greco 5%": "Greek yogurt 5%",
+  "Yogurt greco 0%": "Greek yogurt 0%",
+  "Yogurt di soia": "Soy yogurt",
+  "Olio di semi": "Seed oil",
+  "Olio extravergine": "Extra virgin olive oil",
+  "Olio di cocco": "Coconut oil",
+  "Nocciole macinate": "Ground hazelnuts",
+  "Farina di mandorle": "Almond flour",
+  "Sale fino": "Fine salt",
+  "Latte": "Milk",
+  "Compatta / fragile": "Dense / fragile",
+  "Rustica / da verificare": "Rustic / needs testing",
+  "Più tenace": "Tougher",
+  "Più lavorata": "More mixed",
+  "Fine / tenera": "Fine / tender",
+  "lotti suggeriti. Il limite di": "batches suggested. The limit of",
+  "g è una scelta prudenziale dell’app, non una capacità Vorwerk. Controlla sempre la tacca 2,2 L; la massa non determina il volume.": "g is the app’s conservative choice, not a Vorwerk capacity. Always check the 2.2 L mark; mass does not determine volume.",
+  "Miscelazione lunga dopo la farina: può sviluppare più glutine e disperdere aria. Fermati appena non restano striature asciutte.": "Long mixing after flour can develop more gluten and disperse air. Stop as soon as no dry streaks remain.",
+  "Lievito oltre il 5,5% della miscela: possibile retrogusto o struttura irregolare. La dose del produttore sulla confezione viene prima del simulatore.": "Baking powder exceeds 5.5% of the blend: possible aftertaste or uneven structure. The manufacturer’s pack dosage takes precedence over the simulator.",
+  "Riduzione dello zucchero marcata: cambia anche struttura e ritenzione d’acqua. Valuta una modifica alla volta.": "Large sugar reduction: also changes structure and water retention. Test one change at a time.",
+  "Yogurt greco: proteine e acqua variano molto per marca. Non esiste una correzione universale del liquido; verifica l’etichetta e la consistenza.": "Greek yogurt: protein and water vary considerably by brand. There is no universal liquid adjustment; check the label and consistency.",
+  "Questa miscela non forma la rete del frumento: le proteine totali non indicano il glutine. L’alveolatura disegnata non valida una formulazione senza glutine.": "This blend does not form a wheat gluten network: total protein does not indicate gluten. The drawn crumb does not validate a gluten-free formulation.",
+  "Ricetta 0.1: 100 ml di olio convertiti in circa 92 g (densità assunta 0,92 g/ml); bustina assunta da 16 g. Il commento non specifica lo stampo: Ø 24 cm è il riferimento scelto qui.": "Recipe 0.1: 100 ml oil converted to about 92 g (assumed density 0.92 g/ml); sachet assumed to be 16 g. The comment gives no pan size: Ø 24 cm is the reference chosen here.",
+  "La versione 0.2 del blog viene ripresa come esperimento, senza attribuirle effetti salutistici. La cottura non conserva i fermenti vivi dello yogurt.": "Blog version 0.2 is included as an experiment, without health claims. Baking does not preserve yogurt’s live cultures.",
+  "Ventilato: come punto di partenza prova circa 10–15 °C in meno dello statico. L’app mantiene la temperatura che hai scelto: non la corregge automaticamente.": "Fan oven: as a starting point, try about 10–15 °C below conventional mode. The app keeps your chosen temperature: it does not automatically adjust it.",
+  "Riscaldamento": "Heating",
+  "Espansione dei gas": "Gas expansion",
+  "Asciugatura e doratura": "Drying and browning",
+  "Prepara il laboratorio": "Prepare the lab",
+  "FORNO IN PRERISCALDAMENTO": "OVEN PREHEATING",
+  "Porta il forno a": "Preheat the oven to",
+  ". Prepara lo stampo, setaccia insieme farina, amido e lievito. Ingredienti a temperatura ambiente. Il preriscaldamento continua in parallelo: attendi che il forno sia pronto prima di infornare.": ". Prepare the pan and sift the flour, starch and baking powder together. Use room-temperature ingredients. Preheating continues in parallel: wait until the oven is ready before baking.",
+  "Lotto": "Batch",
+  "Pesa e prepara": "Weigh and prepare",
+  "MACCHINA FERMA": "MACHINE STOPPED",
+  "Pesa": "Weigh",
+  "di ogni ingrediente": "of each ingredient",
+  "gli ingredienti della ricetta": "the recipe ingredients",
+  "Grattugia finemente la scorza evitando la parte bianca.": "Finely grate the zest, avoiding the white pith.",
+  "L’olio di cocco deve essere fluido e appena tiepido.": "Coconut oil must be liquid and barely warm.",
+  "Boccale pulito. Monta correttamente la farfalla se prevista nel passo successivo.": "Use a clean mixing bowl. Fit the butterfly whisk correctly if required in the next step.",
+  "Uova, zucchero e aria": "Eggs, sugar and air",
+  "vel.": "speed",
+  "SENZA FARFALLA": "WITHOUT BUTTERFLY WHISK",
+  "FARFALLA RIMOSSA": "BUTTERFLY WHISK REMOVED",
+  "FARFALLA": "BUTTERFLY WHISK",
+  "Uova e": "Eggs and",
+  "nel boccale. La farfalla non deve mai superare velocità 4. Coperchio e accessori del": "in the mixing bowl. Never exceed speed 4 with the butterfly whisk. Use the lid and accessories for your",
+  "secondo il manuale.": "according to the manual.",
+  "Completa la montata": "Finish whisking",
+  "senza riscaldamento": "without heating",
+  "Disattiva il riscaldamento. Osserva il composto: chiaro, aerato, omogeneo. La durata è un punto di partenza; più tempo non garantisce più volume finale. Farfalla ancora inserita.": "Turn off heating. Observe the mixture: pale, aerated and uniform. Duration is a starting point; more time does not guarantee more final volume. Butterfly whisk still fitted.",
+  "Unisci uova e dolcificante": "Combine eggs and sweetener",
+  "Miscela uova e dolcificante fino a omogeneità. Questa versione non prevede una montata prolungata.": "Mix eggs and sweetener until uniform. This version does not use prolonged whisking.",
+  "Emulsiona yogurt e olio": "Emulsify yogurt and oil",
+  "A macchina ferma aggiungi yogurt, olio": "With the machine stopped, add yogurt, oil",
+  ". Mescola brevemente. Non versare ingredienti a macchina aperta in movimento.": ". Mix briefly. Never pour ingredients into the open machine while it is running.",
+  "Rimuovi la farfalla": "Remove the butterfly whisk",
+  "Arresta le lame, apri e rimuovi la farfalla se montata. Solo dopo puoi raccogliere il composto dalle pareti con la spatola. Non usare mai la spatola con la farfalla inserita.": "Stop the blades, open the lid and remove the butterfly whisk if fitted. Only then scrape down the sides with the spatula. Never use the spatula with the butterfly whisk fitted.",
+  "Incorpora le polveri": "Fold in the dry ingredients",
+  "Aggiungi le polveri setacciate": "Add the sifted dry ingredients",
+  "e la frutta secca macinata": "and the ground nuts",
+  "incluso il cacao": "including the cocoa",
+  ". Usa la durata come limite iniziale; fermati appena l’impasto è omogeneo. Se restano striature, finisci a mano a macchina ferma.": ". Use the duration as an initial limit; stop as soon as the batter is uniform. If streaks remain, finish by hand with the machine stopped.",
+  "Ultime pieghe delicate": "Final gentle folds",
+  "A MANO · NESSUN RISCALDAMENTO": "BY HAND · NO HEATING",
+  "Incorpora i mirtilli ben asciutti con poche pieghe.": "Fold in the thoroughly dried blueberries with a few gentle turns.",
+  "Incorpora scorza e semi di papavero.": "Fold in the zest and poppy seeds.",
+  "Incorpora la scorza.": "Fold in the zest.",
+  "Non lavorare oltre il necessario.": "Do not mix more than necessary.",
+  "Riunisci i lotti con delicatezza e procedi rapidamente; per numerosi lotti preferisci stampi separati e preparazioni scaglionate.": "Gently combine the batches and work quickly; for many batches, use separate pans and staggered preparation.",
+  "Versa nello stampo senza sbatterlo ripetutamente.": "Pour into the pan without repeatedly banging it.",
+  "Cuoci e osserva": "Bake and observe",
+  "VENTILATO": "FAN",
+  "STATICO": "CONVENTIONAL",
+  "circa": "about",
+  "Riempi lo stampo al massimo per circa 2/3, usando uno stampo extra se necessario. Posizione medio-bassa; evita di aprire nei primi 25 minuti. Verso fine cottura verifica centro, elasticità e stecchino senza impasto crudo.": "Fill the pan no more than about 2/3, using another pan if needed. Use a lower-middle rack; avoid opening the oven during the first 25 minutes. Near the end, check the centre, springiness and a skewer for raw batter.",
+  "Misura con una sonda sottile al centro della mollica, senza toccare fondo, pareti o frutta; confronta almeno due punti. Consulta il pannello termometro per l’intervallo orientativo.": "Measure with a thin probe in the centre of the crumb, avoiding the bottom, sides and fruit; compare at least two points. See the thermometer panel for the indicative range.",
+  "Il tempo e il grafico non certificano la cottura.": "Time and the chart do not certify doneness.",
+  "Lascia assestare": "Let it settle",
+  "NELLO STAMPO": "IN THE PAN",
+  "Attendi circa 10 minuti su un piano stabile, poi sforma delicatamente. Se è molto fragile, aspetta ancora.": "Wait about 10 minutes on a stable surface, then gently turn out. If very fragile, wait longer.",
+  "Raffredda sulla gratella": "Cool on a wire rack",
+  "indicativi / ARIA AMBIENTE": "indicative / ROOM AIR",
+  "Lascia raffreddare prima di tagliare. Registra peso, altezza e struttura alla stessa temperatura di confronto. Copri solo quando è fredda, per limitare la condensa.": "Let cool before slicing. Record weight, height and structure at the same comparison temperature. Cover only when cold to limit condensation.",
+  "Salvataggio browser non disponibile. Esporta il quaderno per conservarlo.": "Browser storage unavailable. Export the notebook to keep it.",
+  "Configurazione aggiornata: conferme del protocollo azzerate.": "Configuration updated: procedure confirmations reset.",
+  "Profili generici": "Generic profiles",
+  "PRIMA SCELTA CAPUTO": "FIRST CAPUTO CHOICE",
+  "Usa questa farina →": "Use this flour →",
+  "Scheda ufficiale ↗": "Official specifications ↗",
+  "Completa i parametri nei limiti indicati: il risultato precedente resta visibile.": "Complete the parameters within the stated limits: the previous result remains visible.",
+  "Variante caricata. Stampo e modello Bimby conservati.": "Variation loaded. Pan and Thermomix model retained.",
+  "Dosi della variante ripristinate.": "Variation quantities restored.",
+  "Modalità manuale. Farfalla max vel. 4; rimuovila prima del prelavaggio. Boccale max 2,2 L.": "Manual mode. Butterfly whisk max speed 4; remove before pre-cleaning. Mixing bowl max 2.2 L.",
+  "Modalità manuale. Farfalla max vel. 4. Boccale max 2,2 L: controlla la tacca, anche con impasto aerato.": "Manual mode. Butterfly whisk max speed 4. Mixing bowl max 2.2 L: check the mark, including with aerated batter.",
+  "PERSONALIZZATA": "CUSTOMISED",
+  "(personalizzate)": "(customised)",
+  "(da verificare sull’etichetta)": "(check your label)",
+  "(da scheda)": "(from specifications)",
+  "Scheda del produttore ↗": "Manufacturer specifications ↗",
+  "Fattore geometrico": "Geometric factor",
+  "area": "area",
+  "rispetto a Ø 24 cm.": "relative to Ø 24 cm.",
+  "+ MODIFICHE": "+ CHANGES",
+  "dosi personalizzate": "custom quantities",
+  "foro": "hole",
+  "IMPASTO TOTALE": "TOTAL BATTER",
+  "MISCELA SECCA": "DRY BLEND",
+  "LAVORAZIONI BIMBY": "THERMOMIX BATCHES",
+  "lotto": "batch",
+  "lotti": "batches",
+  "Soglia prudenziale, controlla il volume": "Conservative threshold; check volume",
+  "YOGURT / MISCELA": "YOGURT / BLEND",
+  "FORNO IMPOSTATO": "OVEN SETTING",
+  "indicativi": "indicative",
+  "CONTROLLO COTTURA": "DONENESS CHECK",
+  "Sensoriale": "Sensory",
+  "Sonda reale + controlli strutturali": "Real probe + structural checks",
+  "Stecchino, centro e superficie": "Skewer, centre and surface",
+  "sulla miscela": "of the blend",
+  "Bilancio:": "Balance:",
+  "g · uova pesate senza guscio (circa": "g · eggs weighed without shells (about",
+  "uova da 50 g). Vaniglia facoltativa non pesata. Percentuali sulla miscela di farina, amido e frutta secca, prima degli extra.": "50 g eggs). Optional vanilla not weighed. Percentages refer to the flour, starch and nut blend, before extras.",
+  "Ingrediente": "Ingredient",
+  "Per ciascuno dei": "For each of the",
+  "Profilo farina aggiornato. Le altre dosi sono conservate.": "Flour profile updated. Other quantities retained.",
+  "Pausa simulazione": "Pause simulation",
+  "Curva termica didattica con letture reali della sonda, se presenti.": "Educational thermal curve with real probe readings, if available.",
+  "temperatura del modello": "model temperature",
+  "controllo": "check",
+  "Sonda:": "Probe:",
+  "°C a": "°C at",
+  "Temperatura simulata": "Simulated temperature",
+  "Tempo della sezione": "Cross-section time",
+  "Sonda reale": "Real probe",
+  "Muovi il puntatore per leggere la curva; fai clic per sincronizzare la sezione. Anche il cursore del simulatore è utilizzabile da tastiera. Le varianti sono tratteggiate; se i parametri termici coincidono le curve si sovrappongono. Modello non calibrato: misura la temperatura reale per valutare la cottura.": "Move the pointer to read the curve; click to synchronise the cross-section. The simulation slider also works with a keyboard. Variations are dashed; curves overlap when thermal parameters match. Uncalibrated model: measure real temperature to assess doneness.",
+  "La tua ricetta attuale": "Your current recipe",
+  "linea continua": "solid line",
+  "Farina": "Flour",
+  "Amido": "Starch",
+  "Uova": "Eggs",
+  "Lievito": "Baking powder",
+  "Confronto delle percentuali rispetto alla miscela secca tra ricetta corrente e originale 0.1.": "Dry-blend percentage comparison between the current recipe and original 0.1.",
+  "Percentuali degli ingredienti rispetto alla miscela secca.": "Ingredient percentages relative to the dry blend.",
+  "attuale:": "current:",
+  "La tua formulazione": "Your formulation",
+  "Acqua contabilizzata": "Accounted water",
+  "Ingredienti umidi · stima parziale": "Wet ingredients · partial estimate",
+  "Proteine nella miscela": "Protein in the blend",
+  "Stima compositiva, non indice di glutine": "Compositional estimate, not a gluten index",
+  "Leggi i valori del grafico": "Read chart values",
+  "Attuale": "Current",
+  "Originale 0.1": "Original 0.1",
+  "Confronto normalizzato per 100 g di miscela secca. Mostra differenze di formulazione, non una classifica di qualità. Passa sulle barre per leggere i valori.": "Comparison normalised to 100 g of dry blend. Shows formulation differences, not a quality ranking. Hover over bars to read values.",
+  "Percentuali sulla miscela di farina, amido e frutta secca. Farina + amido + frutta secca = 100%. Gli altri ingredienti sono rapportati alla stessa base; il totale non deve sommare 100%.": "Percentages refer to the flour, starch and nut blend. Flour + starch + nuts = 100%. Other ingredients use the same basis; the total need not add up to 100%.",
+  "min: sotto la fascia usuale dei cake. Se il centro non è assestato, prosegui brevemente e misura di nuovo; controlla anche la posizione della sonda.": "min: below the usual cake range. If the centre is not set, continue briefly and measure again; also check probe placement.",
+  "°C: vicina alla finestra del laboratorio. Controlla un secondo punto e i segni strutturali. Non considerare conclusa la cottura dalla sola lettura.": "°C: close to the lab window. Check a second point and structural signs. Do not judge doneness from this reading alone.",
+  "°C: dentro la finestra orientativa. Verifica un secondo punto, elasticità e stecchino. Se concordano, valuta di sfornare; non prolungare soltanto per raggiungere 99 °C.": "°C: within the indicative window. Check a second point, springiness and a skewer. If they agree, consider removing the cake; do not extend baking just to reach 99 °C.",
+  "°C: sopra la finestra orientativa. Ricontrolla che la punta sia nella mollica e non contro lo stampo. Se la struttura è pronta, ulteriore cottura può asciugare la torta.": "°C: above the indicative window. Check that the tip is in the crumb rather than against the pan. If the structure is ready, further baking may dry out the cake.",
+  "Tre controlli strutturali e lettura nella fascia concordano. La decisione finale resta alla tua osservazione.": "Three structural checks agree with a reading in range. The final decision remains yours.",
+  "Tre controlli strutturali registrati. Confrontali con la sonda e con la formulazione, senza affidarti a un singolo numero.": "Three structural checks recorded. Compare them with the probe and formulation, without relying on one number.",
+  "/3 controlli strutturali registrati. La temperatura da sola non descrive la struttura.": "/3 structural checks recorded. Temperature alone does not describe structure.",
+  "Lettura reale registrata.": "Real reading recorded.",
+  "Letture e controlli azzerati. I dati negli esperimenti salvati restano conservati.": "Readings and checks reset. Data in saved experiments is retained.",
+  "passaggi": "steps",
+  "Durata pianificata": "Planned duration",
+  "confermati": "confirmed",
+  "Operazione eseguita": "Operation completed",
+  "PASSAGGIO": "STEP",
+  "Conferma e termina ✓": "Confirm and finish ✓",
+  "Pausa Ⅱ": "Pause Ⅱ",
+  "Riparti ▶": "Restart ▶",
+  "Timer in corso. Nessun collegamento al Bimby.": "Timer running. No connection to the Thermomix.",
+  "Tempo terminato: verifica il risultato e conferma manualmente.": "Time is up: check the result and confirm manually.",
+  "Timer terminato. Controlla e conferma il passaggio.": "Timer finished. Check and confirm the step.",
+  "Protocollo completato. Registra il risultato nel quaderno.": "Procedure completed. Record the result in the notebook.",
+  "Stampo": "Pan",
+  "porzioni": "servings",
+  "INGREDIENTI": "INGREDIENTS",
+  "Totale": "Total",
+  "PROTOCOLLO": "PROCEDURE",
+  "NUTRIZIONE STIMATA": "ESTIMATED NUTRITION",
+  "Per 100 g cotti:": "Per 100 g cooked:",
+  "Peso cotto": "Cooked weight",
+  "Per porzione:": "Per serving:",
+  "Profili generici e/o etichette, fattori UE; non analisi certificata.": "Generic profiles and/or labels, EU factors; not a certified analysis.",
+  "Termometro attivo: 96–99 °C al cuore come finestra orientativa, insieme a controlli di struttura. Non è una soglia validata.": "Thermometer enabled: 96–99 °C core temperature as an indicative window alongside structural checks. Not a validated threshold.",
+  "Nuove formulazioni sperimentali; tempi da verificare nel tuo forno.": "New experimental formulations; check times in your oven.",
+  "Ricetta di partenza:": "Starting recipe:",
+  "Ricetta e protocollo copiati.": "Recipe and procedure copied.",
+  "Ricetta scaricata come testo.": "Recipe downloaded as text.",
+  "Quaderno pieno: esporta e rimuovi qualche prova prima di aggiungerne altre.": "Notebook full: export and remove some trials before adding more.",
+  "Esperimento salvato nel browser.": "Experiment saved in the browser.",
+  "Salvataggio non disponibile: esporta subito il quaderno.": "Storage unavailable: export the notebook now.",
+  "Il tuo primo esperimento comincia qui.": "Your first experiment starts here.",
+  "Registra una prova di riferimento, poi cambia una sola variabile.": "Record a baseline trial, then change one variable.",
+  "Elimina": "Delete",
+  "crudi": "raw",
+  "altezza": "height",
+  "peso cotto": "cooked weight",
+  "ultima sonda": "last probe",
+  "perdita massa": "mass loss",
+  "Riprendi configurazione →": "Load configuration →",
+  "Configurazione ripresa. Le letture della cottura attuale sono conservate.": "Configuration loaded. Readings from the current bake are retained.",
+  "Esperimento rimosso.": "Experiment removed.",
+  "Annulla": "Undo",
+  "Esperimento ripristinato.": "Experiment restored.",
+  "Backup del quaderno esportato.": "Notebook backup exported.",
+  "File troppo grande: massimo 2 MB.": "File too large: maximum 2 MB.",
+  "Formato non riconosciuto. Usa un JSON esportato dal laboratorio.": "Unrecognised format. Use a JSON exported by the lab.",
+  "Il file contiene esperimenti non validi. Nessun dato importato.": "The file contains invalid experiments. No data imported.",
+  "Il quaderno può contenere al massimo 100 esperimenti.": "The notebook can hold at most 100 experiments.",
+  "esperimenti importati; configurazione e letture": "experiments imported; configuration and readings",
+  "ripristinate dal backup": "restored from backup",
+  "correnti conservate": "currently retained",
+  "Impossibile leggere il file.": "Unable to read the file.",
+  "Parametri +": "Parameters +",
+  "Ultima configurazione ripristinata da questo browser.": "Last configuration restored from this browser.",
+  "Salvataggio non disponibile: esporta il quaderno.": "Storage unavailable: export the notebook.",
+  "PIANO FISSO": "FIXED PLANE",
+  "INTERSEZIONI": "INTERSECTIONS",
+  "Struttura consolidata nel modello": "Structure set in the model",
+  "Matrice in consolidamento": "Matrix setting",
+  "Crescita e coalescenza": "Growth and coalescence",
+  "VOLUME NEL MODELLO": "MODEL VOLUME",
+  "Rapporto calcolato, non altezza prevista": "Calculated ratio, not predicted height",
+  "BOLLE NEL CAMPIONE 3D": "BUBBLES IN THE 3D SAMPLE",
+  "iniziali": "initial",
+  "fusioni": "mergers",
+  "aperture": "vents",
+  "DIAMETRO MEDIANO DELLE BOLLE": "MEDIAN BUBBLE DIAMETER",
+  "Dimensione simulata, non misurata": "Simulated size, not measured",
+  "T cuore modello": "Model core T",
+  "Consolidamento medio": "Mean setting",
+  "Bilancio CO₂": "CO₂ balance",
+  "errore": "error",
+  "IL TUO STAMPO /": "YOUR PAN /",
+  "TONDO": "ROUND",
+  "CIAMBELLA": "RING",
+  "PLUMCAKE": "LOAF",
+  "La forma cambia il percorso del calore.": "Shape changes the heat path.",
+  "Area utile": "Usable area",
+  "Spessore iniziale stimato": "Estimated initial depth",
+  "Densità impasto ipotizzata": "Assumed batter density",
+  "Disegno in prospettiva. Livello stimato con stampo alto 6 cm; verifica il riempimento reale. La ciambella favorisce anche il riscaldamento dall’interno.": "Perspective drawing. Level estimated for a 6 cm tall pan; check actual filling. A ring pan also allows heating from the inside.",
+  "a ciambella": "ring-shaped",
+  "rettangolare": "rectangular",
+  ", con dimensioni e livello d’impasto stimato": ", with dimensions and estimated batter level",
+  "Profili nutrizionali di riferimento ripristinati.": "Reference nutrition profiles restored.",
+  "Completa tutti i valori della riga; usa zero soltanto quando è dichiarato o noto.": "Complete all values in the row; use zero only when stated or known.",
+  "Controlla i valori: saturi ≤ grassi, zuccheri ≤ carboidrati e totale compatibile con 100 g.": "Check values: saturates ≤ fat, sugars ≤ carbohydrate and total compatible with 100 g.",
+  "Per questa farina usa proteine tra 5 e 16 g/100 g.": "For this flour, use protein between 5 and 16 g/100 g.",
+  "Etichetta dell’ingrediente aggiornata.": "Ingredient label updated.",
+  "g di torta cotta": "g of cooked cake",
+  "pesati": "weighed",
+  "stimati": "estimated",
+  "porzioni da": "servings of",
+  "perdita di massa": "mass loss",
+  "Il peso inserito supera la massa cruda: verifica tara e unità. Per ora è usata la perdita stimata.": "Entered weight exceeds raw mass: check tare and units. Estimated loss is used for now.",
+  "Peso cotto misurato: la base per 100 g usa questa misura. Gli ingredienti rimangono una stima compositiva.": "Measured cooked weight: the per-100 g basis uses this measurement. Ingredients remain a compositional estimate.",
+  "Peso cotto stimato. Per un confronto più solido pesa la torta fredda, senza stampo né carta, e inserisci il risultato.": "Estimated cooked weight. For a stronger comparison, weigh the cooled cake without pan or paper and enter the result.",
+  "Energia": "Energy",
+  "di cui acidi grassi saturi": "of which saturates",
+  "di cui zuccheri": "of which sugars",
+  "di cui saturi": "of which saturates",
+  "Valori nutrizionali": "Nutrition information",
+  "STIMA DA RICETTA": "RECIPE ESTIMATE",
+  "Valori medi stimati": "Estimated average values",
+  "Per 100 g": "Per 100 g",
+  "di torta cotta": "of cooked cake",
+  "Per porzione": "Per serving",
+  "da": "of",
+  "Intera torta: circa": "Whole cake: about",
+  "peso": "weight",
+  "misurato": "measured",
+  "stimato": "estimated",
+  "Ripartizione dell’energia calcolata dai nutrienti": "Energy breakdown calculated from nutrients",
+  "dell’energia": "of energy",
+  "Dato mancante nella fonte:": "Missing source data:",
+  ". È mostrato n.d., non zero; puoi completarlo dalla confezione.": ". Shown as n/a, not zero; fill it in from the pack.",
+  "Ingrediente / fonte": "Ingredient / source",
+  "Fonte ↗": "Source ↗",
+  "per 100 g": "per 100 g",
+  "Applica": "Apply",
+  "n.d.": "n/a",
+  "Tabella del produttore; proteine come impostate": "Manufacturer table; protein as set",
+  "Macro generici USDA; proteine": "Generic USDA macros; protein",
+  "ipotizzate": "assumed",
+  "da scheda": "from specifications",
+  "come impostate. Non è la tabella ufficiale": "as set. Not the official table for",
+  "Profilo generico USDA; proteine come impostate.": "Generic USDA profile; protein as set.",
+  "Miscela assunta: 75% semi di papavero + 25% scorza di limone (USDA).": "Assumed blend: 75% poppy seeds + 25% lemon zest (USDA).",
+  "Lievito chimico generico USDA a fosfati. Il sodio varia per marca: sostituisci con la tua etichetta, soprattutto per il sale.": "Generic USDA phosphate baking powder. Sodium varies by brand: replace with your label, especially for salt.",
+  "Parmalat: valori per 100 ml convertiti con densità assunta 1,03 g/ml.": "Parmalat: per-100 ml values converted with an assumed density of 1.03 g/ml.",
+  "Proxy yogurt intero: sostituisci con la tabella del tuo prodotto senza lattosio.": "Whole-milk yogurt proxy: replace with your lactose-free product’s table.",
+  "Valori inseriti dalla tua etichetta": "Values entered from your label",
+  "Etichetta del produttore": "Manufacturer label",
+  "Quaderno ·": "Notebook ·",
+  "Diametro mediano delle bolle": "Median bubble diameter",
+  "Rapporto volume / volume iniziale": "Volume / initial volume ratio",
+  "Bolle nel campione": "Bubbles in the sample",
+  "Frazione gassosa del campione": "Sample gas fraction",
+  ", evoluzione delle ricette selezionate": ", evolution of selected recipes",
+  "Ricetta": "Recipe",
+  "All’istante": "At time",
+  "cottura impostata": "set baking time",
+  ", calcolato dalla popolazione 3D del modello. Le curve descrivono campioni simulati, non misure della torta. La tabella legge ogni ricetta al proprio tempo di cottura impostato. La geometria, i parametri di processo e le ipotesi reologiche sono quelli di ciascuna configurazione.": ", calculated from the model’s 3D population. Curves describe simulated samples, not cake measurements. The table reads each recipe at its own set baking time. Geometry, process parameters and rheological assumptions belong to each configuration.",
+  "Confronto": "Comparison",
+  "per 100 g cotti": "per 100 g cooked",
+  "per porzione": "per serving",
+  "intera torta": "whole cake",
+  "Base di peso": "Weight basis",
+  "100 g cotti": "100 g cooked",
+  "porzione": "serving",
+  "pesata": "weighed",
+  "stimata": "estimated",
+  "a parità di 100 g di torta cotta": "at the same 100 g cooked-cake weight",
+  "per porzione definita da ciascuna ricetta": "per serving defined by each recipe",
+  "per intera torta, con pezzature che possono differire": "per whole cake, with sizes that may differ",
+  ". Le varianti usano Ø 24 cm e la perdita impostata (": ". Variations use Ø 24 cm and the set loss (",
+  "%); gli esperimenti salvati mantengono la propria configurazione e il peso misurato se presente. Valori stimati, non una classifica salutistica.": "%); saved experiments keep their own configuration and measured weight, if available. Estimated values, not a health ranking.",
+  "Profili delle percentuali degli ingredienti per tutte le ricette selezionate": "Ingredient percentage profiles for all selected recipes",
+  "Profili di formulazione: ogni punto è una percentuale sulla miscela secca. Le linee collegano categorie per aiutare il confronto, non descrivono un processo nel tempo. Ricette diverse possono avere profili sovrapposti. La ricetta attuale è la linea continua più spessa.": "Formulation profiles: each point is a dry-blend percentage. Lines connect categories to aid comparison; they do not describe a process over time. Different recipes may have overlapping profiles. The current recipe is the thicker solid line.",
+  "Formula matematica, scorri se necessario": "Mathematical formula; scroll if needed",
+  "Sorgente LaTeX": "LaTeX source",
+  "L’area utile dello stampo": "The usable pan area",
+  "Dimensioni interne. Per lo stampo rettangolare e svasato l’area è un’approssimazione.": "Internal dimensions. Area is approximate for rectangular and tapered pans.",
+  "Dallo stampo di riferimento alla tua ricetta": "From the reference pan to your recipe",
+  "k non ha unità; le masse sono in grammi e bᵢ è una percentuale sulla miscela secca. Lo spessore iniziale deve rimanere costante.": "k is dimensionless; masses are in grams and bᵢ is a dry-blend percentage. Initial depth must stay constant.",
+  "I simboli, senza ambiguità": "The symbols, unambiguously",
+  "Simbolo": "Symbol",
+  "Significato": "Meaning",
+  "Unità": "Unit",
+  "Diametro esterno interno / diametro del foro": "Internal outer diameter / hole diameter",
+  "Area utile / area del riferimento da 24 cm": "Usable area / reference 24 cm pan area",
+  "Dose di base / dose ridimensionata": "Base quantity / scaled quantity",
+  "Farina + amido + frutta secca": "Flour + starch + nuts",
+  "Bilanci compositivi approssimativi": "Approximate compositional balances",
+  "xᵢ: frazione d’acqua assunta per ingrediente umido. fⱼ: frazione in massa del componente secco. Pⱼ: proteine in g/100 g. Non è una misura dell’attività dell’acqua.": "xᵢ: assumed water fraction per wet ingredient. fⱼ: mass fraction of the dry component. Pⱼ: protein in g/100 g. Not a measure of water activity.",
+  "Riscaldamento con inerzia · modello illustrativo": "Heating with inertia · illustrative model",
+  "t e τ* in minuti. Tc e T₀ in °C. Questa espressione non risolve la conduzione del calore nella torta.": "t and τ* in minutes. Tc and T₀ in °C. This expression does not solve heat conduction in the cake.",
+  "Chiusure scelte per l’illustrazione": "Closures chosen for illustration",
+  "Temperature in °C e h in cm. h = massa / (densità × area). Coefficienti di forma: 1 tondo, 0,78 ciambella, 0,90 plumcake; forno: 1 statico, 0,90 ventilato. Sono chiusure esplorative non calibrate; non una soluzione dell’equazione del calore.": "Temperatures in °C and h in cm. h = mass / (density × area). Shape factors: 1 round, 0.78 ring, 0.90 loaf; oven: 1 conventional, 0.90 fan. Exploratory uncalibrated closures, not a solution of the heat equation.",
+  "Le bolle: volume e pressioni parziali": "Bubbles: volume and partial pressures",
+  "R in metri, V in m³, pressione in Pa, temperatura assoluta in kelvin. Il vapore è una pressione parziale rilassata verso a_w p_sat(T).": "R in metres, V in m³, pressure in Pa, absolute temperature in kelvin. Vapour is a partial pressure relaxed towards a_w p_sat(T).",
+  "Crescita nel limite viscoso lento": "Growth in the slow viscous limit",
+  "Il codice risolve numericamente l’equilibrio delle pressioni con bisezione e rilassa il raggio verso la soluzione. È un’approssimazione quasi statica della relazione viscosa, senza inerzia o flussi CFD.": "The code solves pressure equilibrium numerically by bisection and relaxes the radius towards the solution. A quasi-static approximation of the viscous relation, without inertia or CFD flows.",
+  "Consolidamento e conservazione della CO₂": "Setting and CO₂ conservation",
+  "S varia da 0 a 1; cresce la resistenza elastica e diminuiscono le fusioni. Ogni fusione somma le moli e i volumi iniziali delle due bolle. L’errore di bilancio misura la chiusura numerica, non la validità del modello.": "S ranges from 0 to 1; elastic resistance rises and merging decreases. Each merger adds the moles and initial volumes of both bubbles. Balance error measures numerical closure, not model validity.",
+  "IL TUO CASO, ADESSO": "YOUR CASE, NOW",
+  "Area dello stampo": "Pan area",
+  "Area del riferimento Ø 24": "Reference Ø 24 area",
+  "Fattore k": "Factor k",
+  "Miscela secca × k": "Dry blend × k",
+  "Assunzione: NaCl alimentare": "Assumption: food-grade NaCl",
+  "miscela": "blend",
+  "acqua": "water",
+  "forma": "shape",
+  "aria": "air",
+  "prodotta": "produced",
+  "bolle": "bubbles",
+  "riserva": "reserve",
+  "persa": "lost",
+  "Plumcake": "Loaf",
+  "Bimby": "Thermomix",
+  "latte": "milk",
+  "espresso freddo": "cold espresso",
+  "0,55": "0.55",
+  "2,2": "2.2",
+  "Etichetta per 100 ml, convertita": "Per-100 ml label, converted"
+};
+
+/* Italian/English presentation layer. Models and stored user data stay language-neutral.
+ * © 2026 Luca Amore · GPL-3.0-only */
+window.YogurtI18n=(()=>{
+ 'use strict';
+ const messages=window.YogurtTranslations;
+ const storageKey='yogurt-lab-language';
+ let language='it';
+ try{const requested=new URLSearchParams(location.search).get('lang');language=(requested||localStorage.getItem(storageKey))==='en'?'en':'it';}catch{}
+ const variants=new Map();
+ for(const [it,en] of Object.entries(messages)){
+  if(it===en)continue;
+  variants.set(it,en);
+  if(it.length>2){
+   if(!variants.has(it.toLocaleLowerCase('it')))variants.set(it.toLocaleLowerCase('it'),en.toLocaleLowerCase('en'));
+   if(!variants.has(it.toLocaleUpperCase('it')))variants.set(it.toLocaleUpperCase('it'),en.toLocaleUpperCase('en'));
+  }
+ }
+ const escape=s=>s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+ const word=/[\p{L}\p{N}_]/u;
+ const pattern=new RegExp([...variants.keys()].sort((a,b)=>b.length-a.length).map(key=>(word.test(key[0])?'(?<![\\p{L}\\p{N}_])':'')+escape(key)+(word.test(key.at(-1))?'(?![\\p{L}\\p{N}_])':'')).join('|'),'gu');
+ function t(value){
+  const text=String(value??'');if(language!=='en')return text;
+  // Keep commercial product names exactly as printed on their packaging.
+  const protectedNames=Object.values(window.YogurtLab?.flourProfiles||{}).filter(p=>p.brand).map(p=>p.name);
+  const chunks=protectedNames.length?text.split(new RegExp('('+protectedNames.map(escape).join('|')+')','g')):[text];
+  return chunks.map(chunk=>protectedNames.includes(chunk)?chunk:chunk.replace(pattern,match=>variants.get(match))).join('');
+ }
+ const textState=new WeakMap(),attributeState=new WeakMap();
+ const attributes=['aria-label','aria-description','title','placeholder','label','content'];
+ const skip='script,style,textarea,[translate="no"],#languageSelect';
+ function translateText(node){
+  if(node.parentElement?.closest(skip)||!node.nodeValue.trim())return;
+  const previous=textState.get(node),source=previous&&node.nodeValue===previous.output?previous.source:node.nodeValue;
+  const output=t(source);if(node.nodeValue!==output)node.nodeValue=output;
+  textState.set(node,{source,output});
+ }
+ function translateElement(el){
+  if(el.closest(skip))return;
+  let values=attributeState.get(el);if(!values){values={};attributeState.set(el,values);}
+  for(const name of attributes){
+   if(!el.hasAttribute(name))continue;
+   if(name==='content'&&!el.matches('meta[name="description"]'))continue;
+   const current=el.getAttribute(name),previous=values[name],source=previous&&current===previous.output?previous.source:current;
+   const output=t(source);if(current!==output)el.setAttribute(name,output);values[name]={source,output};
+  }
+ }
+ function translateTree(root){
+  if(root.nodeType===3){translateText(root);return;}
+  if(root.nodeType!==1&&root.nodeType!==9)return;
+  if(root.nodeType===1){if(root.closest(skip))return;translateElement(root);}
+  const walker=document.createTreeWalker(root,NodeFilter.SHOW_ELEMENT|NodeFilter.SHOW_TEXT);
+  while(walker.nextNode())if(walker.currentNode.nodeType===3)translateText(walker.currentNode);else translateElement(walker.currentNode);
+ }
+ const observer=new MutationObserver(records=>{
+  observer.disconnect();
+  const roots=new Set();
+  for(const record of records){
+   if(record.type==='childList')for(const node of record.addedNodes)roots.add(node);
+   else roots.add(record.target);
+  }
+  for(const root of roots)if(root.isConnected)translateTree(root);
+  observe();
+ });
+ function observe(){observer.observe(document.documentElement,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:attributes});}
+ function apply(){observer.disconnect();translateTree(document.documentElement);observe();}
+ function setLanguage(next){
+  language=next==='en'?'en':'it';document.documentElement.lang=language;
+  document.getElementById('languageSelect').value=language;
+  try{localStorage.setItem(storageKey,language);}catch{}
+  document.dispatchEvent(new CustomEvent('yogurt:languagechange'));
+  apply();
+ }
+ document.documentElement.lang=language;
+ document.getElementById('languageSelect').value=language;
+ document.getElementById('languageSelect').addEventListener('change',e=>setLanguage(e.target.value));
+ // The app calls apply after its initial render. Later DOM updates are observed.
+ return {t,apply,setLanguage,get language(){return language;},get locale(){return language==='en'?'en-GB':'it-IT';}};
+})();
+
 /* Yogurt Computational Lab · © 2026 Luca Amore · GPL-3.0-only */
 (function (root) {
   'use strict';
@@ -280,7 +1094,7 @@
 })(typeof globalThis!=='undefined'?globalThis:this);
 
 window.YogurtSimulation=(()=>{
- const M=window.YogurtLab,P=window.YogurtPhysics,$=id=>document.getElementById(id),fmt=(v,d=1)=>v.toLocaleString('it-IT',{maximumFractionDigits:d});
+ const M=window.YogurtLab,P=window.YogurtPhysics,$=id=>document.getElementById(id),fmt=(v,d=1)=>v.toLocaleString(window.YogurtI18n.locale,{maximumFractionDigits:d});
  function panSVG(s,r,gradientId="pan-shadow"){
   const round=s.shape!=='loaf',rx=round?Math.min(90,s.diameter*3.2):100,ry=round?rx*.43:35,fill=M.clamp(r.total/s.batterDensity/(r.area*6),.05,.9),line='#a0b78c';let shape='';
   if(round){
@@ -310,7 +1124,7 @@ window.YogurtSimulation=(()=>{
    c.beginPath();c.ellipse(x,y,rx+1,ry+1,0,0,Math.PI*2);c.fillStyle=cocoa?'#d5b498':'#fff1c4';c.fill();
    const p=c.createRadialGradient(x,y-ry*.2,0,x,y,Math.max(rx,ry));p.addColorStop(0,cocoa?'#5e402e':'#a48650');p.addColorStop(.6,cocoa?'#865f40':'#c5a66d');p.addColorStop(1,cocoa?'#b48b61':'#e0c391');c.fillStyle=p;c.beginPath();c.ellipse(x,y,rx,ry,0,0,Math.PI*2);c.fill();
   }
-  c.restore();c.font='10px ui-monospace,monospace';c.fillStyle='#738462';c.fillText(`PIANO FISSO z = ${fmt(plane*1000,0)} mm · ${visible} INTERSEZIONI`,30,330);
+  c.restore();c.font='10px ui-monospace,monospace';c.fillStyle='#738462';c.fillText(window.YogurtI18n.t(`PIANO FISSO z = ${fmt(plane*1000,0)} mm · ${visible} INTERSEZIONI`),30,330);
   $('seedDisplay').textContent=`SEED ${String(s.seed).padStart(4,'0')} · Δt 5 s`;$('simPhase').textContent=frame.setting>.8?'Struttura consolidata nel modello':frame.setting>.2?'Matrice in consolidamento':'Crescita e coalescenza';$('simTimeLabel').textContent=`${fmt(time,1)} min`;$('simTime').value=time;
   $('simReadings').innerHTML=`<div><span>VOLUME NEL MODELLO</span><strong>×${fmt(frame.expansion,2)}</strong><small>Rapporto calcolato, non altezza prevista</small></div><div><span>BOLLE NEL CAMPIONE 3D</span><strong>${frame.count} <small>/ ${frame.initialCount} iniziali</small></strong><small>${frame.merged} fusioni · ${frame.vented} aperture</small></div><div><span>DIAMETRO MEDIANO DELLE BOLLE</span><strong>${fmt(frame.medianDiameter,2)} mm</strong><small>Dimensione simulata, non misurata</small></div>`;
   $('physicsDiagnostics').innerHTML=`<span>T cuore modello <strong>${fmt(frame.temperature,1)} °C</strong></span><span>Consolidamento medio <strong>${fmt(frame.setting*100,0)}%</strong></span><span>Bilancio CO₂ <strong>|errore| ${Math.abs(frame.gasBalanceError).toExponential(1)} mol</strong></span>`;
@@ -363,7 +1177,7 @@ window.YogurtSimulation=(()=>{
 })(typeof globalThis!=='undefined'?globalThis:this);
 
 window.YogurtNutritionUI=(()=>{
- const $=id=>document.getElementById(id),N=window.YogurtNutrition,fmt=(v,d=1)=>v===null?'n.d.':v.toLocaleString('it-IT',{maximumFractionDigits:d}),esc=v=>String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+ const $=id=>document.getElementById(id),N=window.YogurtNutrition,fmt=(v,d=1)=>v===null?'n.d.':v.toLocaleString(window.YogurtI18n.locale,{maximumFractionDigits:d}),esc=v=>String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
  let api;
  function attach(callbacks){api=callbacks;
   const updateWeight=()=>{const value=Number($('cookedWeight').value);if($('cookedWeight').checkValidity()&&value!==api.state().cookedWeight)api.patch({cookedWeight:value});};
@@ -392,11 +1206,11 @@ window.YogurtNutritionUI=(()=>{
 })();
 
 window.YogurtComparisons=(()=>{
- const M=window.YogurtLab,N=window.YogurtNutrition,$=id=>document.getElementById(id),fmt=(v,d=1)=>v===null?'n.d.':v.toLocaleString('it-IT',{maximumFractionDigits:d}),esc=v=>String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+ const M=window.YogurtLab,N=window.YogurtNutrition,$=id=>document.getElementById(id),fmt=(v,d=1)=>v===null?'n.d.':v.toLocaleString(window.YogurtI18n.locale,{maximumFractionDigits:d}),esc=v=>String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
  const palette=['#416b25','#a9501e','#467d90','#997c38','#825c83','#568e75','#be7655','#6e72a3','#829336','#a75f73','#59715c','#9a8064'];
  let selected=new Set(['original']),metric='kcal',basis='per100',crumbMetric='medianDiameter',api;
- function allOptions(){const s=api.state();return [...M.presets.map(p=>({id:p.id,name:p.name,config:M.fromPreset(p.id,{...M.defaults,bakeLoss:s.bakeLoss})})),...api.experiments().map(e=>({id:'saved-'+e.id,name:'Quaderno · '+e.name,config:{...e.config,cookedWeight:e.weight||e.config.cookedWeight}}))];}
- function series(){return [{id:'current',name:'La tua ricetta attuale',config:api.state(),color:palette[0]},...allOptions().filter(p=>selected.has(p.id)).map((p,i)=>({...p,color:palette[(i+1)%palette.length]}))];}
+ function allOptions(){const s=api.state();return [...M.presets.map(p=>({id:p.id,name:window.YogurtI18n.t(p.name),config:M.fromPreset(p.id,{...M.defaults,bakeLoss:s.bakeLoss})})),...api.experiments().map(e=>({id:'saved-'+e.id,name:window.YogurtI18n.t('Quaderno ·')+' '+e.name,config:{...e.config,cookedWeight:e.weight||e.config.cookedWeight}}))];}
+ function series(){return [{id:'current',name:window.YogurtI18n.t('La tua ricetta attuale'),config:api.state(),color:palette[0]},...allOptions().filter(p=>selected.has(p.id)).map((p,i)=>({...p,color:palette[(i+1)%palette.length]}))];}
  function attach(callbacks){api=callbacks;$('comparisonOptions').addEventListener('change',e=>{if(!e.target.dataset.recipe)return;if(e.target.checked)selected.add(e.target.dataset.recipe);else selected.delete(e.target.dataset.recipe);api.refresh();});
   $('compareAll').addEventListener('click',()=>{selected=new Set(allOptions().map(p=>p.id));renderControls();api.refresh();});$('compareNone').addEventListener('click',()=>{selected.clear();renderControls();api.refresh();});
   $('crumbMetric').addEventListener('change',e=>{crumbMetric=e.target.value;api.refresh();});
@@ -404,7 +1218,7 @@ window.YogurtComparisons=(()=>{
  }
  function renderControls(type){
   if(type)$('comparisonPicker').hidden=!['compare','nutrition','crumb','thermal'].includes(type);
-  const available=allOptions();$('comparisonOptions').innerHTML=available.map(p=>`<label><input type="checkbox" data-recipe="${esc(p.id)}" ${selected.has(p.id)?'checked':''}><span>${esc(p.name)}</span></label>`).join('');
+  const available=allOptions();$('comparisonOptions').innerHTML=available.map(p=>`<label><input type="checkbox" data-recipe="${esc(p.id)}" ${selected.has(p.id)?'checked':''}><span translate="no">${esc(p.name)}</span></label>`).join('');
   $('nutritionChartControls').hidden=type!=='nutrition';$('crumbChartControls').hidden=type!=='crumb';
  }
  function render(type){
@@ -416,24 +1230,24 @@ window.YogurtComparisons=(()=>{
    html=`<svg viewBox="0 0 740 265" role="img" aria-label="${spec[0]}, evoluzione delle ricette selezionate">`;
    for(let i=0;i<=4;i++){const v=max*i/4;html+=`<line x1="58" x2="708" y1="${Y(v)}" y2="${Y(v)}" stroke="#e0e7d8"/><text x="47" y="${Y(v)+4}" text-anchor="end" class="svg-tick">${fmt(v,1)}</text>`;}
    for(let t=0;t<=60;t+=10)html+=`<text x="${X(t)}" y="244" text-anchor="middle" class="svg-tick">${t}′</text>`;
-   rows.slice().reverse().forEach(row=>html+=`<polyline points="${row.snapshots.map(f=>`${X(f.minute)},${Y(f[crumbMetric]*spec[2])}`).join(' ')}" fill="none" stroke="${row.color}" stroke-width="${row.id==='current'?3:1.5}" ${row.id==='current'?'':'stroke-dasharray="5 3"'}><title>${esc(row.name)} · ${spec[0]}</title></polyline>`);html+='</svg>';
-   html+=`<div class="comparison-legend">${rows.map(row=>`<span><i style="background:${row.color}"></i>${esc(row.name)}</span>`).join('')}</div><div class="compare-table"><table><thead><tr><th>Ricetta</th><th>${spec[0]} · ${spec[1]}</th><th>All’istante</th></tr></thead><tbody>${rows.map(row=>{const f=row.snapshots[Math.min(130,Math.round(row.config.bake*2))];return `<tr><td>${esc(row.name)}</td><td>${fmt(f[crumbMetric]*spec[2],2)}</td><td>${row.config.bake} min · cottura impostata</td></tr>`;}).join('')}</tbody></table></div>`;
+   rows.slice().reverse().forEach(row=>html+=`<polyline points="${row.snapshots.map(f=>`${X(f.minute)},${Y(f[crumbMetric]*spec[2])}`).join(' ')}" fill="none" stroke="${row.color}" stroke-width="${row.id==='current'?3:1.5}" ${row.id==='current'?'':'stroke-dasharray="5 3"'}><title translate="no">${esc(row.name)} · ${window.YogurtI18n.t(spec[0])}</title></polyline>`);html+='</svg>';
+   html+=`<div class="comparison-legend">${rows.map(row=>`<span translate="no"><i style="background:${row.color}"></i>${esc(row.name)}</span>`).join('')}</div><div class="compare-table"><table><thead><tr><th>Ricetta</th><th>${spec[0]} · ${spec[1]}</th><th>All’istante</th></tr></thead><tbody>${rows.map(row=>{const f=row.snapshots[Math.min(130,Math.round(row.config.bake*2))];return `<tr><td translate="no">${esc(row.name)}</td><td>${fmt(f[crumbMetric]*spec[2],2)}</td><td>${row.config.bake} min · cottura impostata</td></tr>`;}).join('')}</tbody></table></div>`;
    $('chartCaption').textContent=`${spec[0]} (${spec[1]}), calcolato dalla popolazione 3D del modello. Le curve descrivono campioni simulati, non misure della torta. La tabella legge ogni ricetta al proprio tempo di cottura impostato. La geometria, i parametri di processo e le ipotesi reologiche sono quelli di ciascuna configurazione.`;
   }else if(type==='nutrition'){
    const unit=['kcal','kJ'].includes(metric)?metric:'g',rows=data.map(item=>{const n=N.calculate(item.config);return {...item,n,value:n[basis][metric]};});
    const max=Math.max(1,...rows.map(x=>x.value||0))*1.18,H=rows.length*43+48;
    html=`<svg viewBox="0 0 740 ${H}" role="img" aria-label="Confronto ${N.names[metric]}, ${basis==='per100'?'per 100 g cotti':basis==='portion'?'per porzione':'intera torta'}">`;
    for(let i=0;i<=4;i++){const x=235+i/4*440;html+=`<line x1="${x}" x2="${x}" y1="20" y2="${H-26}" stroke="#e0e7d8"/><text x="${x}" y="${H-7}" text-anchor="middle" class="svg-tick">${fmt(max*i/4,metric==='kcal'||metric==='kJ'?0:1)}</text>`;}
-   rows.forEach((row,i)=>{const y=30+i*43,name=row.name.length>31?row.name.slice(0,29)+'…':row.name;html+=`<text x="220" y="${y+13}" text-anchor="end" class="svg-label">${esc(name)}</text><rect x="235" y="${y}" width="${(row.value||0)/max*440}" height="22" rx="3" fill="${row.color}"><title>${esc(row.name)} · ${fmt(row.value,metric==='salt'?2:1)} ${unit}</title></rect><text x="${242+(row.value||0)/max*440}" y="${y+15}" class="svg-tick">${fmt(row.value,metric==='salt'?2:metric==='kcal'||metric==='kJ'?0:1)} ${row.value===null?'':unit}</text>`;});html+='</svg>';
-   html+=`<div class="compare-table"><table><thead><tr><th>Ricetta</th><th>${N.names[metric]} · ${unit}</th><th>Base di peso</th></tr></thead><tbody>${rows.map(row=>`<tr><td>${esc(row.name)}</td><td>${fmt(row.value,metric==='salt'?2:1)}</td><td>${basis==='per100'?'100 g cotti':basis==='portion'?`${fmt(row.n.portionWeight,0)} g / porzione`:`${fmt(row.n.cooked,0)} g intera torta`} · ${row.n.measured?'pesata':'stimata'}</td></tr>`).join('')}</tbody></table></div>`;
+   rows.forEach((row,i)=>{const y=30+i*43,name=row.name.length>31?row.name.slice(0,29)+'…':row.name;html+=`<text x="220" y="${y+13}" text-anchor="end" class="svg-label" translate="no">${esc(name)}</text><rect x="235" y="${y}" width="${(row.value||0)/max*440}" height="22" rx="3" fill="${row.color}"><title translate="no">${esc(row.name)} · ${fmt(row.value,metric==='salt'?2:1)} ${unit}</title></rect><text x="${242+(row.value||0)/max*440}" y="${y+15}" class="svg-tick">${fmt(row.value,metric==='salt'?2:metric==='kcal'||metric==='kJ'?0:1)} ${row.value===null?'':unit}</text>`;});html+='</svg>';
+   html+=`<div class="compare-table"><table><thead><tr><th>Ricetta</th><th>${N.names[metric]} · ${unit}</th><th>Base di peso</th></tr></thead><tbody>${rows.map(row=>`<tr><td translate="no">${esc(row.name)}</td><td>${fmt(row.value,metric==='salt'?2:1)}</td><td>${basis==='per100'?'100 g cotti':basis==='portion'?`${fmt(row.n.portionWeight,0)} g / porzione`:`${fmt(row.n.cooked,0)} g intera torta`} · ${row.n.measured?'pesata':'stimata'}</td></tr>`).join('')}</tbody></table></div>`;
    $('chartCaption').textContent=`${N.names[metric]}, ${basis==='per100'?'a parità di 100 g di torta cotta':basis==='portion'?'per porzione definita da ciascuna ricetta':'per intera torta, con pezzature che possono differire'}. Le varianti usano Ø 24 cm e la perdita impostata (${fmt(api.state().bakeLoss,0)}%); gli esperimenti salvati mantengono la propria configurazione e il peso misurato se presente. Valori stimati, non una classifica salutistica.`;
   }else{
    const keys=['flour','starch','nuts','eggs','sugar','yogurt','oil','leaven'],names=['Farina','Amido','Frutta secca','Uova','Dolcificante','Yogurt','Olio','Lievito'];
    const values=data.map(item=>({...item,v:keys.map(k=>M.calculate(item.config).ingredients.find(i=>i.key===k)?.pct||0)})),max=Math.ceil(Math.max(100,...values.flatMap(r=>r.v))/25)*25,Y=v=>220-v/max*175,X=i=>58+i*92;
    html='<svg viewBox="0 0 740 265" role="img" aria-label="Profili delle percentuali degli ingredienti per tutte le ricette selezionate">';for(let v=0;v<=max;v+=25)html+=`<line x1="58" x2="705" y1="${Y(v)}" y2="${Y(v)}" stroke="#e0e7d8"/><text x="47" y="${Y(v)+4}" text-anchor="end" class="svg-tick">${v}%</text>`;
    names.forEach((name,i)=>html+=`<text x="${X(i)}" y="244" text-anchor="middle" class="svg-tick">${name}</text>`);
-   values.slice().reverse().forEach(row=>{html+=`<polyline points="${row.v.map((v,i)=>`${X(i)},${Y(v)}`).join(' ')}" fill="none" stroke="${row.color}" stroke-width="${row.id==='current'?3:1.6}" opacity="${row.id==='current'?1:.72}" ${row.id==='current'?'':'stroke-dasharray="5 3"'}><title>${esc(row.name)}</title></polyline>`;row.v.forEach((v,i)=>html+=`<circle cx="${X(i)}" cy="${Y(v)}" r="${row.id==='current'?4:2.5}" fill="${row.color}"><title>${esc(row.name)} · ${names[i]} ${fmt(v,1)}%</title></circle>`);});html+='</svg>';
-   html+=`<div class="comparison-legend">${values.map(row=>`<span><i style="background:${row.color}"></i>${esc(row.name)}</span>`).join('')}</div><div class="compare-table"><table><thead><tr><th>Ricetta</th>${names.map(n=>`<th>${n}</th>`).join('')}</tr></thead><tbody>${values.map(row=>`<tr><td>${esc(row.name)}</td>${row.v.map(v=>`<td>${fmt(v,1)}%</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
+   values.slice().reverse().forEach(row=>{html+=`<polyline points="${row.v.map((v,i)=>`${X(i)},${Y(v)}`).join(' ')}" fill="none" stroke="${row.color}" stroke-width="${row.id==='current'?3:1.6}" opacity="${row.id==='current'?1:.72}" ${row.id==='current'?'':'stroke-dasharray="5 3"'}><title translate="no">${esc(row.name)}</title></polyline>`;row.v.forEach((v,i)=>html+=`<circle cx="${X(i)}" cy="${Y(v)}" r="${row.id==='current'?4:2.5}" fill="${row.color}"><title translate="no">${esc(row.name)} · ${names[i]} ${fmt(v,1)}%</title></circle>`);});html+='</svg>';
+   html+=`<div class="comparison-legend">${values.map(row=>`<span translate="no"><i style="background:${row.color}"></i>${esc(row.name)}</span>`).join('')}</div><div class="compare-table"><table><thead><tr><th>Ricetta</th>${names.map(n=>`<th>${n}</th>`).join('')}</tr></thead><tbody>${values.map(row=>`<tr><td translate="no">${esc(row.name)}</td>${row.v.map(v=>`<td>${fmt(v,1)}%</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
    $('chartCaption').textContent='Profili di formulazione: ogni punto è una percentuale sulla miscela secca. Le linee collegano categorie per aiutare il confronto, non descrivono un processo nel tempo. Ricette diverse possono avere profili sovrapposti. La ricetta attuale è la linea continua più spessa.';
   }
   $('chartArea').innerHTML=html;return true;
@@ -470,7 +1284,7 @@ window.YogurtMath=(()=>{
   figure('Consolidamento e conservazione della CO₂',`<mtable columnspacing="0.5em" rowspacing="0.9em">${row(frac('<mi>d</mi><mi>S</mi>','<mi>d</mi><mi>t</mi>'),'<mi>k</mi><mo>(</mo><mi>T</mi><mo>)</mo><mo>(</mo><mn>1</mn><mo>−</mo><mi>S</mi><mo>)</mo>')}${row('<msub><mi>n</mi><mtext>prodotta</mtext></msub>','<msub><mi>n</mi><mtext>bolle</mtext></msub><mo>+</mo><msub><mi>n</mi><mtext>riserva</mtext></msub><mo>+</mo><msub><mi>n</mi><mtext>persa</mtext></msub>')}</mtable>`,String.raw`\frac{dS}{dt}=k(T)(1-S),\qquad n_{\mathrm{prodotta}}=n_{\mathrm{bolle}}+n_{\mathrm{riserva}}+n_{\mathrm{persa}}`,8,'S varia da 0 a 1; cresce la resistenza elastica e diminuiscono le fusioni. Ogni fusione somma le moli e i volumi iniziali delle due bolle. L’errore di bilancio misura la chiusura numerica, non la validità del modello.');
 
  }
- function render(s,r){init();const format=(v,d=2)=>v.toLocaleString('it-IT',{maximumFractionDigits:d});document.getElementById('mathLive').innerHTML=`<span>IL TUO CASO, ADESSO</span><dl><div><dt>Area dello stampo</dt><dd>${format(r.area,1)} cm²</dd></div><div><dt>Area del riferimento Ø 24</dt><dd>${format(Math.PI*144,1)} cm²</dd></div><div><dt>Fattore k</dt><dd>${format(r.scale,4)}</dd></div><div><dt>Miscela secca × k</dt><dd>${format(s.flour,0)} × ${format(r.scale,4)} = ${format(r.blend,1)} g</dd></div></dl>`;}
+ function render(s,r){init();const format=(v,d=2)=>v.toLocaleString(window.YogurtI18n.locale,{maximumFractionDigits:d});document.getElementById('mathLive').innerHTML=`<span>IL TUO CASO, ADESSO</span><dl><div><dt>Area dello stampo</dt><dd>${format(r.area,1)} cm²</dd></div><div><dt>Area del riferimento Ø 24</dt><dd>${format(Math.PI*144,1)} cm²</dd></div><div><dt>Fattore k</dt><dd>${format(r.scale,4)}</dd></div><div><dt>Miscela secca × k</dt><dd>${format(s.flour,0)} × ${format(r.scale,4)} = ${format(r.blend,1)} g</dd></div></dl>`;}
  return {render};
 })();
 
@@ -479,7 +1293,7 @@ window.YogurtMath=(()=>{
  'use strict';
  const M=window.YogurtLab,$=id=>document.getElementById(id),form=$('config');
  const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
- const fmt=(v,d=1)=>Number(v).toLocaleString('it-IT',{maximumFractionDigits:d});
+ const fmt=(v,d=1)=>Number(v).toLocaleString(window.YogurtI18n.locale,{maximumFractionDigits:d});
  const KEY='neotokio.yogurt-lab.v1';
  let state={...M.defaults},probes=[],checks=[false,false,false],experiments=[],done=[],stored=false;
  let simTime=state.bake,simView='section',chart='thermal',simPlaying=false,simFrame=0,kitchenIndex=0,timerRemaining=0,timerDeadline=0,timerRunning=false;
@@ -583,7 +1397,7 @@ window.YogurtMath=(()=>{
    const xMax=Math.max(65,...probes.map(p=>p.minute)),X=t=>58+t/xMax*650,Y=v=>222-(v-15)/95*190;
    html=svgStart('Curva termica didattica con letture reali della sonda, se presenti.');
    const comparisons=window.YogurtComparisons.series().slice(1);
-   for(const item of comparisons){const pts=[];for(let t=0;t<=xMax;t+=1)pts.push(`${X(t)},${Y(M.thermal(item.config,t).core)}`);html+=`<polyline points="${pts.join(' ')}" fill="none" stroke="${item.color}" stroke-width="1.4" stroke-dasharray="5 3" opacity=".75"><title>${esc(item.name)} · temperatura del modello</title></polyline>`;}
+   for(const item of comparisons){const pts=[];for(let t=0;t<=xMax;t+=1)pts.push(`${X(t)},${Y(M.thermal(item.config,t).core)}`);html+=`<polyline points="${pts.join(' ')}" fill="none" stroke="${item.color}" stroke-width="1.4" stroke-dasharray="5 3" opacity=".75"><title translate="no">${esc(item.name)} · ${window.YogurtI18n.t('temperatura del modello')}</title></polyline>`;}
 
    if(s.thermometer)html+=`<rect x="58" y="${Y(99)}" width="650" height="${Y(96)-Y(99)}" fill="#dce8c9"/>`;
    [20,40,60,80,100].forEach(v=>html+=`<line x1="58" x2="708" y1="${Y(v)}" y2="${Y(v)}" stroke="#dde5d5" stroke-width="1"/>${tickText(46,Y(v)+4,v+'°','end')}`);
@@ -594,7 +1408,7 @@ window.YogurtMath=(()=>{
    if(s.thermometer)probes.forEach(p=>html+=`<circle cx="${X(p.minute)}" cy="${Y(p.temp)}" r="4" fill="#426f85" stroke="white" stroke-width="1.5"><title>Sonda: ${fmt(p.temp,1)} °C a ${fmt(p.minute,1)} min</title></circle>`);
    html+=`<line id="chartCursor" x1="${X(simTime)}" x2="${X(simTime)}" y1="25" y2="222" stroke="#ae7341" stroke-dasharray="4 4"/><g id="chartTooltip" class="chart-tooltip"></g><rect id="chartOverlay" x="58" y="22" width="650" height="200" fill="transparent" class="chart-hover"/></svg><div class="chart-legend"><span><i class="legend-line"></i>Temperatura simulata</span><span><i class="legend-line orange"></i>Tempo della sezione</span>${s.thermometer?'<span><i class="legend-line point"></i>Sonda reale</span>':''}</div>`;
    $('chartCaption').textContent='Muovi il puntatore per leggere la curva; fai clic per sincronizzare la sezione. Anche il cursore del simulatore è utilizzabile da tastiera. Le varianti sono tratteggiate; se i parametri termici coincidono le curve si sovrappongono. Modello non calibrato: misura la temperatura reale per valutare la cottura.';
-   html+=`<div class="comparison-legend"><span><i style="background:#416b25"></i>La tua ricetta attuale · linea continua</span>${comparisons.map(item=>`<span><i style="background:${item.color}"></i>${esc(item.name)}</span>`).join('')}</div>`;
+   html+=`<div class="comparison-legend"><span><i style="background:#416b25"></i>La tua ricetta attuale · linea continua</span>${comparisons.map(item=>`<span translate="no"><i style="background:${item.color}"></i>${esc(item.name)}</span>`).join('')}</div>`;
    $('chartArea').innerHTML=html;
    const readEvent=e=>{const box=$('chartOverlay').getBoundingClientRect();return M.clamp((e.clientX-box.left)/box.width*xMax,0,xMax);};
    $('chartOverlay').addEventListener('pointermove',e=>{const t=readEvent(e),cx=M.clamp(X(t),145,610);$('chartTooltip').innerHTML=`<rect x="${cx-84}" y="7" width="168" height="26" rx="5" fill="#fff" stroke="#cbd8bd"/><text x="${cx}" y="24" text-anchor="middle">${fmt(t,1)} min · ${fmt(M.thermal(s,t).core,1)} °C</text>`;});
@@ -639,8 +1453,8 @@ window.YogurtMath=(()=>{
  if(!/^\d{4}-\d\d-\d\dT\d\d:\d\d$/.test(startAt))startAt=defaultStart();$('startAt').value=startAt;
  // Interpret the wall-clock input in Europe/Rome, independently of the computer timezone.
  function romeDate(value){let d=new Date(value+'Z');if(!Number.isFinite(d.getTime()))return new Date();for(let i=0;i<3;i++){const parts=new Intl.DateTimeFormat('sv-SE',{timeZone:'Europe/Rome',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}).format(d);const represented=new Date(parts.replace(' ','T')+'Z').getTime(),desired=new Date(value+'Z').getTime();const delta=desired-represented;if(!delta)break;d=new Date(d.getTime()+delta);}return d;}
- function timeString(d){return new Intl.DateTimeFormat('it-IT',{timeZone:'Europe/Rome',hour:'2-digit',minute:'2-digit'}).format(d);}
- function dayString(d){return new Intl.DateTimeFormat('it-IT',{timeZone:'Europe/Rome',day:'2-digit',month:'short'}).format(d);}
+ function timeString(d){return new Intl.DateTimeFormat(window.YogurtI18n.locale,{timeZone:'Europe/Rome',hour:'2-digit',minute:'2-digit'}).format(d);}
+ function dayString(d){return new Intl.DateTimeFormat(window.YogurtI18n.locale,{timeZone:'Europe/Rome',day:'2-digit',month:'short'}).format(d);}
  function renderTimeline(){
   let cursor=romeDate(startAt).getTime();const total=steps.reduce((n,s)=>n+s.seconds,0);
   $('protocolSummary').textContent=`${steps.length} passaggi · ${currentResult.batches} ${currentResult.batches===1?'lotto':'lotti'}\nDurata pianificata ${longDuration(total)} · confermati ${done.length}/${steps.length}`;
@@ -668,7 +1482,7 @@ window.YogurtMath=(()=>{
  $('goProbe').addEventListener('click',()=>dialog.close());
  function recipeText(){const r=currentResult,p=M.presets.find(p=>p.id===state.preset),n=window.YogurtNutrition.calculate(state);return `NEOTOKIO / YOGURT COMPUTATIONAL LAB\n${p.name} · ${state.device}\nStampo ${state.shape==='loaf'?`${state.length} × ${state.width} cm`:state.shape==='ring'?`ciambella Ø ${state.diameter} cm, foro ${state.hole} cm`:`tondo Ø ${state.diameter} cm`} · ${state.portions} porzioni\n\nINGREDIENTI\n${r.ingredients.map(i=>`${fmt(i.g,1)} g ${i.name}`).join('\n')}\nTotale ${fmt(r.total,1)} g · ${r.batches} lotti\n\nPROTOCOLLO\n${steps.map((s,i)=>`${i+1}. ${s.name}\n${s.setting}\n${s.text}`).join('\n\n')}\n\nNUTRIZIONE STIMATA\nPer 100 g cotti: ${fmt(n.per100.kJ,0)} kJ / ${fmt(n.per100.kcal,0)} kcal; grassi ${fmt(n.per100.fat,1)} g; saturi ${fmt(n.per100.sat,1)} g; carboidrati ${fmt(n.per100.carbs,1)} g; zuccheri ${n.per100.sugars===null?'n.d.':fmt(n.per100.sugars,1)+' g'}; fibre ${fmt(n.per100.fiber,1)} g; proteine ${fmt(n.per100.protein,1)} g; sale ${fmt(n.per100.salt,2)} g.\nPeso cotto ${n.measured?'misurato':'stimato'}: ${fmt(n.cooked,0)} g. Per porzione: ${fmt(n.portion.kcal,0)} kcal. Profili generici e/o etichette, fattori UE; non analisi certificata.\n\n${state.thermometer?'Termometro attivo: 96–99 °C al cuore come finestra orientativa, insieme a controlli di struttura. Non è una soglia validata.\n':''}Nuove formulazioni sperimentali; tempi da verificare nel tuo forno.\nRicetta di partenza: https://www.lucaamore.com/generative-ai-cooking-experiments-for-making-a-yogurt-cake-with-a-thermomix-bimby/\n`};
  function download(name,body,type='application/json'){const url=URL.createObjectURL(new Blob([body],{type})),a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),5000);}
- $('copyRecipe').addEventListener('click',async()=>{try{await navigator.clipboard.writeText(recipeText());toast('Ricetta e protocollo copiati.');}catch{download('yogurt-lab-ricetta.txt',recipeText(),'text/plain;charset=utf-8');toast('Ricetta scaricata come testo.');}});
+ $('copyRecipe').addEventListener('click',async()=>{try{await navigator.clipboard.writeText(window.YogurtI18n.t(recipeText()));toast('Ricetta e protocollo copiati.');}catch{download('yogurt-lab-ricetta.txt',window.YogurtI18n.t(recipeText()),'text/plain;charset=utf-8');toast('Ricetta scaricata come testo.');}});
  $('printRecipe').addEventListener('click',()=>window.print());
  $('experimentForm').addEventListener('submit',e=>{e.preventDefault();if(!e.target.reportValidity())return;if(experiments.length>=100){toast('Quaderno pieno: esporta e rimuovi qualche prova prima di aggiungerne altre.');return;}
   const name=$('experimentName').value.trim();if(!name)return;
@@ -677,7 +1491,7 @@ window.YogurtMath=(()=>{
  });
  function renderExperiments(){
   if(!experiments.length){$('experiments').innerHTML='<div class="empty-state">Il tuo primo esperimento comincia qui.<br>Registra una prova di riferimento, poi cambia una sola variabile.</div>';return;}
-  $('experiments').innerHTML=experiments.map((e,index)=>{const r=M.calculate(e.config),p=M.presets.find(p=>p.id===e.config.preset),date=new Intl.DateTimeFormat('it-IT',{timeZone:'Europe/Rome',dateStyle:'medium',timeStyle:'short'}).format(new Date(e.date));return `<article class="experiment"><div class="experiment-top"><div><h3>${esc(e.name)}</h3><div class="experiment-date">${date} · ${esc(p.name)} · ${e.config.device}</div></div><button type="button" class="experiment-delete" data-delete="${index}" aria-label="Elimina ${esc(e.name)}">Elimina ×</button></div><div class="experiment-meta"><span>${fmt(r.total,0)} g crudi</span><span>amido ${fmt(e.config.starch,0)}%</span>${e.height?`<span>altezza ${fmt(e.height,1)} cm</span>`:''}${e.weight?`<span>peso cotto ${fmt(e.weight,0)} g</span>`:''}${e.probes.length?`<span>ultima sonda ${fmt(e.probes.at(-1).temp,1)} °C</span>`:''}${e.weight&&e.weight<r.total?`<span>perdita massa ${fmt((1-e.weight/r.total)*100,1)}%</span>`:''}</div>${e.notes?`<p>${esc(e.notes)}</p>`:''}<div class="actions"><button type="button" class="secondary" data-load="${index}">Riprendi configurazione →</button><button type="button" class="secondary" data-entry-export="${index}">↓ JSON</button></div></article>`;}).join('');
+  $('experiments').innerHTML=experiments.map((e,index)=>{const r=M.calculate(e.config),p=M.presets.find(p=>p.id===e.config.preset),date=new Intl.DateTimeFormat(window.YogurtI18n.locale,{timeZone:'Europe/Rome',dateStyle:'medium',timeStyle:'short'}).format(new Date(e.date));return `<article class="experiment"><div class="experiment-top"><div><h3 translate="no">${esc(e.name)}</h3><div class="experiment-date">${date} · ${esc(p.name)} · ${e.config.device}</div></div><button type="button" class="experiment-delete" translate="no" data-delete="${index}" aria-label="${esc(window.YogurtI18n.t('Elimina')+' '+e.name)}">${window.YogurtI18n.t('Elimina')} ×</button></div><div class="experiment-meta"><span>${fmt(r.total,0)} g crudi</span><span>amido ${fmt(e.config.starch,0)}%</span>${e.height?`<span>altezza ${fmt(e.height,1)} cm</span>`:''}${e.weight?`<span>peso cotto ${fmt(e.weight,0)} g</span>`:''}${e.probes.length?`<span>ultima sonda ${fmt(e.probes.at(-1).temp,1)} °C</span>`:''}${e.weight&&e.weight<r.total?`<span>perdita massa ${fmt((1-e.weight/r.total)*100,1)}%</span>`:''}</div>${e.notes?`<p translate="no">${esc(e.notes)}</p>`:''}<div class="actions"><button type="button" class="secondary" data-load="${index}">Riprendi configurazione →</button><button type="button" class="secondary" data-entry-export="${index}">↓ JSON</button></div></article>`;}).join('');
   $('experiments').querySelectorAll('[data-load]').forEach(b=>b.addEventListener('click',()=>{const e=experiments[Number(b.dataset.load)];state=M.sanitize(e.config);writeForm();done=[];resetTimer();changedConfig();$('workspace').scrollIntoView({behavior:'auto'});toast('Configurazione ripresa. Le letture della cottura attuale sono conservate.');}));
   $('experiments').querySelectorAll('[data-entry-export]').forEach(b=>b.addEventListener('click',()=>{download('yogurt-lab-esperimento.json',JSON.stringify({schema:'neotokio-yogurt-lab',version:1,experiments:[experiments[Number(b.dataset.entryExport)]]},null,2));}));
   $('experiments').querySelectorAll('[data-delete]').forEach(b=>b.addEventListener('click',()=>{const removed=experiments.splice(Number(b.dataset.delete),1)[0];persist();renderExperiments();$('toast').innerHTML='Esperimento rimosso. <button type="button" id="undoDelete" class="text-button" style="display:inline;margin:0 0 0 12px">Annulla</button>';$('toast').hidden=false;clearTimeout(toastTimeout);$('undoDelete').addEventListener('click',()=>{experiments.unshift(removed);persist();renderExperiments();toast('Esperimento ripristinato.');});toastTimeout=setTimeout(()=>$('toast').hidden=true,10000);}));
@@ -686,7 +1500,7 @@ window.YogurtMath=(()=>{
  $('importNotebook').addEventListener('change',async e=>{const file=e.target.files[0];if(!file)return;try{if(file.size>2_000_000)throw new Error('File troppo grande: massimo 2 MB.');const data=JSON.parse(await file.text());if(data.schema!=='neotokio-yogurt-lab'||data.version!==1||!Array.isArray(data.experiments))throw new Error('Formato non riconosciuto. Usa un JSON esportato dal laboratorio.');const incoming=data.experiments.map(validEntry).filter(Boolean);if(incoming.length!==data.experiments.length)throw new Error('Il file contiene esperimenti non validi. Nessun dato importato.');const existing=new Set(experiments.map(e=>e.id));const added=incoming.filter(e=>{if(existing.has(e.id))return false;existing.add(e.id);return true;});if(added.length+experiments.length>100)throw new Error('Il quaderno può contenere al massimo 100 esperimenti.');experiments=[...added,...experiments];const restore=$('restoreCurrentImport').checked&&data.current&&data.current.config;if(restore){state=M.sanitize(data.current.config);probes=validProbes(data.current.probes);checks=validChecks(data.current.checks);done=[];resetTimer();writeForm();render();}persist();renderExperiments();renderChart();toast(`${added.length} esperimenti importati; configurazione e letture ${restore?'ripristinate dal backup':'correnti conservate'}.`);}catch(err){toast(err.message||'Impossibile leggere il file.');}finally{e.target.value='';}});
  const observer=new IntersectionObserver(entries=>{for(const entry of entries)if(entry.isIntersecting){document.querySelectorAll('.section-nav a').forEach(a=>a.classList.toggle('active',a.hash==='#'+entry.target.id));}},{rootMargin:'-10% 0px -70% 0px'});
  ['workspace','flours','protocol','notebook','method'].forEach(id=>observer.observe($(id)));
- window.addEventListener('beforeprint',()=>{stopSim();});
+ window.addEventListener('beforeprint',()=>{stopSim();window.YogurtI18n.apply();});
  const mobileQuery=window.matchMedia('(max-width:850px)');
  function configExpanded(expanded){$('configSidebar').classList.toggle('mobile-collapsed',!expanded);$('toggleConfig').setAttribute('aria-expanded',String(expanded));$('toggleConfig').textContent=expanded?'Nascondi −':'Parametri +';}
  configExpanded(!mobileQuery.matches);
@@ -694,7 +1508,26 @@ window.YogurtMath=(()=>{
  mobileQuery.addEventListener('change',e=>configExpanded(!e.matches));
  window.YogurtNutritionUI.attach({state:()=>state,toast,patch:patch=>{state=M.sanitize({...state,...patch});writeForm();render();persist();}});
  window.YogurtComparisons.attach({state:()=>state,experiments:()=>experiments,refresh:renderChart});
+ document.addEventListener('yogurt:languagechange',()=>{
+  const edits=[...$('nutrientInputs').querySelectorAll('[data-nutrient]')].map(el=>({
+   id:el.closest('tr').querySelector('[data-save-nutrients]').dataset.saveNutrients,
+   key:el.dataset.nutrient,value:el.value
+  }));
+  render();
+  for(const edit of edits){
+   const row=[...$('nutrientInputs').querySelectorAll('[data-save-nutrients]')].find(el=>el.dataset.saveNutrients===edit.id)?.closest('tr');
+   const input=row?.querySelector('[data-nutrient="'+edit.key+'"]');
+   if(input)input.value=edit.value;
+  }
+  renderExperiments();
+  if(dialog.open){
+   const remaining=timerRemaining,running=timerRunning,deadline=timerDeadline;
+   renderKitchen();timerRemaining=remaining;timerRunning=running;timerDeadline=deadline;updateTimerDisplay();
+  }
+  configExpanded($('toggleConfig').getAttribute('aria-expanded')==='true');
+ });
  render();renderExperiments();persist();
+ window.YogurtI18n.apply();
  if(stored) $('saveStatus').textContent=storageOkay?'Ultima configurazione ripristinata da questo browser.':'Salvataggio non disponibile: esporta il quaderno.';
 })();
 
