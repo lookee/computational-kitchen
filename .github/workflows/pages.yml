@@ -37,6 +37,8 @@ jobs:
           JS
       - name: Check Yogurt Lab calculations
         run: node --test yogurt-lab/tests/*.test.cjs
+      - name: Check Pizza Lab gas-cell model
+        run: node --test pizza-lab/tests/*.test.cjs
       - name: Prepare the page
         if: steps.setup.outputs.enabled == 'true'
         run: |

@@ -64,6 +64,12 @@ and copyright notices, included alongside their font data.
  .time-label{line-height:1.6;overflow-wrap:anywhere}
 }
 </style>
+<style id="pizza-crumb-style">
+.pc-body{padding:26px;min-width:0}.pc-intro{display:flex;justify-content:space-between;gap:20px;align-items:start}.pc-kicker{font:10px/1.5 var(--mono);letter-spacing:1.5px;color:#567441}.pc-intro h3{font:clamp(25px,2.8vw,38px)/1.12 var(--display,system-ui,sans-serif);margin:8px 0 13px;letter-spacing:-1px}.pc-intro p,.pc-note{font-size:13px;line-height:1.7;color:#526047;max-width:850px}.pc-badge{padding:7px 10px;border:1px solid #c6d6b7;border-radius:30px;color:#486434;font:9px var(--mono);white-space:nowrap}.pc-recipe{display:flex;flex-wrap:wrap;gap:7px;margin:18px 0}.pc-recipe span{padding:6px 9px;background:#f3f6ed;border-radius:5px;font-size:11px;color:#456034;overflow-wrap:anywhere}.pc-toolbar{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;align-items:center;margin:20px 0 12px}.pc-toggle{display:flex;flex-wrap:wrap;gap:5px}.pc-toggle button,.pc-stages button{border:1px solid #ccd8c0;border-radius:6px;background:white;color:#4b653b;font-size:12px;padding:9px 13px;min-height:38px}.pc-toggle button[aria-pressed=true],.pc-stages button[aria-pressed=true]{background:#35552a;color:white;border-color:#35552a}.pc-scene{border:1px solid #d4dfc9;border-radius:12px;overflow:hidden;position:relative;background:#f6f8f0}.pc-scene canvas{display:block;width:100%;height:350px}.pc-scene-meta{display:flex;flex-wrap:wrap;gap:9px;justify-content:space-between;padding:12px 17px;border-top:1px solid #dce4d3;background:#eef3e6;font:10px/1.5 var(--mono);color:#466037}.pc-controls{padding:18px 0 0}.pc-controls-top{display:flex;justify-content:space-between;gap:12px;align-items:center}.pc-controls-top strong{font-size:15px;font-variant-numeric:tabular-nums}.pc-controls input[type=range]{display:block;width:100%;accent-color:#577b3e;margin:15px 0;min-height:26px}.pc-stages{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px}.pc-stages button{padding:9px 7px;font-size:11px}.pc-plane{display:flex;align-items:center;gap:14px;font-size:12px;margin:15px 0}.pc-plane input{width:140px;accent-color:#577b3e;min-height:28px}.pc-readings{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:22px 0 14px}.pc-readings>div{padding:16px 13px;background:#f7f9f3;border:1px solid #dde5d5;border-radius:8px;min-width:0}.pc-readings span{display:block;font:9px/1.6 var(--mono);letter-spacing:.6px;color:#576c48}.pc-readings strong{display:block;font:28px/1.3 var(--display,system-ui,sans-serif);color:#314b25;margin:7px 0}.pc-readings small{font-size:10px;line-height:1.6;color:#637357;display:block}.pc-diagnostics{display:flex;flex-wrap:wrap;gap:10px 22px;font:10px/1.7 var(--mono);color:#637357}.pc-details{border-top:1px solid #dbe3d2;margin-top:23px;padding-top:16px}.pc-details>summary{font-size:14px;font-weight:600;color:#3c592b;cursor:pointer;padding:5px 0}.pc-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px 16px;margin:20px 0}.pc-grid label{font-size:12px;color:#3f5732;display:block}.pc-grid input{width:100%;box-sizing:border-box;display:block;border:1px solid #cdd9c2;border-radius:6px;padding:10px;background:white;font-size:15px;min-height:42px;margin:6px 0}.pc-grid small{display:block;font-size:10px;line-height:1.5;color:#68775b}.pc-grid label.pc-invalid input{border-color:#b7482e;background:#fff5ed}.pc-setting-actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center}.pc-setting-actions span{font-size:12px;color:#78533a}.pc-details p,.pc-details li{font-size:12px;line-height:1.8;color:#526047}.pc-details code{font-size:11px;overflow-wrap:anywhere}.pc-equations{padding:15px;background:#f6f8f1;border-radius:8px;overflow-x:auto;font:12px/2 var(--mono)}.pc-limits{border-left:3px solid #d9a36d;padding:4px 13px;margin:18px 0}.pc-sources{display:flex;flex-wrap:wrap;gap:10px 22px}.pc-sources a{font-size:11px;color:#456b2f}.pc-body button:focus-visible,.pc-body input:focus-visible{outline:3px solid #d99c62;outline-offset:3px}.pc-empty{padding:24px;background:#f5f7f0;border-radius:8px;font-size:14px;line-height:1.7;color:#536347}
+@media(max-width:1100px){.pc-readings{grid-template-columns:repeat(2,minmax(0,1fr))}.pc-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:780px){.pc-body{padding:18px 14px}.pc-intro{flex-wrap:wrap;gap:6px}.pc-intro h3{font-size:30px}.pc-scene canvas{height:290px}.pc-grid{gap:15px 12px}.pc-stages{grid-template-columns:repeat(2,minmax(0,1fr))}.pc-readings strong{font-size:26px}.pc-controls-top{align-items:start}.pc-controls-top strong{font-size:13px}.pc-plane{flex-wrap:wrap}.pc-toolbar{gap:8px}.pc-badge{font-size:8px}}
+
+</style>
 </head><body><div class="shell"><header><a class="brand" href="#"><span class="mark" aria-hidden="true">⌘</span><div><strong>NEOTOKIO</strong><span class="small">PIZZA LAB / V.0.1.0</span></div></a><div class="header-right"><a class="device-badge" href="#bimbySelect" aria-label="Modello Bimby selezionato"><span>Bimby®</span><strong id="bimbyBadge">TM6</strong></a><span class="status">Computational kitchen</span><a href="#fermentationLab">Grafici ↗</a><a href="#theory">Le formule ↗</a><label class="language-control" data-no-translate><span class="sr-only">Lingua / Language</span><select id="languageSelect" aria-label="Lingua / Language"><option value="it">Italiano</option><option value="en">English</option></select></label></div></header>
 <section class="hero"><div><div class="eyebrow">Farina. Acqua. Algoritmi.</div><h1>Pizza<br><em>Computational<br>Lab</em><span class="hero-device">per Bimby®</span></h1><p>Dal primo giro di Spiga all’ultima infornata. Progetta dosi, prefermenti e orari: il tuo laboratorio per la pizza, con Bimby.</p></div><div class="orbit" aria-hidden="true"><div class="orbit-inner"><div><b id="orbHydro">65<span style="font-size:20px">%</span></b><small>IDRATAZIONE</small></div></div><div class="sat">F + H₂O + t → 🍕</div></div></section>
 <main class="workspace"><aside class="sidebar"><div class="config-title"><strong>Il tuo esperimento</strong><span>INPUT / 01</span></div><form id="config" novalidate><div class="form-section device-config"><div class="section-label">00 / Il tuo Bimby</div><label class="field"><span>Modello Bimby®</span><select name="bimby" id="bimbySelect"><option value="TM6">Bimby® TM6</option><option value="TM5">Bimby® TM5</option><option value="TM7">Bimby® TM7</option></select></label><p class="hint">Passaggi adattati al modello selezionato.</p></div>
@@ -105,7 +111,7 @@ and copyright notices, included alongside their font data.
 <label class="field full"><span>Recupero forno tra pizze</span><span class="input-wrap"><input name="gap" type="number" min="0" max="10" step="0.5" value="1"><small>min</small></span></label></div><p class="hint">400 g di farina e 900 g di impasto per lotto sono limiti prudenziali scelti per questa pagina, non capacità certificate del modello. Rispetta il manuale e controlla lo sforzo del motore. Tempi del forno indicativi, da adattare al tuo apparecchio.</p></div></details>
 <div class="form-actions"><p class="hint" id="autoCalcStatus" role="status">Calcolo automatico: ingredienti, curva e orari si aggiornano mentre modifichi i parametri.</p></div><div class="form-footer">Dati salvati solo in questo browser. Nessun account aggiuntivo.</div></form></aside>
 <section id="result" aria-label="Ricetta e programma"><div class="print-title"><h1>NEOTOKIO / Pizza Lab</h1><p id="printSubtitle"></p></div><div id="error" class="error" role="alert" hidden></div><div id="stale" class="stale" hidden>Completa o correggi i parametri: il piano si aggiorna automaticamente.</div><div id="output"><div class="viewbar"><div class="eyebrow" id="resultLabel">OUTPUT / IL TUO PIANO</div><div class="actions"><button class="secondary" type="button" id="copyBtn">Copia ricetta</button><button class="secondary" type="button" id="calendarBtn">↓ Calendario</button><button class="secondary" type="button" id="printBtn">Anteprima e stampa</button><button class="secondary pdf-primary" type="button" id="pdfBtn">↓ PDF ricetta</button></div></div><div class="metrics" id="metrics"></div><div id="warnings"></div><div class="card"><div class="card-head"><h2><span>01</span>Il bilancio degli ingredienti</h2><span class="pill" id="methodPill">DIRETTO</span></div><div class="ingredients" id="ingredients"></div><div id="split"></div><div class="card-note" id="massNote"></div></div>
-<section class="card ff-card" id="fermentationLab" aria-labelledby="fermentationTitle"><div class="card-head"><h2 id="fermentationTitle"><span>LAB</span>La finestra di lievitazione</h2><a href="#ffDocumentation">Come leggere la curva ↗</a></div><div id="fermentationBody" data-no-translate></div></section><section class="card timeline-overview" aria-labelledby="overviewTitle"><div class="card-head"><h2 id="overviewTitle"><span>02</span>Il viaggio dell’impasto</h2><span class="pill">TUTTE LE FASI</span></div><div class="overview"><p class="overview-copy">Un colpo d’occhio dal primo ingrediente all’ultima pizza. Le barre condividono la stessa scala temporale.</p><section class="live-dashboard" aria-label="Avanzamento in tempo reale"><div class="live-top"><span class="live-indicator">IN TEMPO REALE</span><time id="liveClock"></time></div><div class="overall-line"><strong id="overallState"></strong><span id="overallPercent"></span></div><div class="live-meter overall-meter" id="overallProgress" role="progressbar" aria-label="Avanzamento temporale del programma" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i></i></div><p id="liveFocus" class="live-focus" aria-live="polite"></p><p id="nextAction" class="next-action"></p><div class="live-bottom"><span id="confirmationSummary"></span><button type="button" class="secondary" id="focusActionBtn" disabled>Vai all’azione →</button></div></section><div class="gantt-scroll" tabindex="0" aria-label="Timeline di tutte le fasi; su schermi piccoli scorri orizzontalmente"><div id="phaseOverview" class="gantt"></div></div><p class="gantt-note">La linea arancio indica «Adesso» quando il programma è in corso. Il forno comprende preriscaldamento e infornate: la sovrapposizione con l’appretto è intenzionale. Per fasi molto brevi la barra ha una larghezza minima visibile; gli orari riportano la durata esatta.</p><div id="overviewRange" class="overview-range"></div></div></section><div class="card timeline-card"><div class="card-head"><h2><span>03</span>Passo per passo · Bimby e tempi</h2><span class="pill" id="durationPill"></span></div><div class="phase-bar" id="phaseBar" aria-hidden="true"></div><div class="stats-inline" id="scheduleSummary"></div><div class="timeline-legend"><span><i class="dot"></i>MANI IN PASTA</span><span><i class="dot wait"></i>ATTESA</span><span><i class="dot parallel"></i>IN PARALLELO</span></div><div class="timeline" id="timeline"></div><div class="card-note">Barre e countdown misurano il tempo previsto, non rilevano l’esecuzione del Bimby. Conferma manualmente le azioni: bolle, volume e consistenza decidono quando l’impasto è pronto. Il piano si riferisce a pizza tonda e lievito di birra fresco.</div></div>
+<section class="card ff-card" id="fermentationLab" aria-labelledby="fermentationTitle"><div class="card-head"><h2 id="fermentationTitle"><span>LAB</span>La finestra di lievitazione</h2><a href="#ffDocumentation">Come leggere la curva ↗</a></div><div id="fermentationBody" data-no-translate></div></section><section class="card" id="alveolationLab" aria-labelledby="pizzaCrumbTitle" data-no-translate><div class="card-head"><h2 id="pizzaCrumbTitle"><span>LAB</span>Dentro il cornicione</h2></div><div id="pizzaCrumbBody" class="pc-body"></div></section><section class="card timeline-overview" aria-labelledby="overviewTitle"><div class="card-head"><h2 id="overviewTitle"><span>02</span>Il viaggio dell’impasto</h2><span class="pill">TUTTE LE FASI</span></div><div class="overview"><p class="overview-copy">Un colpo d’occhio dal primo ingrediente all’ultima pizza. Le barre condividono la stessa scala temporale.</p><section class="live-dashboard" aria-label="Avanzamento in tempo reale"><div class="live-top"><span class="live-indicator">IN TEMPO REALE</span><time id="liveClock"></time></div><div class="overall-line"><strong id="overallState"></strong><span id="overallPercent"></span></div><div class="live-meter overall-meter" id="overallProgress" role="progressbar" aria-label="Avanzamento temporale del programma" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i></i></div><p id="liveFocus" class="live-focus" aria-live="polite"></p><p id="nextAction" class="next-action"></p><div class="live-bottom"><span id="confirmationSummary"></span><button type="button" class="secondary" id="focusActionBtn" disabled>Vai all’azione →</button></div></section><div class="gantt-scroll" tabindex="0" aria-label="Timeline di tutte le fasi; su schermi piccoli scorri orizzontalmente"><div id="phaseOverview" class="gantt"></div></div><p class="gantt-note">La linea arancio indica «Adesso» quando il programma è in corso. Il forno comprende preriscaldamento e infornate: la sovrapposizione con l’appretto è intenzionale. Per fasi molto brevi la barra ha una larghezza minima visibile; gli orari riportano la durata esatta.</p><div id="overviewRange" class="overview-range"></div></div></section><div class="card timeline-card"><div class="card-head"><h2><span>03</span>Passo per passo · Bimby e tempi</h2><span class="pill" id="durationPill"></span></div><div class="phase-bar" id="phaseBar" aria-hidden="true"></div><div class="stats-inline" id="scheduleSummary"></div><div class="timeline-legend"><span><i class="dot"></i>MANI IN PASTA</span><span><i class="dot wait"></i>ATTESA</span><span><i class="dot parallel"></i>IN PARALLELO</span></div><div class="timeline" id="timeline"></div><div class="card-note">Barre e countdown misurano il tempo previsto, non rilevano l’esecuzione del Bimby. Conferma manualmente le azioni: bolle, volume e consistenza decidono quando l’impasto è pronto. Il piano si riferisce a pizza tonda e lievito di birra fresco.</div></div>
 <details class="card formula-card" id="theory"><summary>⌘ Formule matematiche · guida al modello</summary><section id="fermentationTheory" class="formula-body" data-no-translate></section><div class="formula-body" id="formulas"></div></details><div class="card"><div class="card-head"><h2><span>04</span>Due strumenti che fanno la differenza</h2></div><div class="formula-body"><div class="grid2"><div><h3>La temperatura si misura.</h3><p>Usa un termometro: il display del boccale non è una misura affidabile del cuore dell’impasto. Mira indicativamente a 23–25 °C a fine lavorazione, adattando acqua e pause. Qui non scaldiamo a 37 °C.</p></div><div><h3>Il lievito si pesa al decimo.</h3><p>Il lievito è mostrato al decimo di grammo. Usa una bilancia esterna adatta: la risoluzione del display non garantisce l’accuratezza della pesata. Le dosi inferiori a 0,1 g richiedono una pesata più fine. Olio e sale entrano nel rinnovo, mai nel prefermento.</p></div></div></div></div></div></section></main><section class="legal-notes" id="legalNotes" aria-label="Marchi e licenza"><div class="legal-head"><strong>Un laboratorio indipendente.</strong><a href="https://www.gnu.org/licenses/gpl-3.0.html" target="_blank" rel="noopener" class="license-badge" data-no-translate>GNU GPL v3</a></div><p>Bimby® e Thermomix® sono marchi registrati del gruppo Vorwerk. Pizza Computational Lab è un progetto indipendente, non affiliato, sponsorizzato o approvato da Vorwerk. I nomi dei modelli sono usati per identificare l’apparecchio a cui si riferiscono i passaggi.</p><p>Tempi e dosi sono indicativi: verifica l’impasto e segui sempre il manuale e i limiti del tuo apparecchio.</p><p><strong>© 2026 Luca Amore.</strong> Software libero rilasciato sotto GNU General Public License, versione 3 (GPL-3.0-only). Puoi usarlo, studiarlo, modificarlo e ridistribuirlo secondo la licenza. Fornito senza garanzia, nei limiti consentiti dalla legge.</p><div class="legal-actions"><a href="" download="pizza-computational-lab.html" id="sourceDownload">↓ Sorgente HTML</a><button type="button" class="small-btn" id="licenseDownload">↓ Licenza GPLv3</button><a href="https://cookidoo.it/foundation/it-IT/disclaimer" target="_blank" rel="noopener">Informazioni sul marchio ↗</a></div><details><summary>Testo integrale GNU GPL v3</summary><pre id="licenseText" data-no-translate lang="en">                    GNU GENERAL PUBLIC LICENSE
                        Version 3, 29 June 2007
 
@@ -2053,7 +2059,7 @@ function matchesObservation(o,r){return Boolean(o&&o.schema===1&&canonicalKey(o.
 function recipeSegments(p,pre=false){return pre?[{hours:p.prefHours,temp:p.prefTemp,kind:'preferment'}]:[{hours:p.bulk,temp:p.temp,kind:'bulk'},...(p.cold?[{hours:p.cold,temp:p.coldTemp,kind:'cold'}]:[]),{hours:1/6,temp:p.temp,kind:'shape'},{hours:p.proof,temp:p.temp,kind:'proof'}];}
 function thermalSeries(segments,T0,tau,ea,total){let T=T0,E=0,hour=0,points=[{hour:0,T,E}];const all=[...segments],planned=all.reduce((n,s)=>n+s.hours,0);if(total>planned)all.push({hours:total-planned,temp:segments.at(-1).temp,kind:'extension'});for(const s of all){const duration=Math.min(s.hours,total-hour);if(duration<=0)continue;const steps=Math.ceil(duration*60),dt=duration/steps,initial=T,base=hour;for(let i=0;i<steps;i++){const mid=s.temp+(initial-s.temp)*Math.exp(-(i+.5)*dt/tau);E+=activity(mid,ea)*dt;T=s.temp+(initial-s.temp)*Math.exp(-(i+1)*dt/tau);hour=base+(i+1)*dt;points.push({hour,T,E});}if(hour>=total-1e-8)break;}return points;}
 function sample(points,h){h=clamp(h,0,points.at(-1).hour);let lo=0,hi=points.length-1;while(hi-lo>1){const m=(lo+hi)>>1;if(points[m].hour<h)lo=m;else hi=m;}const a=points[lo],b=points[hi],f=b.hour===a.hour?0:(h-a.hour)/(b.hour-a.hour),v={};for(const k of Object.keys(a))v[k]=typeof a[k]==='number'?a[k]+(b[k]-a[k])*f:a[k];return v;}
-function makeShape(series,params){const {C,Eg,seed,age0}=params;const raw=series.map(p=>{const g=seed+(1-seed)*(-Math.expm1(-Math.pow(p.E/Eg,2))),s=Math.exp(-Math.pow((p.E+age0)/C,4));return{...p,g,s,u:g*s};});const peak=raw.reduce((a,b)=>b.u>a.u?b:a,raw[0]),max=Math.max(1e-12,peak.u),best=raw.filter(p=>p.u>=.85*max);return{points:raw.map(p=>({...p,u:p.u/max})),peak:peak.hour,quality:max,window:{start:best[0].hour,end:best.at(-1).hour},truncated:peak.hour>=series.at(-1).hour-1/60};}
+function makeShape(series,params){const {C,Eg,seed,age0}=params;const raw=series.map(p=>{const g=seed+(1-seed)*(-Math.expm1(-Math.pow(p.E/Eg,2))),s=Math.exp(-Math.pow((p.E+age0)/C,4));return{...p,g,s,u:g*s};});const peak=raw.reduce((a,b)=>b.u>a.u?b:a,raw[0]),max=Math.max(Number.MIN_VALUE,peak.u),best=raw.filter(p=>p.u>=.85*max);return{points:raw.map(p=>({...p,u:p.u/max})),peak:peak.hour,quality:max,window:{start:best[0].hour,end:best.at(-1).hour},truncated:peak.hour>=series.at(-1).hour-1/60};}
 function build(r,plan,options={}){const p=r.p,profile=resolveProfile(p.flourProfile,p.farina),pre=options.phase==='preferment'&&p.method!=='diretto',phase=pre?'preferment':'final',event=pre?plan.events.find(e=>e.title.startsWith('Maturazione')):null,start=pre?event.start:plan.fermentationStart,planned=pre?p.prefHours:p.hours,segments=recipeSegments(p,pre),w=profile?.w?(profile.w[0]+profile.w[1])/2:clamp(Number(options.customW)||profile?.wLower||270,100,500),capFactor=clamp(Number(options.capFactor)||1,.4,2),H=pre?p.prefHydro:p.H;
  // Phenomenological prior, intentionally not a fitted flour-specific kinetic law.
  const C=28*Math.pow(w/270,2)*Math.pow(65/H,1.5)*capFactor;
@@ -2120,7 +2126,7 @@ function render(r,plan,lang='it',phase){if(typeof document==='undefined')return;
  const stopDrag=e=>{if(e.pointerId===dragId){if(curve.hasPointerCapture(e.pointerId))curve.releasePointerCapture(e.pointerId);dragId=null;}};curve?.addEventListener('pointerup',stopDrag);curve?.addEventListener('pointercancel',stopDrag);
  document.getElementById('ffResetDuration')?.addEventListener('click',()=>explore(d.planned));
  document.getElementById('ffApplyDuration')?.addEventListener('click',()=>{if(state.stale)return;const choice=durationChoice(r,state.hour,d.phase);if(!choice.ok||!choice.changed)return;document.dispatchEvent(new CustomEvent('pizza-duration-confirm',{detail:{phase:d.phase,hours:choice.value,key:signature(r)}}));});
- document.getElementById('ffUpdateModel').addEventListener('click',()=>{const factor=Number(document.getElementById('ffCapFactor').value),cw=Number(document.getElementById('ffCustomW')?.value||state.customW);if(!Number.isFinite(factor)||factor<.4||factor>2||!Number.isFinite(cw)||cw<100||cw>500){document.getElementById('ffCapFactor').reportValidity();document.getElementById('ffCustomW')?.reportValidity();return;}state.capFactor=factor;state.customW=cw;render(r,plan,lang,d.phase);});
+ document.getElementById('ffUpdateModel').addEventListener('click',()=>{const factor=Number(document.getElementById('ffCapFactor').value),cw=Number(document.getElementById('ffCustomW')?.value||state.customW);if(!Number.isFinite(factor)||factor<.4||factor>2||!Number.isFinite(cw)||cw<100||cw>500){document.getElementById('ffCapFactor').reportValidity();document.getElementById('ffCustomW')?.reportValidity();return;}state.capFactor=factor;state.customW=cw;render(r,plan,lang,d.phase);document.dispatchEvent(new CustomEvent('pizza-fermentation-model-change'));});
  document.getElementById('ffSaveObservation').addEventListener('click',()=>{try{const v=makeObservation(r,document.getElementById('ffGoodStart').value,document.getElementById('ffGoodEnd').value,document.getElementById('ffObservationNote').value);localStorage.setItem('pizza-lab-observation-v1',JSON.stringify(v));render(r,plan,lang,d.phase);document.querySelector('.ff-observation').open=true;document.getElementById('ffObservationFeedback').textContent=t('Osservazione salvata.','Observation saved.');}catch{document.getElementById('ffObservationFeedback').textContent=t('Inserisci due ore crescenti tra 0,25 e 168.','Enter increasing hours between 0.25 and 168.');}});
  document.getElementById('ffClearObservation').addEventListener('click',()=>{try{localStorage.removeItem('pizza-lab-observation-v1');render(r,plan,lang,d.phase);document.querySelector('.ff-observation').open=true;}catch{}});
  document.getElementById('ffCatalogSearch').addEventListener('input',e=>{const q=norm(e.target.value);for(const row of document.querySelectorAll('#ffCatalog tbody tr'))row.hidden=!norm(row.textContent).includes(q);});
@@ -2148,7 +2154,335 @@ function updateNow(now){if(!state||state.stale||typeof document==='undefined')re
 function markStale(){if(!state)return;state.stale=true;const host=document.getElementById('fermentationBody');if(!host)return;document.getElementById('ffStale').hidden=false;host.classList.add('ff-is-stale');for(const c of document.querySelectorAll('#fermentationBody input,#fermentationBody select,#fermentationBody button,#fermentationTheory input,#fermentationTheory select,#fermentationTheory button'))c.disabled=true;}
 function documentation(d,t,n){return `<p>${t('Questo è un modello fenomenologico di Pizza Lab: illustra il compromesso tra sviluppo e perdita di tenuta. Non è il modello Pandough, né una curva sperimentale di un reofermentometro. Una misura reale richiede prove di sviluppo e ritenzione del gas sulla specifica farina.','This is a Pizza Lab phenomenological model illustrating development versus loss of strength. It is not the Pandough model or a measured rheofermentometer curve. Real measurements require dough-development and gas-retention tests on the specific flour.')}</p><div class="ff-math"><math display="block"><mrow><mi>U</mi><mo>(</mo><mi>t</mi><mo>)</mo><mo>=</mo><mfrac><mrow><mi>G</mi><mo>(</mo><mi>t</mi><mo>)</mo><mi>S</mi><mo>(</mo><mi>t</mi><mo>)</mo></mrow><mrow><msub><mi>max</mi><mi>t</mi></msub><mo>[</mo><mi>G</mi><mo>(</mo><mi>t</mi><mo>)</mo><mi>S</mi><mo>(</mo><mi>t</mi><mo>)</mo><mo>]</mo></mrow></mfrac></mrow></math><math display="block"><mrow><mi>G</mi><mo>=</mo><msub><mi>G</mi><mn>0</mn></msub><mo>+</mo><mo>(</mo><mn>1</mn><mo>−</mo><msub><mi>G</mi><mn>0</mn></msub><mo>)</mo><mo>[</mo><mn>1</mn><mo>−</mo><mi>exp</mi><mo>(</mo><mo>−</mo><msup><mrow><mo>(</mo><mi>E</mi><mo>/</mo><msub><mi>E</mi><mi>g</mi></msub><mo>)</mo></mrow><mn>2</mn></msup><mo>)</mo><mo>]</mo></mrow></math><math display="block"><mrow><mi>S</mi><mo>=</mo><mi>exp</mi><mo>[</mo><mo>−</mo><msup><mrow><mo>(</mo><mo>(</mo><mi>E</mi><mo>+</mo><msub><mi>A</mi><mn>0</mn></msub><mo>)</mo><mo>/</mo><mi>C</mi><mo>)</mo></mrow><mn>4</mn></msup><mo>]</mo></mrow></math><math display="block"><mrow><mi>C</mi><mo>=</mo><mn>28</mn><mi>h</mi><mo>·</mo><msup><mrow><mo>(</mo><mi>W</mi><mo>/</mo><mn>270</mn><mo>)</mo></mrow><mn>2</mn></msup><mo>·</mo><msup><mrow><mo>(</mo><mn>65</mn><mo>/</mo><mi>H</mi><mo>)</mo></mrow><mn>1.5</mn></msup><mo>·</mo><mi>f</mi></mrow></math></div><p>${t('G è sviluppo relativo, S tenuta relativa e U un indice di utilizzo normalizzato. E è il tempo equivalente a 20 °C ottenuto integrando Arrhenius sulla temperatura simulata: T(t)=T ambiente+(T iniziale−T ambiente) exp(−t/τ). La finestra U≥0,85 è una convenzione grafica. Nessuna di queste quantità è una percentuale misurata di lievitazione, volume o digeribilità.','G is relative development, S relative strength, U a normalised usability index. E is equivalent time at 20 °C, integrating Arrhenius along simulated dough temperature: T(t)=T environment+(T initial−T environment) exp(−t/τ). The window U≥0.85 is a display convention. None is a measured percentage of proofing, volume or digestibility.')}</p><p>${t('Ipotesi non validate: 28 h, esponenti 2 / 1,5 / 4, soglia 0,85 e relazione W→C sono scelte esplorative, non dati del produttore né leggi universali. P/L, proteine, stabilità farinografica e Falling Number sono consultabili ma non vengono trasformati in ore con coefficienti inventati. La sensibilità ±30% su C è esplorativa, non un intervallo di confidenza.','Unvalidated assumptions: 28 h, exponents 2 / 1.5 / 4, threshold 0.85 and W→C relation are exploratory choices, not producer data or universal laws. P/L, protein, farinograph stability and Falling Number are available for reference, but are not converted into hours with invented coefficients. The ±30% sensitivity on C is exploratory, not a confidence interval.')}</p><p>${t('Scala del lievito: E_g=24 h ×(q_65,20/ y)^(1/1,2) ×(q_H,20/q_65,20)^(1/1,2), dove y è lievito fresco/farina e q è la formula empirica già documentata. Sale, olio e idratazione entrano in q. L’esplorazione della curva non modifica la ricetta. «Usa questa durata» conserva il rapporto lievito/farina e giorno, ora e tipo del riferimento selezionato (inizio o prima infornata): aggiorna gli altri orari solo se l’avvio resta futuro; per una nuova dose serve il comando esplicito «Ricalcola il lievito».','Yeast scale: E_g=24 h ×(q_65,20/y)^(1/1.2) ×(q_H,20/q_65,20)^(1/1.2), with y fresh yeast/flour and q the documented empirical formula. Salt, oil and hydration enter q. Exploring the curve does not change the recipe. “Use this duration” retains the yeast/flour ratio and the selected reference type, day and time (start or first bake), updating other timestamps only if preparation still starts in the future; a new dose requires the explicit “Recalculate yeast” command.')}</p><p>${t('Negli indiretti si aggiungono A₀=r E_pre e G₀=r[1−exp(−(E_pre/E_g,pre)²)], con r quota di farina prefermentata; è un’approssimazione ulteriore, senza modellare acidità o stato biologico del prefermento. Autolisi, energia d’impasto, pH e danni meccanici non sono modellati. La simulazione parte dopo l’ultimo lotto Bimby.','Indirect dough adds A₀=r E_pre and G₀=r[1−exp(−(E_pre/E_g,pre)²)], with r the prefermented flour fraction: a further approximation that omits preferment acidity and biological state. Autolyse, mixing energy, pH and mechanical damage are not modelled. Simulation begins after the last Thermomix batch.')}</p><p>${t('Parametri attivi','Active parameters')}: W=${n(d.w)} · C=${n(d.C)} h · E_g=${n(d.Eg)} h · T₀=${n(d.phase==='preferment'?d.r.p.prefTemp:d.r.p.initialTemp)} °C · τ=${n(d.r.p.tau)} h · Eₐ=${n(d.r.p.ea)} kJ/mol. ${t('Una finestra personale adatta graficamente la curva ai due tempi osservati; non aggiunge nuove misure.','A personal window graphically maps the curve to the two observed timings; it does not add measurements.')}</p><div class="ff-sources"><a href="https://food.au.dk/foodhay/instruments/food-biophysics-platform/food-design-lab/rheofermenter" target="_blank" rel="noopener">Aarhus University · dough development / gas retention ↗</a><a href="https://www.kingarthurbaking.com/pro/reference/dough-temperature" target="_blank" rel="noopener">King Arthur · dough temperature ↗</a></div>`;}
 if(typeof document!=='undefined'){const sel=document.getElementById('flourProfile');if(sel){const groups=[...new Set(profiles.map(p=>p.brand))];sel.innerHTML=groups.map(b=>`<optgroup label="${esc(b)}">${profiles.filter(p=>p.brand===b).map(p=>`<option value="${p.id}">${esc(p.name)}${p.w?' · W '+(p.w[0]===p.w[1]?p.w[0]:p.w.join('–')):p.wText?' · W '+esc(p.wText):''}</option>`).join('')}</optgroup>`).join('')+'<option value="custom">Altra / Custom</option>';}}
-root.PizzaFermentation={profiles,resolveProfile,activity,thermalSeries,build,sample,signature,makeObservation,matchesObservation,render,explore,updateNow,markStale,durationChoice,scheduledDurationChoice};
+root.PizzaFermentation={modelOptions:()=>({customW:state?.customW||270,capFactor:state?.capFactor||1}),profiles,resolveProfile,activity,thermalSeries,build,sample,signature,makeObservation,matchesObservation,render,explore,updateNow,markStale,durationChoice,scheduledDurationChoice};
+})(typeof window==='undefined'?globalThis:window);
+
+</script>
+<script id="pizza-crumb-model">
+/* Pizza Lab: deterministic 3D gas-cell population, exploratory/unfitted. GPL-3.0-only */
+(function (root) {
+  'use strict';
+  const R = 8.314462618, P0 = 101325, sphere = r => 4 * Math.PI * r ** 3 / 3;
+  const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+  const defaults = Object.freeze({seed: 42, nuclei: 180, initialAir: 4, development: 75,
+    retention: 88, gasYield: 2.4, drainage: 18, shapingLoss: 22, diameter: 28,
+    ovenTemp: 400, heatTau: 1.8, setTemp: 78, setMinutes: .6,
+    surfaceTension: .035, steam: .30});
+  const ranges = {seed:[1,99999], nuclei:[80,300], initialAir:[1,12], development:[20,100],
+    retention:[20,100], gasYield:[.2,6], drainage:[2,90], shapingLoss:[0,85], diameter:[20,40],
+    ovenTemp:[180,500], heatTau:[.4,8], setTemp:[65,95], setMinutes:[.15,3],
+    surfaceTension:[.015,.08], steam:[0,.6]};
+  function sanitize(input = {}) {
+    const s = {};
+    for (const [k, [a,b]] of Object.entries(ranges)) {
+      const v = Number(input[k] ?? defaults[k]);
+      s[k] = Number.isFinite(v) ? clamp(v,a,b) : defaults[k];
+    }
+    s.seed = Math.round(s.seed); s.nuclei = Math.round(s.nuclei);
+    return s;
+  }
+  function random(seed) { return () => {
+    seed |= 0; seed = seed + 0x6D2B79F5 | 0;
+    let t = Math.imul(seed ^ seed >>> 15, 1 | seed);
+    t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+    return ((t ^ t >>> 14) >>> 0) / 4294967296;
+  }; }
+  const cache = new Map();
+  function run(r, plan, input = {}, F = root.PizzaFermentation, curveOptions = {}) {
+    if (!F) throw Error('PizzaFermentation is required');
+    const s = sanitize(input), p = r.p;
+    // Independent from the normalised usability curve and personal timing observations.
+    const curve = F.build(r, plan, {phase:'final',customW:curveOptions.customW,capFactor:curveOptions.capFactor});
+    if (curve.unsupported) return {supported:false, reason:'flour', settings:s, snapshots:[]};
+    const key = JSON.stringify([F.signature(r), p.bakeMinutes, s, curve.w, curve.C]);
+    if (cache.has(key)) return cache.get(key);
+    const rng = random(s.seed), W = .060, D = .008, density = 1200;
+    // A local rim sample, NOT a complete pizza: 2.4 × average sheet thickness.
+    const H = (p.peso / 1000 / density) / (Math.PI * (s.diameter / 200) ** 2) * 2.4;
+    const V0 = W * H * D, matrix = V0 * (1 - s.initialAir / 100);
+    const sampleFlour = matrix * density * 1000 * r.F / r.M;
+    // ml CO2 (at 20°C, 1 atm) per g flour; a user hypothesis, not measured yield.
+    const potential = r.Y > 0
+      ? sampleFlour * s.gasYield * 1e-6 * P0 / (R * 293.15) : 0;
+    const weights = Array.from({length:s.nuclei}, () => Math.exp((rng() - .5) * 2.2));
+    const sum = weights.reduce((a,b) => a+b,0), cells = [];
+    for (let i=0; i<s.nuclei; i++) {
+      const radius = Math.cbrt(V0 * s.initialAir / 100 * weights[i] / sum * 3 / (4*Math.PI));
+      let x,y,z;
+      for (let attempt=0; attempt<100; attempt++) {
+        x=radius+rng()*(W-2*radius); y=radius+rng()*(H-2*radius); z=radius+rng()*(D-2*radius);
+        if (!cells.some(b => Math.hypot(x-b.x,y-b.y,z-b.z) < (radius+b.r)*1.02)) break;
+      }
+      cells.push({id:i,x,y,z,r:radius,lock:radius,
+        air:(P0+2*s.surfaceTension/radius)*sphere(radius)/(R*(p.initialTemp+273.15)),
+        co:0,set:0,alive:true});
+    }
+    const snapshots=[], contacts=new Map();
+    const development=clamp(s.development/100+(p.autolysis?.06:0),.2,1);
+    const mobility=clamp(Math.exp((p.H-65)*.028)*(1+r.O/r.F*3),.6,2);
+    let generated=0,lost=0,reservoir=0,merged=0,expansion=1,shaped=false;
+    function snapshot(kind,hour,minute,T) {
+      const alive=cells.filter(b=>b.alive), volume=alive.reduce((a,b)=>a+sphere(b.r),0);
+      const gasCO=alive.reduce((a,b)=>a+b.co,0), diameters=alive.map(b=>b.r*2000).sort((a,b)=>a-b);
+      snapshots.push({kind,hour,minute,temperature:T,width:W,height:H,depth:D,
+        expansion:(matrix+volume)/V0,porosity:volume/(matrix+volume),count:alive.length,
+        medianDiameter:diameters[Math.floor(diameters.length/2)]||0,
+        setting:alive.reduce((a,b)=>a+b.set,0)/Math.max(1,alive.length),merged,
+        generatedCO2:generated,retainedCO2:gasCO,reservoirCO2:reservoir,lostCO2:lost,
+        balanceError:generated-gasCO-reservoir-lost,
+        pores:alive.map(b=>({id:b.id,x:b.x,y:b.y,z:b.z,r:b.r,set:b.set}))});
+    }
+    function radii(T,dt,baking) {
+      for (const b of cells) if (b.alive) {
+        if (baking) {
+          const previous=b.set;
+          const rate=Math.max(0,(T-(s.setTemp-6))/12)/s.setMinutes;
+          b.set=1-(1-b.set)*Math.exp(-dt/60*rate);
+          if (previous<.15 && b.set>=.15) b.lock=b.r;
+        }
+        // Saturation pressure (Pa); capped steam term is a deliberately simplified closure.
+        const pv=baking ? Math.min(s.steam*P0,611.2*Math.exp(2.5e6/461.5*(1/273.15-1/(T+273.15)))) : 0;
+        const elastic=250000*development*Math.max(0,(b.set-.15)/.85)**3;
+        let lo=1e-7,hi=.035;
+        for(let i=0;i<23;i++) {
+          const mid=(lo+hi)/2;
+          const pressure=(b.air+b.co)*R*(T+273.15)/sphere(mid)+pv-P0
+            -2*s.surfaceTension/mid-elastic*((mid/b.lock)**3-1);
+          if(pressure>0)lo=mid;else hi=mid;
+        }
+        b.r=(lo+hi)/2;
+      }
+      const gas=cells.reduce((a,b)=>a+(b.alive?sphere(b.r):0),0);
+      expansion=(matrix+gas)/V0;
+    }
+    function topology(dt,T) {
+      const live=cells.filter(b=>b.alive);
+      for(let i=0;i<live.length;i++) {
+        const a=live[i]; if(!a.alive)continue;
+        for(let j=i+1;j<live.length;j++) {
+          const b=live[j];if(!b.alive)continue;
+          const dist=Math.hypot(a.x-b.x,(a.y-b.y)*expansion,a.z-b.z),pair=a.id+':'+b.id;
+          if(dist<(a.r+b.r)*.97 && Math.max(a.set,b.set)<.75) {
+            const contact=(contacts.get(pair)||0)+dt;contacts.set(pair,contact);
+            const threshold=s.drainage*60*development/mobility*Math.exp(8*Math.max(a.set,b.set)-.012*(T-20));
+            if(contact>=threshold) {
+              const va=sphere(a.r),vb=sphere(b.r),v=va+vb;
+              a.x=(a.x*va+b.x*vb)/v;a.y=(a.y*va+b.y*vb)/v;a.z=(a.z*va+b.z*vb)/v;
+              a.r=Math.cbrt(a.r**3+b.r**3);a.lock=Math.cbrt(a.lock**3+b.lock**3);
+              a.air+=b.air;a.co+=b.co;a.set=Math.max(a.set,b.set);
+              b.co=0;b.alive=false;merged++;
+            }
+          } else contacts.delete(pair);
+        }
+      }
+      // Position relaxation approximates deforming films; it is not a CFD packing solver.
+      for(let pass=0;pass<2;pass++)for(let i=0;i<live.length;i++) {
+        const a=live[i];if(!a.alive)continue;
+        for(let j=i+1;j<live.length;j++) {
+          const b=live[j];if(!b.alive)continue;
+          let dx=a.x-b.x,dy=(a.y-b.y)*expansion,dz=a.z-b.z,dist=Math.hypot(dx,dy,dz);
+          const sep=(a.r+b.r)*.94;if(dist>=sep)continue;
+          if(dist<1e-10){dx=1e-7;dist=1e-7;}
+          const move=(sep-dist)*.3/dist;
+          a.x=clamp(a.x+dx*move,0,W);b.x=clamp(b.x-dx*move,0,W);
+          a.y=clamp(a.y+dy*move/expansion,0,H);b.y=clamp(b.y-dy*move/expansion,0,H);
+          a.z=clamp(a.z+dz*move,0,D);b.z=clamp(b.z-dz*move,0,D);
+        }
+      }
+    }
+    function feed(target,T,dt,strength,baking=false) {
+      const delta=Math.max(0,target-generated);generated+=delta;
+      const retention=s.retention/100*development*(.3+.7*strength);
+      reservoir+=delta*retention;lost+=delta*(1-retention);
+      const live=cells.filter(b=>b.alive),area=live.reduce((a,b)=>a+b.r**2,0);
+      const transfer=reservoir*(1-Math.exp(-dt/120));reservoir-=transfer;
+      for(const b of live) {
+        b.co+=transfer*b.r**2/area;
+        const leakRate=(1-strength)*.00012/mobility*(1-b.set);
+        const leak=b.co*(1-Math.exp(-leakRate*dt));b.co-=leak;lost+=leak;
+      }
+      radii(T,dt,baking);
+    }
+    // Unnormalised gas potential from equivalent thermal exposure, including an indirect-dough seed.
+    const targetAt = E => potential*(curve.seed+(1-curve.seed)*(-Math.expm1(-((E/curve.Eg)**1.2))));
+    if(curve.seed>0)feed(targetAt(0),p.initialTemp,600,1);
+    snapshot('fermentation',0,0,p.initialTemp);
+    // Include phase boundaries exactly. Adaptive dt never exceeds 5 min; <= 300 fermentation frames.
+    const series=curve.points.filter(v=>v.hour<=p.hours+1e-9),last=F.sample(curve.points,p.hours);
+    if(series.at(-1).hour<p.hours-1e-9)series.push(last);
+    let prev=series[0],sinceTopology=0,nextSave=p.hours/240;
+    for(let index=1;index<series.length;index++) {
+      const v=series[index],dt=(v.hour-prev.hour)*3600;
+      feed(targetAt(v.E),v.T,dt,v.s);
+      sinceTopology+=dt;
+      if(sinceTopology>=300 || index===series.length-1){topology(sinceTopology,v.T);sinceTopology=0;}
+      if(v.hour>=nextSave || index===series.length-1) {
+        snapshot('fermentation',v.hour,0,v.T);nextSave=v.hour+p.hours/240;
+      }
+      prev=v;
+    }
+    const fermentationEnd=snapshots.length-1,shapeTemp=last.T;
+    // An assumed single shaping loss for the rim. Does not deduct recipe ingredient mass.
+    for(const b of cells)if(b.alive){lost+=b.co*s.shapingLoss/100;b.co*=1-s.shapingLoss/100;b.air*=1-s.shapingLoss/100;}
+    lost+=reservoir*s.shapingLoss/100;reservoir*=1-s.shapingLoss/100;
+    radii(shapeTemp,0,false);shaped=true;snapshot('shaping',p.hours,0,shapeTemp);
+    const shapingIndex=snapshots.length-1,gasAtBake=generated;
+    // Fermentation gas production stops at shaping in this version; baking redistributes reservoir CO2.
+    const bakeSeconds=p.bakeMinutes*60;
+    for(let sec=0;sec<bakeSeconds;) {
+      const dt=Math.min(2,bakeSeconds-sec);sec+=dt;
+      const minute=sec/60;
+      const T=Math.min(99,shapeTemp+(s.ovenTemp-shapeTemp)*(1-Math.exp(-minute/s.heatTau)));
+      feed(gasAtBake,T,dt,last.s,true);
+      if(sec%10===0)topology(10,T);
+      if(sec%4===0||sec===bakeSeconds)snapshot('baking',p.hours,minute,T);
+    }
+    const result={supported:true,settings:s,snapshots,fermentationEnd,shapingIndex,
+      parameters:{width:W,height:H,depth:D,sampleFlour,development,gasPotential:potential,
+        w:curve.w,unknownW:curve.unknownW,C:curve.C,Eg:curve.Eg,seed:curve.seed,shaped}};
+    cache.set(key,result);if(cache.size>4)cache.delete(cache.keys().next().value);
+    return result;
+  }
+  const api={run,sanitize,defaults,ranges};
+  root.PizzaCrumb=api;
+  if(typeof module!=='undefined'&&module.exports)module.exports=api;
+})(typeof window==='undefined'?globalThis:window);
+
+</script>
+<script id="pizza-crumb-ui">
+/* Pizza Lab alveolation viewer. GPL-3.0-only */
+(function(root){
+  'use strict';
+  const P=root.PizzaCrumb,$=id=>document.getElementById(id),STORE='pizza-lab-crumb-v1';
+  let settings={...P.defaults},state=null,playing=false,raf=0,lastTick=0,view='section',plane=.5;
+  try{settings=P.sanitize(JSON.parse(localStorage.getItem(STORE)||'null')||{});}catch{}
+  const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const tr=(it,en)=>state?.lang==='en'?en:it;
+  const number=(v,d=1)=>Number(v).toLocaleString(state?.lang==='en'?'en-GB':'it-IT',{maximumFractionDigits:d});
+  function stop(){playing=false;cancelAnimationFrame(raf);if($('pcPlay')){$('pcPlay').textContent=tr('▶ Riproduci','▶ Play');$('pcPlay').setAttribute('aria-pressed','false');}}
+  function render(r,plan,lang='it'){
+    stop();const host=$('pizzaCrumbBody');if(!host)return;
+    if(state&&state.r.p.oven!==r.p.oven){settings.ovenTemp=r.p.oven==='ferrari'?400:250;settings.heatTau=r.p.oven==='ferrari'?1.8:2.8;}
+    // On the first load, match the oven unless the user has already stored settings.
+    if(!state){try{if(!localStorage.getItem(STORE)&&r.p.oven==='domestico'){settings.ovenTemp=250;settings.heatTau=2.8;}}catch{}}
+    const previous=state,run=P.run(r,plan,settings,root.PizzaFermentation,root.PizzaFermentation.modelOptions());
+    state={r,plan,lang,run,index:previous?.run===run?previous.index:run.snapshots.length-1};
+    $('pizzaCrumbTitle').innerHTML=`<span>LAB</span>${tr('Dentro il cornicione','Inside the crust')}`;
+    const t=tr;
+    if(!run.supported){host.innerHTML=`<p class="pc-empty">${t('Il modello delle bolle richiede un impasto con farina di grano tenero raffinata. La farina selezionata richiede un modello dedicato: qui non viene simulata un’alveolatura.','The gas-cell model requires refined soft-wheat dough. The selected flour needs a dedicated model; no crumb simulation is generated here.')}</p>`;return;}
+    const a=run.parameters,p=r.p;
+    host.innerHTML=`<div class="pc-intro"><div><div class="pc-kicker">${t('MICROSTRUTTURA / DAL GAS ALLA MOLLICA','MICROSTRUCTURE / FROM GAS TO CRUMB')}</div><h3>${t('Piccole bolle.<br>Grandi differenze.','Tiny bubbles.<br>Big differences.')}</h3><p>${t('Entra in un campione virtuale del bordo: segui la crescita delle bolle, le fusioni, la perdita di gas in stesura e il consolidamento al forno. Cambia la ricetta per esplorare la struttura risultante nel modello.','Explore a virtual rim sample: follow bubble growth, mergers, shaping gas loss and oven setting. Change the recipe to explore the resulting modelled structure.')}</p></div><span class="pc-badge">${t('MODELLO ESPLORATIVO','EXPLORATORY MODEL')}</span></div>
+    <div class="pc-recipe"><span>${esc(p.farina)}</span><span>W ${number(a.w,0)}${a.unknownW?' · '+t('ipotizzato','assumed'):''}</span><span>${number(p.H)}% H₂O</span><span>${t('Lievito','Yeast')} ${number(100*r.Y/r.F,3)}%</span><span>${esc(p.method)} · ${number(p.hours)} h${p.cold?' · '+number(p.cold)+' h '+t('frigo','cold'):''}</span><span>${number(p.peso)} g · Ø ${number(settings.diameter)} cm</span></div>
+    <div class="pc-toolbar"><div class="pc-toggle" role="group" aria-label="${t('Vista del campione','Sample view')}"><button type="button" data-pc-view="section">${t('Sezione del cornicione','Crust cross-section')}</button><button type="button" data-pc-view="volume">${t('Popolazione 3D','3D population')}</button></div><span class="pc-kicker">${t('STESSO SEED, CONFRONTO RIPETIBILE','SAME SEED, REPEATABLE COMPARISON')}</span></div>
+    <div class="pc-scene"><canvas id="pcCanvas" role="img" aria-label="${t('Alveolatura simulata del cornicione. Dati numerici disponibili sotto la figura.','Simulated crust gas cells. Numerical readings are available below the image.')}"></canvas><div class="pc-scene-meta"><span id="pcPhase"></span><span id="pcSeed"></span></div></div>
+    <label class="pc-plane" id="pcPlaneLabel">${t('Piano di taglio nel campione','Sample cutting plane')}<input id="pcPlane" type="range" min="5" max="95" step="1" value="${plane*100}"><output id="pcPlaneValue"></output></label>
+    <div class="pc-controls"><div class="pc-controls-top"><button id="pcPlay" type="button" class="secondary" aria-pressed="false">${t('▶ Riproduci','▶ Play')}</button><strong id="pcTime" aria-live="off"></strong></div><input id="pcTimeSlider" type="range" min="0" max="${run.snapshots.length-1}" step="1" value="${state.index}" aria-label="${t('Istante della simulazione','Simulation instant')}"><div class="pc-stages" role="group" aria-label="${t('Fasi simulate','Simulated stages')}">${[[0,t('01 · Impasto','01 · Mixing')],[run.fermentationEnd,t('02 · Fine lievitazione','02 · End of proofing')],[run.shapingIndex,t('03 · Dopo stesura','03 · After shaping')],[run.snapshots.length-1,t('04 · Fine cottura','04 · End of baking')]].map(([i,label])=>`<button type="button" data-pc-frame="${i}">${label}</button>`).join('')}</div></div>
+    <div class="pc-readings" id="pcReadings" aria-live="off"></div><div class="pc-diagnostics" id="pcDiagnostics"></div>
+    <p class="pc-note">${t('Campione locale del bordo, non pizza intera. Sezione e vista 3D mostrano le stesse bolle; il taglio visualizza solo le intersezioni reali con il piano scelto. La riproduzione comprime la lievitazione e rallenta la cottura per renderle esplorabili.','Local rim sample, not a whole pizza. Section and 3D view show the same bubbles; the section shows actual intersections with the selected plane. Playback compresses proofing and slows baking to make both explorable.')}</p>
+    <details class="pc-details" id="pcSettings"><summary>${t('Parametri di struttura, stesura e cottura','Structure, shaping and baking settings')}</summary><p>${t('Idratazione, farina, dose, sale, olio, prefermento, tempi, frigo e autolisi arrivano dalla ricetta. Qui puoi cambiare le ipotesi aggiuntive: non sono misure ricavate dal marchio della farina o dal modello Bimby. Cambiando forno si ripristinano temperatura e inerzia indicative.','Hydration, flour, yeast, salt, oil, preferment, timings, refrigeration and autolyse come from the recipe. Edit additional assumptions below; these are not measurements derived from the flour brand or Thermomix model. Changing oven resets indicative temperature and thermal lag.')}</p><div class="pc-grid">${fields().map(([key,it,en,unit,step,hintIt,hintEn])=>`<label>${t(it,en)}${unit?' · '+unit:''}<input type="number" data-pc-setting="${key}" min="${P.ranges[key][0]}" max="${P.ranges[key][1]}" step="${step}" value="${settings[key]}"><small>${t(hintIt,hintEn)}</small></label>`).join('')}</div><div class="pc-setting-actions"><button type="button" id="pcApply">${t('Simula queste condizioni','Simulate these conditions')}</button><button type="button" id="pcReset" class="secondary">${t('Ripristina ipotesi','Reset assumptions')}</button><span id="pcFeedback" role="status"></span></div></details>
+    <details class="pc-details" id="pcScience"><summary>${t('Come funziona · formule, fonti e limiti','How it works · equations, sources and limits')}</summary>${documentation()}</details>`;
+    host.querySelectorAll('[data-pc-view]').forEach(b=>b.addEventListener('click',()=>{view=b.dataset.pcView;draw();}));
+    host.querySelectorAll('[data-pc-frame]').forEach(b=>b.addEventListener('click',()=>{stop();state.index=Number(b.dataset.pcFrame);draw();}));
+    $('pcPlane').addEventListener('input',e=>{plane=Number(e.target.value)/100;draw();});
+    $('pcTimeSlider').addEventListener('input',e=>{stop();state.index=Number(e.target.value);draw();});
+    $('pcPlay').addEventListener('click',()=>{if(playing){stop();return;}if(state.index>=run.snapshots.length-1)state.index=0;playing=true;lastTick=0;$('pcPlay').textContent=t('Ⅱ Pausa','Ⅱ Pause');$('pcPlay').setAttribute('aria-pressed','true');raf=requestAnimationFrame(tick);});
+    $('pcApply').addEventListener('click',()=>{
+      let invalid=false;const next={};
+      host.querySelectorAll('[data-pc-setting]').forEach(el=>{const valid=el.value.trim()!==''&&el.checkValidity();el.parentElement.classList.toggle('pc-invalid',!valid);if(!valid)invalid=true;next[el.dataset.pcSetting]=Number(el.value);});
+      if(invalid){$('pcFeedback').textContent=t('Correggi i valori evidenziati prima di simulare.','Correct the highlighted values before simulating.');host.querySelector('.pc-invalid input')?.focus();return;}
+      settings=P.sanitize(next);persist();render(r,plan,lang);$('pcSettings').open=true;$('pcFeedback').textContent=t('Simulazione aggiornata.','Simulation updated.');
+    });
+    $('pcReset').addEventListener('click',()=>{settings={...P.defaults,ovenTemp:p.oven==='ferrari'?400:250,heatTau:p.oven==='ferrari'?1.8:2.8};persist();render(r,plan,lang);$('pcSettings').open=true;});
+    draw();
+  }
+  function persist(){try{localStorage.setItem(STORE,JSON.stringify(settings));}catch{}}
+  function fields(){return [
+    ['diameter','Diametro pizza','Pizza diameter','cm',1,'Con il peso paniello determina lo spessore del campione.','Sets sample thickness together with dough-ball weight.'],
+    ['development','Sviluppo della maglia','Gluten development','%',1,'Ipotesi sulla lavorazione; autolisi attiva aggiunge 0,06 al fattore.','Mixing assumption; active autolyse adds 0.06 to the factor.'],
+    ['shapingLoss','Gas perso in stesura','Shaping gas loss','%',1,'Perdita locale nel bordo; non cambia le dosi.','Local rim loss; ingredient quantities are unchanged.'],
+    ['retention','Ritenzione potenziale CO₂','Potential CO₂ retention','%',1,'Prima delle perdite per cedimento e stesura.','Before weakening and shaping losses.'],
+    ['gasYield','Potenziale CO₂','CO₂ potential','ml/g',.1,'Gas a 20 °C e 1 atm per grammo di farina; ipotesi.','Gas at 20°C and 1 atm per gram of flour; assumed.'],
+    ['initialAir','Aria iniziale','Initial air','%',.5,'Frazione del volume iniziale, incorporata in impasto.','Fraction of initial volume, entrained during mixing.'],
+    ['nuclei','Bolle iniziali nel campione','Initial sample bubbles','',1,'Distribuzione 3D riproducibile con il seed.','Repeatable 3D distribution controlled by seed.'],
+    ['drainage','Tempo di drenaggio film','Film drainage time','min',1,'Scala delle fusioni: più basso, fusioni più rapide.','Merger timescale: lower means faster mergers.'],
+    ['surfaceTension','Tensione superficiale','Surface tension','N/m',.005,'Termine di Laplace; ipotesi equivalente.','Laplace term; equivalent assumed value.'],
+    ['ovenTemp','Temperatura forno','Oven temperature','°C',5,'Valore ipotizzato: sostituiscilo con una lettura reale.','Assumed value: replace with an actual oven reading.'],
+    ['heatTau','Inerzia termica del bordo','Rim thermal lag','min',.1,'Modello concentrato; non descrive platea e resistenze.','Lumped model; does not resolve deck and heating elements.'],
+    ['setTemp','Consolidamento matrice','Matrix setting temperature','°C',1,'Inizio convenzionale della transizione della struttura.','Conventional onset of the structure transition.'],
+    ['setMinutes','Tempo di consolidamento','Setting timescale','min',.05,'Più breve: le bolle si bloccano prima.','Shorter: gas cells become fixed sooner.'],
+    ['steam','Pressione vapore massima','Maximum steam pressure','× atm',.05,'Termine semplificato di espansione, non bilancio acqua.','Simplified expansion term, not a water balance.'],
+    ['seed','Seed del campione','Sample seed','',1,'Stesso seed per confrontare variazioni della ricetta.','Use the same seed when comparing recipe changes.']
+  ];}
+  function tick(time){
+    if(!playing||!state)return;
+    if(!lastTick)lastTick=time;
+    if(time-lastTick>75){state.index++;lastTick=time;draw();if(state.index>=state.run.snapshots.length-1){stop();return;}}
+    raf=requestAnimationFrame(tick);
+  }
+  function draw(){
+    if(!state?.run.supported)return;
+    const f=state.run.snapshots[state.index],t=tr,n=number,canvas=$('pcCanvas');if(!canvas)return;
+    const rect=canvas.getBoundingClientRect();if(!rect.width)return;
+    canvas.width=Math.round(rect.width*Math.min(2,devicePixelRatio||1));canvas.height=Math.round(rect.height*Math.min(2,devicePixelRatio||1));
+    const c=canvas.getContext('2d');c.scale(canvas.width/900,canvas.height/350);
+    c.fillStyle='#f5f7ee';c.fillRect(0,0,900,350);c.lineWidth=.5;c.strokeStyle='#dbe4ce';
+    for(let x=30;x<900;x+=40){c.beginPath();c.moveTo(x,0);c.lineTo(x,350);c.stroke();}
+    for(let y=25;y<350;y+=40){c.beginPath();c.moveTo(0,y);c.lineTo(900,y);c.stroke();}
+    if(view==='section')section(c,f);else volume(c,f);
+    const stage=f.kind==='baking'?(f.setting>.8?t('Matrice consolidata','Matrix set'):t('Espansione e consolidamento','Expansion and setting')):f.kind==='shaping'?t('Stesura · gas residuo nel bordo','Shaping · remaining rim gas'):t('Lievitazione · crescita e fusioni','Proofing · growth and mergers');
+    $('pcPhase').textContent=stage;$('pcSeed').textContent=`SEED ${settings.seed} · ${n(f.width*1000,0)} × ${n(f.height*f.expansion*1000)} × ${n(f.depth*1000,0)} mm`;
+    $('pcTime').textContent=f.kind==='baking'?`${t('Forno','Baking')} +${n(f.minute,2)} min · ${n(f.temperature)} °C`:`${t('Dopo impasto','Since mixing')} +${n(f.hour,2)} h · ${n(f.temperature)} °C`;
+    $('pcTimeSlider').value=state.index;$('pcTimeSlider').setAttribute('aria-valuetext',$('pcTime').textContent+' · '+stage);
+    $('pcPlaneLabel').hidden=view!=='section';$('pcPlaneValue').textContent=`z = ${n(plane*f.depth*1000)} mm`;
+    document.querySelectorAll('[data-pc-view]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.pcView===view)));
+    document.querySelectorAll('[data-pc-frame]').forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.pcFrame)===state.index)));
+    const retained=f.generatedCO2>0?100*f.retainedCO2/f.generatedCO2:0;
+    $('pcReadings').innerHTML=[
+      [t('POROSITÀ DEL CAMPIONE','SAMPLE POROSITY'),n(f.porosity*100)+'%',t('Volume gas / volume totale simulato','Gas volume / total simulated volume')],
+      [t('DIAMETRO MEDIANO 3D','MEDIAN 3D DIAMETER'),n(f.medianDiameter,2)+' mm',t('Tutte le bolle, anche fuori dal taglio','All cells, including those outside the slice')],
+      [t('BOLLE NEL CAMPIONE','SAMPLE GAS CELLS'),f.count+' / '+settings.nuclei,n(f.merged,0)+' '+t('fusioni cumulative','cumulative mergers')],
+      [t('CO₂ NELLE BOLLE','CO₂ IN GAS CELLS'),n(retained)+'%',t('Quota del gas generato; esclude il serbatoio','Share of generated gas; excludes reservoir')]
+    ].map(([a,b,d])=>`<div><span>${a}</span><strong>${b}</strong><small>${d}</small></div>`).join('');
+    $('pcDiagnostics').textContent=`${t('Espansione','Expansion')} ×${n(f.expansion,2)} · ${t('Consolidamento','Setting')} ${n(f.setting*100,0)}% · ${t('Bilancio CO₂ |errore|','CO₂ balance |error|')} ${Math.abs(f.balanceError).toExponential(1)} mol`;
+  }
+  function pore(c,x,y,rx,ry,alpha=1){
+    c.save();c.globalAlpha=alpha;c.beginPath();c.ellipse(x,y,Math.max(.1,rx),Math.max(.1,ry),0,0,Math.PI*2);
+    const g=c.createRadialGradient(x-rx*.25,y-ry*.25,0,x,y,Math.max(rx,ry,.1));g.addColorStop(0,'#927243');g.addColorStop(.7,'#c9a673');g.addColorStop(1,'#e6cb97');c.fillStyle=g;c.fill();c.strokeStyle='#fff1ce';c.lineWidth=1.5;c.stroke();c.restore();
+  }
+  function section(c,f){
+    const scale=Math.min(750/f.width,205/(f.height*f.expansion)),w=f.width*scale,h=f.height*f.expansion*scale,x=(900-w)/2,y=265-h;
+    const path=new Path2D();path.roundRect(x,y,w,h,Math.min(28,h*.3));
+    c.save();c.shadowColor='#67522422';c.shadowBlur=15;c.shadowOffsetY=10;c.fillStyle='#e4c58b';c.fill(path);c.restore();
+    c.save();c.clip(path);const g=c.createLinearGradient(0,y,0,y+h);g.addColorStop(0,'#e9c98b');g.addColorStop(.45,'#fae9bd');g.addColorStop(1,'#ecd3a0');c.fillStyle=g;c.fillRect(x,y,w,h);
+    let visible=0;
+    for(const b of f.pores){const dist=Math.abs(b.z-plane*f.depth);if(dist>=b.r)continue;visible++;const radius=Math.sqrt(b.r*b.r-dist*dist)*scale;pore(c,x+b.x*scale,265-b.y*f.expansion*scale,radius,radius);}
+    c.restore();c.strokeStyle=f.kind==='baking'?'#b88643':'#cfb17b';c.lineWidth=f.kind==='baking'?5:2;c.stroke(path);
+    c.font='11px ui-monospace,monospace';c.fillStyle='#526b40';c.fillText(tr('SEZIONE FISICA DEL CAMPIONE','PHYSICAL SAMPLE CROSS-SECTION'),30,28);
+    c.fillText(`${visible} ${tr('INTERSEZIONI','INTERSECTIONS')} · z = ${number(plane*f.depth*1000)} mm`,30,325);
+    const bar=10e-3*scale;c.strokeStyle='#3f5b2d';c.lineWidth=2;c.beginPath();c.moveTo(900-40-bar,303);c.lineTo(860,303);c.stroke();c.fillText('10 mm',900-40-bar,322);
+  }
+  function volume(c,f){
+    const scale=Math.min(650/f.width,180/(f.height*f.expansion));
+    const project=(x,y,z)=>({x:120+x*scale+z*scale*.65,y:270-y*scale-z*scale*.5});
+    const edges=[[[0,0,0],[f.width,0,0]],[[0,0,0],[0,f.height*f.expansion,0]],[[0,0,0],[0,0,f.depth]],[[f.width,0,0],[f.width,f.height*f.expansion,0]],[[f.width,0,0],[f.width,0,f.depth]],[[0,f.height*f.expansion,0],[f.width,f.height*f.expansion,0]],[[0,f.height*f.expansion,0],[0,f.height*f.expansion,f.depth]],[[0,0,f.depth],[f.width,0,f.depth]],[[0,0,f.depth],[0,f.height*f.expansion,f.depth]],[[f.width,f.height*f.expansion,0],[f.width,f.height*f.expansion,f.depth]],[[f.width,0,f.depth],[f.width,f.height*f.expansion,f.depth]],[[0,f.height*f.expansion,f.depth],[f.width,f.height*f.expansion,f.depth]]];
+    c.strokeStyle='#b4c5a3';c.lineWidth=1.2;for(const [a,b] of edges){const p=project(...a),q=project(...b);c.beginPath();c.moveTo(p.x,p.y);c.lineTo(q.x,q.y);c.stroke();}
+    for(const b of [...f.pores].sort((a,b)=>b.z-a.z)){const p=project(b.x,b.y*f.expansion,b.z);pore(c,p.x,p.y,b.r*scale,b.r*scale,.55+.35*(1-b.z/f.depth));}
+    c.font='11px ui-monospace,monospace';c.fillStyle='#526b40';c.fillText(tr('POPOLAZIONE 3D · PROIEZIONE OBLIQUA','3D POPULATION · OBLIQUE PROJECTION'),30,28);c.fillText(tr('Campione trasparente · tutte le bolle simulate','Transparent sample · all simulated gas cells'),30,325);
+  }
+  function documentation(){const t=tr,n=number,a=state.run.parameters;return `
+    <p>${t('Modello di popolazione 3D deterministico: distribuzione iniziale, trasferimento CO₂, crescita, contatto e fusione dei film, degassamento in stesura, riscaldamento e consolidamento. Non è CFD né una previsione validata del tuo cornicione.','Deterministic 3D population model: initial distribution, CO₂ transfer, growth, film contact and merger, shaping degassing, heating and setting. This is neither CFD nor a validated prediction of your crust.')}</p>
+    <div class="pc-equations">E(t) = ∫ exp[−Eₐ/R · (1/T − 1/293.15)] dt<br>n_generated = n_potential · {G₀ + (1−G₀)[1−exp(−(E/Eg)^1.2)]}<br>(n_air+n_CO₂) RT/(4πr³/3) + P_v = P_atm + 2γ/r + K · [(r/r_lock)³−1]<br>T_core = min(99, T_start + (T_oven−T_start)[1−exp(−t/τ_oven)])<br>V_gas = Σ 4πr³/3 · φ = V_gas/(V_matrix+V_gas)<br>n_generated = n_cells + n_reservoir + n_lost</div>
+    <p>${t('Temperature in kelvin nelle equazioni del gas e di Arrhenius; tempi E ed Eg in ore, τ forno in minuti, raggi in metri, pressioni in pascal, gas in moli. Eg, G₀ e S arrivano dalla curva non normalizzata, senza applicare le osservazioni personali. W modifica solo la tenuta ipotizzata S, non determina direttamente dimensione o numero degli alveoli. P/L e proteine restano dati consultabili, senza conversioni arbitrarie in cinetiche.','Temperatures are kelvin in gas and Arrhenius equations; E and Eg are in hours, oven τ in minutes, radii in metres, pressures in pascals, gas in moles. Eg, G₀ and S come from the unnormalised curve, without applying personal observations. W only affects assumed strength S; it does not directly determine pore size or count. P/L and protein remain reference data, without arbitrary conversion into kinetics.')}</p>
+    <p>${t('Ritenzione del gas nuovo','New gas retention')}: retention × development × (0.3 + 0.7 S). ${t('Autolisi aggiunge 0,06 a development, fino a 1; idratazione e olio modificano la scala delle fusioni. Tutti questi coefficienti sono ipotesi di Pizza Lab. Il gas non trasferito resta nel serbatoio; le perdite finiscono in n_lost. Fusione e stesura conservano esplicitamente il bilancio CO₂. Il vapore è un termine di pressione separato: non rientra nel bilancio CO₂.','Autolyse adds 0.06 to development, capped at 1; hydration and oil change the merger timescale. These coefficients are Pizza Lab assumptions. Untransferred gas remains in the reservoir; losses enter n_lost. Mergers and shaping explicitly conserve the CO₂ balance. Steam is a separate pressure term, excluded from the CO₂ balance.')}</p>
+    <p>${t('Campione attuale','Current sample')}: 60 × ${n(a.height*1000,2)} × 8 mm ${t('prima dell’espansione; spessore = 2,4 × peso/(densità × area pizza), densità ipotizzata 1,2 g/ml. Non viene previsto il volume dell’intera pizza.','before expansion; thickness = 2.4 × mass/(density × pizza area), assumed density 1.2 g/ml. Whole-pizza volume is not predicted.')} Eg=${n(a.Eg,2)} h; C=${n(a.C,2)} h; G₀=${n(a.seed,3)}.</p>
+    <div class="pc-limits"><p>${t('Limiti: il campione è omogeneo; platea, irraggiamento, evaporazione, pH, proteolisi e gradienti centro/bordo non sono risolti. In questa versione la produzione fermentativa si arresta alla stesura: in forno il gas già prodotto si espande e il serbatoio si redistribuisce. Non è una legge biologica. Le bolle sono sfere equivalenti con rilassamento geometrico approssimato, possono sovrapporsi e intersecare il bordo del campione; la porosità è la somma dei volumi equivalenti, non una misura della superficie disegnata. Il grado di consolidamento non certifica la cottura.','Limits: homogeneous sample; deck contact, radiation, evaporation, pH, proteolysis and centre/rim gradients are not resolved. In this version, fermentation production stops at shaping: baking expands existing gas and redistributes the reservoir. This is not a biological law. Cells are equivalent spheres with approximate geometric relaxation; overlap and sample-boundary intersections are possible. Porosity sums equivalent volumes; it is not a measurement of the drawn area. Setting does not certify doneness.')}</p></div>
+    <p>${t('Le fonti sostengono i meccanismi, non i coefficienti del simulatore. Per calibrare servono prove reali con farina, dose, temperature, tempi, metodo di stesura e foto del taglio.','Sources support the mechanisms, not the simulator coefficients. Calibration requires actual bakes with flour, dose, temperatures, timings, shaping method and cross-section photographs.')}</p><div class="pc-sources"><a href="https://doi.org/10.1016/j.foodres.2015.08.013" target="_blank" rel="noopener">Verheyen et al. · 2015 · gas formation / retention ↗</a><a href="https://doi.org/10.3390/foods12071407" target="_blank" rel="noopener">Pizza dough · 2023 · leavening / structure ↗</a><a href="https://food.au.dk/foodhay/instruments/food-biophysics-platform/food-design-lab/rheofermenter" target="_blank" rel="noopener">Aarhus · rheofermenter measurements ↗</a></div>`;}
+  if(typeof window!=='undefined'){
+    window.addEventListener('resize',()=>{if(state)draw();});
+    document.addEventListener('visibilitychange',()=>{if(document.hidden)stop();});
+    document.addEventListener('pizza-fermentation-model-change',()=>{if(state)render(state.r,state.plan,state.lang);});
+  }
+  root.PizzaCrumbUI={render,stop,draw};
 })(typeof window==='undefined'?globalThis:window);
 
 </script>
@@ -2175,10 +2509,10 @@ const metrics=[['Impasto totale',f(r.M),'g',`${p.n} panielli × ${p.peso} g`],['
 const warn=[...r.warnings];if(plan.start<Date.now()-60000)warn.unshift('Questo piano richiede un inizio nel passato. Modifica la data o l’ora dell’infornata prima di seguirlo.');if(plan.firstBake-p.preheat*60000<plan.start)warn.push('Il preriscaldamento deve iniziare prima della preparazione dell’impasto.');$('warnings').innerHTML=warn.map(w=>`<div class="warning">${esc(w)}</div>`).join('');
 const ingredients=[['Farina',r.F,'100%',100],['Acqua',r.W,`${f(p.H)}%`,p.H],['Sale',r.S,`${I.number(100*r.S/r.F,1)}%`,100*r.S/r.F],['Olio',r.O,`${f(100*r.O/r.F)}%`,100*r.O/r.F],['Lievito',r.Y,`${I.number(100*r.Y/r.F,3)}%`,100*r.Y/r.F]];$('ingredients').innerHTML=ingredients.map(([name,g,pct,width])=>`<div class="ingredient"><div class="name">${name}</div><strong>${name==='Lievito'?fy(g):f(g)} <small>g</small></strong><div class="microbar"><i style="width:${width}%"></i></div><div class="pct">${pct} sulla farina</div></div>`).join('');
 const weighed=L.weighedTotals(r);if(p.method!=='diretto'){$('split').innerHTML=`<div class="split-wrap"><table><caption class="sr-only">Ingredienti divisi tra prefermento e rinnovo</caption><thead><tr><th>Fase · quantità totali</th><th>Farina</th><th>Acqua</th><th>Lievito</th><th>Sale / olio</th></tr></thead><tbody><tr><td>${esc(p.method)} · ${r.prefBatches} ${r.prefBatches===1?'lotto':'lotti'}</td><td>${grams(weighed.prefF)}</td><td>${grams(weighed.prefW)}</td><td>${fy(weighed.prefY,r.prefY)} g</td><td>0 / 0 g</td></tr><tr><td>Rinnovo · ${r.batches} lotti</td><td>${grams(weighed.finalF)}</td><td>${grams(weighed.finalW)}</td><td>${fy(weighed.finalY,r.finalY)} g</td><td>${f(weighed.S)} / ${f(weighed.O)} g</td></tr></tbody></table><p class="hint">Al rinnovo si aggiunge tutto il prefermento maturo: ${grams(weighed.prefMass)}. Le quantità per singolo lotto sono nei passaggi sotto.</p></div>`}else $('split').innerHTML='';$('massNote').textContent=`${p.farina||'Farina non specificata'} · Bilancio comprensivo del lievito: ${f(r.mass)} g. Valori mostrati arrotondati; nessuna perdita di lavorazione inclusa. Idratazione convenzionale del fornaio, senza contabilizzare l’acqua contenuta nel lievito fresco.`;
-PizzaFermentation.render(r,plan,I.get());renderOverview(plan);$('scheduleSummary').textContent=`INIZIO ${full(plan.start)} → ULTIMA PIZZA ${full(plan.end)} · Europe/Rome`;
+PizzaFermentation.render(r,plan,I.get());PizzaCrumbUI.render(r,plan,I.get());renderOverview(plan);$('scheduleSummary').textContent=`INIZIO ${full(plan.start)} → ULTIMA PIZZA ${full(plan.end)} · Europe/Rome`;
 const parts=p.method==='diretto'?[[p.hours,'#8caa6e']]:[[p.prefHours,'#f4aa76'],[p.hours,'#8caa6e']];$('phaseBar').innerHTML=parts.map(([h,c])=>`<span style="background:${c};flex:${h}"></span>`).join('');
 $('timeline').innerHTML=plan.events.map((e,i)=>`<article class="event ${e.type}" id="event-${i}" data-event="${i}" data-time-start="${e.start}" data-time-end="${e.end}" data-confirm-key="event:${i}"><div><time datetime="${new Date(e.start).toISOString()}">${time(e.start)}</time><div class="date">${date(e.start)}</div><div class="end">fino ${time(e.end)}${date(e.end)!==date(e.start)?`<br>${date(e.end)}`:''}</div></div><div class="rail" aria-hidden="true"></div><div><h3>${esc(e.title)}</h3><div class="event-badges"><span class="mini ${e.type==='parallel'?'orange':''}">${esc(e.tag||duration(e.end-e.start))}</span></div><p>${esc(e.description)}</p>${progressMarkup(e.start,e.end,'Fase: '+e.title)}${e.steps?`<details class="bimby-steps" open><summary>${e.steps.length} passaggi Bimby · ${duration(e.end-e.start)} · quantità per questo lotto</summary><ol class="instructions">${e.steps.map((s,j)=>`<li id="step-${i}-${j}" data-time-start="${e.start+s.minute*60000}" data-time-end="${e.start+(s.minute+s.duration)*60000}" data-confirm-key="step:${i}:${j}"><div class="step-content"><div class="step-heading"><strong class="step-name">${String(j+1).padStart(2,'0')} / ${esc(s.title||'Operazione')}</strong><span class="subtime">${stepTime(e.start+s.minute*60000,e.start+(s.minute+s.duration)*60000)}</span></div><p>${esc(s.text)}</p><span class="setting ${s.kind==='macchina'?'machine-setting':''}">${esc(s.setting)}</span>${progressMarkup(e.start+s.minute*60000,e.start+(s.minute+s.duration)*60000,s.title)}<label class="check action-check"><input type="checkbox" data-step-check="step:${i}:${j}">Azione eseguita</label></div></li>`).join('')}</ol></details>`:''}<label class="check"><input type="checkbox" data-check="${i}">Passaggio completato</label></div></article>`).join('');
-$('formulas').innerHTML=formulas(r);setupLive();}catch(e){$('error').textContent=e.message;$('error').hidden=false;$('output').hidden=true;for(const id of['copyBtn','calendarBtn','printBtn','pdfBtn'])$(id).disabled=true;current=null;PizzaFermentation.markStale();I.apply();}}
+$('formulas').innerHTML=formulas(r);setupLive();}catch(e){$('error').textContent=e.message;$('error').hidden=false;$('output').hidden=true;for(const id of['copyBtn','calendarBtn','printBtn','pdfBtn'])$(id).disabled=true;current=null;PizzaFermentation.markStale();PizzaCrumbUI.stop();I.apply();}}
 function renderOverview(plan){
 const all=plan.events,groups=[
  ['Prefermento','prefermento',e=>/^(Biga|Poolish) · preparazione|^Maturazione/.test(e.title)],

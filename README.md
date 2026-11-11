@@ -33,7 +33,7 @@ Il progetto nasce dalla curiosità di unire cucina, matematica e sviluppo softwa
 |---|---|---|
 | **Progetta** | Diretto, poolish e biga; autolisi e frigo opzionali | 11 varianti; stampi tondi, ciambelle e plumcake |
 | **Confronta** | Farine, idratazione e curve di fermentazione | 10 farine commerciali, incluse 4 Caputo; formulazioni e nutrienti |
-| **Esplora** | Formule documentate e finestre di lievitazione indicative | Popolazione 3D di bolle, crescita, coalescenza e consolidamento |
+| **Esplora** | Finestre di lievitazione; alveolatura 3D del cornicione, stesura e cottura | Popolazione 3D di bolle, crescita, coalescenza e consolidamento |
 | **Prepara** | Passaggi Bimby e timeline con orari | Modalità cucina, timer e sonda al cuore opzionale, attiva di default |
 | **Conserva** | Scheda stampabile, PDF e calendario | Quaderno esperimenti, import/export JSON e stampa/PDF |
 | **Interfaccia** | Italiano / English | Italiano / English |
@@ -46,9 +46,11 @@ Yogurt Lab include un selettore **Italiano / English** che memorizza la lingua n
 
 ### Dal grafico alla cucina
 
-**Pizza: il tempo diventa visibile.** Esplora la curva di fermentazione e pianifica le lavorazioni fino al forno.
+**Pizza: il tempo diventa visibile.** Esplora la curva di fermentazione e pianifica le lavorazioni fino al forno. La nuova sezione **Dentro il cornicione** simula una popolazione di bolle 3D: crescita, fusioni, perdita di gas in stesura e consolidamento al forno. Esplora il taglio e la vista 3D con replay e parametri modificabili. È un modello esplorativo di un campione locale, da confrontare con prove reali; funziona anche offline. [Dettagli del modello](pizza-lab/README.md).
 
 [![Pizza Lab: grafico interattivo della fermentazione](assets/screenshots/pizza-lab-fermentation.jpg)](https://lookee.github.io/computational-kitchen/pizza-computational-lab.html)
+
+[![Pizza Lab: simulazione dell’alveolatura del cornicione](assets/screenshots/pizza-lab-alveolation.png)](https://lookee.github.io/computational-kitchen/pizza-computational-lab.html#alveolationLab)
 
 **Yogurt: guarda dentro la mollica.** Cambia dosi e processo, esplora la popolazione di bolle e confronta tutte le ricette. Le letture reali della sonda restano separate dalle curve simulate.
 
@@ -87,7 +89,7 @@ This project brings together cooking, mathematics and software. AI helps design 
 |---|---|---|
 | **Design** | Direct dough, poolish and biga; optional autolyse and cold fermentation | 11 variations; round, ring and loaf pans |
 | **Compare** | Flours, hydration and fermentation curves | 10 branded flours, including 4 Caputo profiles; formulations and nutrients |
-| **Explore** | Documented formulas and indicative fermentation windows | A 3D bubble population: growth, coalescence and matrix setting |
+| **Explore** | Fermentation windows; 3D rim gas cells, shaping and baking | A 3D bubble population: growth, coalescence and matrix setting |
 | **Bake** | Thermomix steps and a preparation timeline | Cooking mode, manual timers and optional core-temperature readings, enabled by default |
 | **Keep** | Printable recipe, PDF and calendar export | Experiment notebook, JSON import/export and print/PDF |
 | **Interface** | English / Italian | English / Italian |
@@ -100,7 +102,7 @@ Yogurt Lab’s **Italiano / English** selector remembers your language in the br
 
 ### From the chart to your kitchen
 
-[See the apps in action above](#dal-grafico-alla-cucina): explore Pizza Lab’s fermentation graph and Yogurt Lab’s pan geometry and bubble simulation. Screenshots show the Italian interfaces.
+[See the apps in action above](#dal-grafico-alla-cucina): explore Pizza Lab’s fermentation graph and Yogurt Lab’s pan geometry and bubble simulation. Pizza Lab also includes **Inside the crust**: a deterministic 3D population of gas cells, from proofing through shaping gas loss to oven setting. Explore cross-sections, the 3D view and replay, with editable assumptions and explicit CO₂ balance. This exploratory local-sample model also works offline. [Model details](pizza-lab/README.md). Screenshots show the Italian interfaces.
 
 ### One click online. One file offline.
 
