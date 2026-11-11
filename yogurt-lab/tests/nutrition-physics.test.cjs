@@ -19,9 +19,9 @@ test('Cooking loss changes concentration, not total nutrient mass or total energ
  const weighed=N.calculate({...M.defaults,cookedWeight:800});assert.equal(weighed.measured,true);near(weighed.per100.protein,weighed.total.protein/8);
  const invalid=N.calculate({...M.defaults,cookedWeight:2000});assert.equal(invalid.measured,false);assert.equal(invalid.invalidWeight,true);
 });
-test('Area scaling preserves nutrients per100g; portion counts change only portions',()=>{
+test('Whole-egg scaling preserves nutrients per100g; portion counts change only portions',()=>{
  for(const p of M.presets){const s=M.fromPreset(p.id),a=N.calculate(s),b=N.calculate({...s,diameter:30});
-  near(a.per100.kcal,b.per100.kcal);near(b.total.kcal,a.total.kcal*1.5625);
+  near(a.per100.kcal,b.per100.kcal);near(b.total.kcal,a.total.kcal*5/3);
  }
  const n=N.calculate({...M.defaults,portions:20});near(n.portion.kcal,n.total.kcal/20);
 });

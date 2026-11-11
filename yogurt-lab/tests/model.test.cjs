@@ -2,12 +2,12 @@ const {test}=require('node:test');
 const assert=require('node:assert/strict');
 const M=require('../src/model.js');
 const close=(a,b)=>assert.ok(Math.abs(a-b)<1e-8,`${a} != ${b}`);
-test('All variants conserve ingredient mass and scaling changes every ingredient by area',()=>{
+test('All variants conserve mass and proportions when pan scaling selects whole eggs',()=>{
  for(const p of M.presets){
   const a=M.calculate(M.fromPreset(p.id,M.defaults)),b=M.calculate({...a.s,diameter:30});
-  close(a.scale,1);close(b.scale,1.5625);
+  close(a.scale,1);close(b.geometryScale,1.5625);close(b.scale,5/3);assert.equal(b.eggCount,5);
   close(a.ingredients.reduce((n,i)=>n+i.g,0),a.total);
-  for(const i of a.ingredients)close(b.ingredients.find(j=>j.key===i.key).g,i.g*1.5625);
+  for(const i of a.ingredients)close(b.ingredients.find(j=>j.key===i.key).g,i.g*5/3);
   const blend=a.ingredients.filter(i=>['flour','starch','nuts'].includes(i.key)).reduce((n,i)=>n+i.g,0);close(blend,a.blend);
  }
 });
@@ -17,7 +17,7 @@ test('Original recipe retains quantities with explicit oil conversion and packet
  assert.equal(values.flour,300);assert.equal(values.sugar,250);assert.equal(values.yogurt,125);assert.equal(values.oil,92);assert.equal(values.eggs,150);assert.equal(values.leaven,16);
 });
 test('Pan area accounts for ring hole and rectangular pan, portions only divide',()=>{
- const ring=M.calculate({...M.defaults,shape:'ring',diameter:24,hole:8});close(ring.scale,8/9);
+ const ring=M.calculate({...M.defaults,shape:'ring',diameter:24,hole:8});close(ring.geometryScale,8/9);close(ring.scale,1);assert.equal(ring.eggCount,3);
  const loaf=M.calculate({...M.defaults,shape:'loaf',length:25,width:11});close(loaf.area,275);
  close(M.calculate({...M.defaults,portions:20}).total,M.calculate(M.defaults).total);
 });

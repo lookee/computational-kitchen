@@ -17,13 +17,16 @@ window.YogurtI18n=(()=>{
  }
  const escape=s=>s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
  const word=/[\p{L}\p{N}_]/u;
- const pattern=new RegExp([...variants.keys()].sort((a,b)=>b.length-a.length).map(key=>(word.test(key[0])?'(?<![\\p{L}\\p{N}_])':'')+escape(key)+(word.test(key.at(-1))?'(?![\\p{L}\\p{N}_])':'')).join('|'),'gu');
+ let pattern,protectedNames;
  function t(value){
   const text=String(value??'');if(language!=='en')return text;
-  // Keep commercial product names exactly as printed on their packaging.
-  const protectedNames=[...new Set(Object.values(window.YogurtLab?.flourProfiles||{}).filter(p=>p.brand).flatMap(p=>[p.name,p.brand]))].sort((a,b)=>b.length-a.length);
-  const chunks=protectedNames.length?text.split(new RegExp('('+protectedNames.map(escape).join('|')+')','g')):[text];
-  return chunks.map(chunk=>protectedNames.includes(chunk)?chunk:chunk.replace(pattern,match=>variants.get(match))).join('');
+  if(!pattern){
+   // Complete messages win over names within them; isolated brand names stay unchanged.
+   protectedNames=new Set(Object.values(window.YogurtLab?.flourProfiles||{}).filter(p=>p.brand).flatMap(p=>[p.name,p.brand]));
+   const keys=[...new Set([...variants.keys(),...protectedNames])].sort((a,b)=>b.length-a.length);
+   pattern=new RegExp(keys.map(key=>(word.test(key[0])?'(?<![\\p{L}\\p{N}_])':'')+escape(key)+(word.test(key.at(-1))?'(?![\\p{L}\\p{N}_])':'')).join('|'),'gu');
+  }
+  return text.replace(pattern,match=>protectedNames.has(match)?match:variants.get(match));
  }
  const textState=new WeakMap(),attributeState=new WeakMap();
  const attributes=['aria-label','aria-description','title','placeholder','label','content'];

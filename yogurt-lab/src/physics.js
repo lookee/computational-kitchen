@@ -5,7 +5,7 @@
  const PI=Math.PI,RG=8.314462618,P0=101325,sphere=r=>4/3*PI*r*r*r;
  const random=seed=>()=>{seed|=0;seed=seed+0x6D2B79F5|0;let t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;return ((t^t>>>14)>>>0)/4294967296;};
  const sigmoid=x=>1/(1+Math.exp(-x));
- const relevant=['flour','flourId','protein','starch','nuts','eggs','sugar','sweetener','yogurt','yogurtType','oil','leaven','milk','extra','extras','whip','mix','initial','oven','ovenMode','tau','seed','shape','diameter','hole','width','length','initialAir','viscosity','surfaceTension','gasYield','gasRetention','setTemp','setMinutes','elasticity','waterActivity','batterDensity','filmDrainage'];
+ const relevant=['flour','flourId','protein','starch','nuts','eggs','eggCount','eggWeight','wholeEggs','sugar','sweetener','yogurt','yogurtType','oil','leaven','milk','extra','extras','whip','mix','initial','oven','ovenMode','tau','seed','shape','diameter','hole','width','length','initialAir','viscosity','surfaceTension','gasYield','gasRetention','setTemp','setMinutes','elasticity','waterActivity','batterDensity','filmDrainage'];
  const cache=new Map();
  function key(s){return JSON.stringify(relevant.map(k=>s[k]));}
  function run(input){

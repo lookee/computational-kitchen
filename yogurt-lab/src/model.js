@@ -22,7 +22,7 @@
   };
   const defaults = {preset:'signature', device:'TM6', shape:'round', diameter:24, length:25, width:11, hole:8, portions:10,
     flour:300, flourId:'pastry', protein:9, starch:12, nuts:0, sugar:180, sweetener:'sugar', yogurt:200, yogurtType:'whole',
-    oil:90, oilType:'seed', eggs:150, leaven:12, extras:'lemon', extra:4, milk:0, whip:5, mix:20,
+    oil:90, oilType:'seed', eggs:150, eggCount:0, eggWeight:0, wholeEggs:true, leaven:12, extras:'lemon', extra:4, milk:0, whip:5, mix:20,
     oven:170, ovenMode:'static', bake:40, initial:22, tau:14, seed:42, batchLimit:1100, thermometer:true, bakeLoss:12, cookedWeight:0, nutritionOverrides:{},initialAir:8,viscosity:300,surfaceTension:0.04,gasYield:0.12,gasRetention:25,setTemp:85,setMinutes:2,elasticity:30,waterActivity:0.85,batterDensity:0.95,filmDrainage:600};
   const presets = [
     {id:'signature', name:'Signature · limone & vaniglia', tag:'LA NOSTRA PROPOSTA', description:'Farina debole, 12% di amido, più yogurt. Una base di ricerca per una mollica fine, da validare nel tuo forno.', config:{}},
@@ -43,6 +43,11 @@
   function sanitize(input={}) {
     const s={...defaults};
     for(const [key,[a,b]] of Object.entries(bounds)) if(typeof input[key]==='number' && Number.isFinite(input[key])) s[key]=clamp(input[key],a,b);
+    // eggs remains the reference formula mass, including in existing notebook entries.
+    // Zero count selects the pan-based suggestion; zero weight uses 50 g per shelled egg.
+    if(typeof input.wholeEggs==='boolean')s.wholeEggs=input.wholeEggs;
+    if(Number.isFinite(input.eggCount))s.eggCount=Math.round(clamp(input.eggCount,0,12));
+    if(Number.isFinite(input.eggWeight))s.eggWeight=clamp(input.eggWeight,0,1200);
     for(const [key,allowed] of Object.entries(enumValues)) if(allowed.includes(input[key])) s[key]=input[key];
     if(presets.some(p=>p.id===input.preset)) s.preset=input.preset;
     if(typeof input.thermometer==='boolean')s.thermometer=input.thermometer;
@@ -58,7 +63,7 @@
   }
   function fromPreset(id, current=defaults) {
     const p=presets.find(p=>p.id===id)||presets[0];
-    const shared=Object.fromEntries(['device','shape','diameter','length','width','hole','portions','thermometer','batchLimit','initial','tau','seed','bakeLoss','nutritionOverrides','initialAir','viscosity','surfaceTension','gasYield','gasRetention','setTemp','setMinutes','elasticity','waterActivity','batterDensity','filmDrainage'].map(k=>[k,current[k]]));
+    const shared=Object.fromEntries(['device','shape','diameter','length','width','hole','portions','eggCount','thermometer','batchLimit','initial','tau','seed','bakeLoss','nutritionOverrides','initialAir','viscosity','surfaceTension','gasYield','gasRetention','setTemp','setMinutes','elasticity','waterActivity','batterDensity','filmDrainage'].map(k=>[k,current[k]]));
     return sanitize({...defaults,...p.config,preset:p.id,...shared});
   }
   const extraNames={lemon:'Scorza di limone',orange:'Scorza d’arancia',poppy:'Scorza + papavero',cocoa:'Cacao amaro',blueberries:'Mirtilli',coffee:'Espresso freddo',none:'Nessun extra'};
@@ -66,7 +71,11 @@
   const oilNames={seed:'Olio di semi',olive:'Olio extravergine',coconut:'Olio di cocco'};
   function calculate(input) {
     const s=sanitize(input), area=s.shape==='loaf'?s.length*s.width:Math.PI*(s.diameter*s.diameter-(s.shape==='ring'?s.hole*s.hole:0))/4;
-    const scale=area/(Math.PI*24*24/4), profile=flourProfiles[s.flourId];
+    const geometryScale=area/(Math.PI*24*24/4),profile=flourProfiles[s.flourId];
+    const suggestedEggCount=Math.max(1,Math.round(s.eggs*geometryScale/50));
+    const eggCount=s.wholeEggs?(s.eggCount||suggestedEggCount):s.eggs*geometryScale/50;
+    const eggMass=s.wholeEggs?(s.eggWeight>0?s.eggWeight:eggCount*50):s.eggs*geometryScale;
+    const scale=eggMass/s.eggs,depthRatio=scale/geometryScale;
     const base=[
       {key:'flour',name:profile.name,g:s.flour*(1-(s.starch+s.nuts)/100),color:'#486b2f'},
       {key:'starch',name:'Amido di mais',g:s.flour*s.starch/100,color:'#96a76a'},
@@ -88,6 +97,7 @@
     const effectiveGluten=profile.gluten?s.protein*(1-(s.starch+s.nuts)/100):0;
     const texture=!profile.gluten?'Compatta / fragile':['whole','spelt','petra-5'].includes(s.flourId)?'Rustica / da verificare':['strong','caputo-nuvola'].includes(s.flourId)?'Più tenace':s.mix>50?'Più lavorata':'Fine / tenera';
     const warnings=[];
+    if(total/(s.batterDensity*area)>4)warnings.push('Con queste uova intere il livello stimato supera 2/3 di uno stampo alto 6 cm. Usa uno stampo più grande o suddividi tra più stampi; non scartare parte delle uova.');
     if(batches>1)warnings.push(`${batches} lotti suggeriti. Il limite di ${s.batchLimit} g è una scelta prudenziale dell’app, non una capacità Vorwerk. Controlla sempre la tacca 2,2 L; la massa non determina il volume.`);
     if(s.mix>40 && profile.gluten)warnings.push('Miscelazione lunga dopo la farina: può sviluppare più glutine e disperdere aria. Fermati appena non restano striature asciutte.');
     if(s.leaven/s.flour>.055)warnings.push('Lievito oltre il 5,5% della miscela: possibile retrogusto o struttura irregolare. La dose del produttore sulla confezione viene prima del simulatore.');
@@ -97,7 +107,7 @@
     if(s.preset==='original')warnings.push('Ricetta 0.1: 100 ml di olio convertiti in circa 92 g (densità assunta 0,92 g/ml); bustina assunta da 16 g. Il commento non specifica lo stampo: Ø 24 cm è il riferimento scelto qui.');
     if(s.preset==='oat')warnings.push('La versione 0.2 del blog viene ripresa come esperimento, senza attribuirle effetti salutistici. La cottura non conserva i fermenti vivi dello yogurt.');
     if(s.ovenMode==='fan')warnings.push('Ventilato: come punto di partenza prova circa 10–15 °C in meno dello statico. L’app mantiene la temperatura che hai scelto: non la corregge automaticamente.');
-    return {s,area,scale,ingredients,total,batches,water,blendProtein,effectiveGluten,texture,warnings,blend:s.flour*scale,waterPct:water/(s.flour*scale)*100};
+    return {s,area,scale,geometryScale,eggCount,suggestedEggCount,eggMass,eggEstimated:s.eggWeight===0,depthRatio,ingredients,total,batches,water,blendProtein,effectiveGluten,texture,warnings,blend:s.flour*scale,waterPct:water/(s.flour*scale)*100};
   }
   // A deliberately simple thermal illustration, NOT an oven calibration or a doneness/safety model.
   function thermal(input,t) {
@@ -110,7 +120,7 @@
   function protocol(input) {
     const r=calculate(input),s=r.s,steps=[];
     const add=(name,seconds,setting,text,kind='work')=>steps.push({id:steps.length,name,seconds,setting,text,kind});
-    add('Prepara il laboratorio',300,'FORNO IN PRERISCALDAMENTO',`Porta il forno a ${s.oven} °C ${s.ovenMode==='fan'?'ventilato':'statico'}. Prepara lo stampo, setaccia insieme farina, amido e lievito. Ingredienti a temperatura ambiente. Il preriscaldamento continua in parallelo: attendi che il forno sia pronto prima di infornare.`);
+    add('Prepara il laboratorio',300,'FORNO IN PRERISCALDAMENTO',`Porta il forno a ${s.oven} °C ${s.ovenMode==='fan'?'ventilato':'statico'}. Prepara lo stampo, setaccia insieme farina, amido e lievito. Ingredienti a temperatura ambiente. Il preriscaldamento continua in parallelo: attendi che il forno sia pronto prima di infornare. Usa tutte le ${r.eggCount} uova intere: ${Math.round(r.eggMass*10)/10} g sgusciate ${r.eggEstimated?'stimati':'pesati'}. ${r.eggEstimated?'Per una dose precisa, pesa tutte le uova e inserisci il peso totale nel laboratorio prima di pesare gli altri ingredienti. ':''}${r.batches>1?'Per i lotti, sbatti insieme tutte le uova e suddividi il peso come indicato: non restano avanzi. Nell’ultimo lotto usa il residuo, inclusi gli arrotondamenti.':''}`);
     for(let b=1;b<=r.batches;b++){
       const prefix=r.batches>1?`Lotto ${b}/${r.batches} · `:'';
       add(prefix+'Pesa e prepara',120,'MACCHINA FERMA',`Pesa ${r.batches>1?'1/'+r.batches+' di ogni ingrediente':'gli ingredienti della ricetta'}. ${s.extras==='lemon'||s.extras==='orange'||s.extras==='poppy'?'Grattugia finemente la scorza evitando la parte bianca. ':''}${s.oilType==='coconut'?'L’olio di cocco deve essere fluido e appena tiepido. ':''}Boccale pulito. Monta correttamente la farfalla se prevista nel passo successivo.`);

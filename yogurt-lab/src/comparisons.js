@@ -14,6 +14,7 @@ window.YogurtComparisons=(()=>{
   const available=allOptions();$('comparisonOptions').innerHTML=available.map(p=>`<label><input type="checkbox" data-recipe="${esc(p.id)}" ${selected.has(p.id)?'checked':''}><span translate="no">${esc(p.name)}</span></label>`).join('');
   $('nutritionChartControls').hidden=type!=='nutrition';$('crumbChartControls').hidden=type!=='crumb';
  }
+ function radarPoints(values,max,cx,cy,radius){return values.map((v,i)=>{const angle=-Math.PI/2+i*2*Math.PI/values.length,r=v/max*radius;return [cx+Math.cos(angle)*r,cy+Math.sin(angle)*r];});}
  function render(type){
   renderControls(type);if(!['compare','nutrition','crumb'].includes(type))return false;
   const data=series();let html='';
@@ -36,14 +37,27 @@ window.YogurtComparisons=(()=>{
    $('chartCaption').textContent=`${N.names[metric]}, ${basis==='per100'?'a parità di 100 g di torta cotta':basis==='portion'?'per porzione definita da ciascuna ricetta':'per intera torta, con pezzature che possono differire'}. Le varianti usano Ø 24 cm e la perdita impostata (${fmt(api.state().bakeLoss,0)}%); gli esperimenti salvati mantengono la propria configurazione e il peso misurato se presente. Valori stimati, non una classifica salutistica.`;
   }else{
    const keys=['flour','starch','nuts','eggs','sugar','yogurt','oil','leaven'],names=['Farina','Amido','Frutta secca','Uova','Dolcificante','Yogurt','Olio','Lievito'];
-   const values=data.map(item=>({...item,v:keys.map(k=>M.calculate(item.config).ingredients.find(i=>i.key===k)?.pct||0)})),max=Math.ceil(Math.max(100,...values.flatMap(r=>r.v))/25)*25,Y=v=>220-v/max*175,X=i=>58+i*92;
-   html='<svg viewBox="0 0 740 265" role="img" aria-label="Profili delle percentuali degli ingredienti per tutte le ricette selezionate">';for(let v=0;v<=max;v+=25)html+=`<line x1="58" x2="705" y1="${Y(v)}" y2="${Y(v)}" stroke="#e0e7d8"/><text x="47" y="${Y(v)+4}" text-anchor="end" class="svg-tick">${v}%</text>`;
-   names.forEach((name,i)=>html+=`<text x="${X(i)}" y="244" text-anchor="middle" class="svg-tick">${name}</text>`);
-   values.slice().reverse().forEach(row=>{html+=`<polyline points="${row.v.map((v,i)=>`${X(i)},${Y(v)}`).join(' ')}" fill="none" stroke="${row.color}" stroke-width="${row.id==='current'?3:1.6}" opacity="${row.id==='current'?1:.72}" ${row.id==='current'?'':'stroke-dasharray="5 3"'}><title translate="no">${esc(row.name)}</title></polyline>`;row.v.forEach((v,i)=>html+=`<circle cx="${X(i)}" cy="${Y(v)}" r="${row.id==='current'?4:2.5}" fill="${row.color}"><title translate="no">${esc(row.name)} · ${names[i]} ${fmt(v,1)}%</title></circle>`);});html+='</svg>';
+   const values=data.map(item=>({...item,v:keys.map(k=>M.calculate(item.config).ingredients.find(i=>i.key===k)?.pct||0)}));
+   const max=Math.ceil(Math.max(100,...values.flatMap(r=>r.v))/25)*25,mobile=window.matchMedia('(max-width:560px)').matches;
+   const cx=mobile?180:370,cy=mobile?200:220,radius=mobile?104:170,labelRadius=mobile?132:195;
+   const points=v=>radarPoints(v,max,cx,cy,radius).map(p=>p.join(',')).join(' ');
+   html=`<svg class="radar-chart" viewBox="0 0 ${mobile?'360 400':'740 450'}" role="img" aria-label="Diagramma radar Kiviat: ingredienti delle ricette selezionate, in percentuale sulla miscela secca">`;
+   for(let level=1;level<=4;level++){
+    const v=max*level/4;
+    html+=`<polygon class="radar-grid" points="${points(keys.map(()=>v))}" fill="none" stroke="#dce5d2"/><text x="${cx+7}" y="${cy-radius*level/4+4}" class="svg-tick radar-scale">${fmt(v,1)}%</text>`;
+   }
+   names.forEach((name,i)=>{
+    const angle=-Math.PI/2+i*2*Math.PI/keys.length,x=cx+Math.cos(angle)*radius,y=cy+Math.sin(angle)*radius;
+    html+=`<line class="radar-axis" x1="${cx}" y1="${cy}" x2="${x}" y2="${y}" stroke="#dce5d2"/><text x="${cx+Math.cos(angle)*labelRadius}" y="${cy+Math.sin(angle)*labelRadius}" text-anchor="middle" dominant-baseline="middle" class="radar-label">${name}</text>`;
+   });
+   values.slice().reverse().forEach(row=>{
+    html+=`<polygon class="radar-profile" data-recipe="${esc(row.id)}" points="${points(row.v)}" fill="${row.id==='current'?row.color:'none'}" fill-opacity=".08" stroke="${row.color}" stroke-width="${row.id==='current'?3:1.6}" opacity="${row.id==='current'?1:.8}" ${row.id==='current'?'':'stroke-dasharray="5 3"'}><title translate="no">${esc(row.name)}</title></polygon>`;
+    radarPoints(row.v,max,cx,cy,radius).forEach(([x,y],i)=>html+=`<circle cx="${x}" cy="${y}" r="${row.id==='current'?4:2.5}" fill="${row.color}"><title translate="no">${esc(row.name)} · ${window.YogurtI18n.t(names[i])} ${fmt(row.v[i],1)}%</title></circle>`);
+   });html+='</svg>';
    html+=`<div class="comparison-legend">${values.map(row=>`<span translate="no"><i style="background:${row.color}"></i>${esc(row.name)}</span>`).join('')}</div><div class="compare-table"><table><thead><tr><th>Ricetta</th>${names.map(n=>`<th>${n}</th>`).join('')}</tr></thead><tbody>${values.map(row=>`<tr><td translate="no">${esc(row.name)}</td>${row.v.map(v=>`<td>${fmt(v,1)}%</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
-   $('chartCaption').textContent='Profili di formulazione: ogni punto è una percentuale sulla miscela secca. Le linee collegano categorie per aiutare il confronto, non descrivono un processo nel tempo. Ricette diverse possono avere profili sovrapposti. La ricetta attuale è la linea continua più spessa.';
+   $('chartCaption').textContent='Diagramma radar / Kiviat: ogni asse è un ingrediente, espresso in percentuale sulla miscela secca. Tutti gli assi e tutte le ricette condividono la stessa scala; farina + amido + frutta secca = 100%. La tua ricetta è il poligono continuo più spesso. La superficie non è un punteggio di qualità. I valori esatti sono nella tabella.';
   }
   $('chartArea').innerHTML=html;return true;
  }
- return {attach,render,renderControls,series};
+ return {attach,render,renderControls,series,radarPoints};
 })();

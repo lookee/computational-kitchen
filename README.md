@@ -44,6 +44,10 @@ Yogurt Lab include un selettore **Italiano / English** che memorizza la lingua n
 - **[Torta allo yogurt — Bimby · Italiano →](https://lookee.github.io/computational-kitchen/yogurt-computational-lab.html?lang=it)**
 - **[Yogurt cake — Thermomix · English →](https://lookee.github.io/computational-kitchen/yogurt-computational-lab.html?lang=en)**
 
+Le dosi di Yogurt Lab usano **uova intere**: numero e peso compaiono insieme. Lo stampo suggerisce il numero più vicino e tutti gli ingredienti vengono scalati nelle stesse proporzioni. Inserendo il peso totale delle uova sgusciate, la ricetta usa tutte le uova senza residui. Lo spessore può differire dal riferimento geometrico.
+
+Il confronto delle formulazioni usa un **diagramma radar/Kiviat** con otto ingredienti e una scala percentuale comune, affiancato dai valori in tabella.
+
 ### Dal grafico alla cucina
 
 **Pizza: il tempo diventa visibile.** Esplora la curva di fermentazione e pianifica le lavorazioni fino al forno. La nuova sezione **Dentro il cornicione** simula una popolazione di bolle 3D: crescita, fusioni, perdita di gas in stesura e consolidamento al forno. Esplora il taglio e la vista 3D con replay e parametri modificabili. È un modello esplorativo di un campione locale, da confrontare con prove reali; funziona anche offline. [Dettagli del modello](pizza-lab/README.md).
@@ -99,6 +103,10 @@ Yogurt Lab’s **Italiano / English** selector remembers your language in the br
 
 - **[Yogurt cake — Thermomix · English →](https://lookee.github.io/computational-kitchen/yogurt-computational-lab.html?lang=en)**
 - **[Torta allo yogurt — Bimby · Italiano →](https://lookee.github.io/computational-kitchen/yogurt-computational-lab.html?lang=it)**
+
+Yogurt Lab uses **whole eggs**, showing both count and weight. The pan suggests the nearest whole number and every ingredient scales by the same factor. Enter the total shelled egg weight to use all of your eggs without leftovers. Batter depth may differ from the geometric reference.
+
+Formulation comparisons use a **radar/Kiviat chart** with eight ingredients and a shared percentage scale, alongside exact tabular values.
 
 ### From the chart to your kitchen
 
