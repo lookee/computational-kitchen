@@ -22,6 +22,8 @@ test('Dynamic messages translate across number and punctuation boundaries',()=>{
  assert.equal(i.t('0/3 controlli strutturali registrati. La temperatura da sola non descrive la struttura.'),'0/3 structural checks recorded. Temperature alone does not describe structure.');
  assert.equal(i.t('Aggiungi le polveri setacciate. Usa la durata come limite iniziale; fermati appena l’impasto è omogeneo. Se restano striature, finisci a mano a macchina ferma.'),'Add the sifted dry ingredients. Use the duration as an initial limit; stop as soon as the batter is uniform. If streaks remain, finish by hand with the machine stopped.');
  assert.equal(i.t('PIANO FISSO z = 4 mm · 12 INTERSEZIONI'),'FIXED PLANE z = 4 mm · 12 INTERSECTIONS');
+ assert.equal(i.t('Molino Grassi'),'Molino Grassi');
+ assert.equal(i.t('P/L 0,45–0,55'),'P/L 0,45–0,55');
  assert.equal(i.t('Caputo Pasticceria · 00 · 1 kg'),'Caputo Pasticceria · 00 · 1 kg');
 });
 test('Every preset and appliance produces English instructions without changing calculations',()=>{

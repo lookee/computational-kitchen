@@ -726,7 +726,5 @@ window.YogurtTranslations={
   "Bimby": "Thermomix",
   "latte": "milk",
   "espresso freddo": "cold espresso",
-  "0,55": "0.55",
-  "2,2": "2.2",
   "Etichetta per 100 ml, convertita": "Per-100 ml label, converted"
 };

@@ -21,7 +21,7 @@ window.YogurtI18n=(()=>{
  function t(value){
   const text=String(value??'');if(language!=='en')return text;
   // Keep commercial product names exactly as printed on their packaging.
-  const protectedNames=Object.values(window.YogurtLab?.flourProfiles||{}).filter(p=>p.brand).map(p=>p.name);
+  const protectedNames=[...new Set(Object.values(window.YogurtLab?.flourProfiles||{}).filter(p=>p.brand).flatMap(p=>[p.name,p.brand]))].sort((a,b)=>b.length-a.length);
   const chunks=protectedNames.length?text.split(new RegExp('('+protectedNames.map(escape).join('|')+')','g')):[text];
   return chunks.map(chunk=>protectedNames.includes(chunk)?chunk:chunk.replace(pattern,match=>variants.get(match))).join('');
  }
@@ -31,7 +31,7 @@ window.YogurtI18n=(()=>{
  function translateText(node){
   if(node.parentElement?.closest(skip)||!node.nodeValue.trim())return;
   const previous=textState.get(node),source=previous&&node.nodeValue===previous.output?previous.source:node.nodeValue;
-  const output=t(source);if(node.nodeValue!==output)node.nodeValue=output;
+  const output=node.parentElement?.localName==='mn'&&language==='en'?source.replace(',', '.'):t(source);if(node.nodeValue!==output)node.nodeValue=output;
   textState.set(node,{source,output});
  }
  function translateElement(el){
