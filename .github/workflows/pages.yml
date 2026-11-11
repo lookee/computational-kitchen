@@ -35,11 +35,14 @@ jobs:
           if (!enabled) appendFileSync(process.env.GITHUB_STEP_SUMMARY,
             'Select **Settings → Pages → Source: GitHub Actions**, then run **Actions → Pages → Run workflow** on `main`.');
           JS
+      - name: Check Yogurt Lab calculations
+        run: node --test yogurt-lab/tests/*.test.cjs
       - name: Prepare the page
         if: steps.setup.outputs.enabled == 'true'
         run: |
           mkdir _site
-          cp pizza-computational-lab.html LICENSE _site/
+          cp index.html pizza-computational-lab.html yogurt-computational-lab.html LICENSE _site/
+          cp -R assets _site/
           touch _site/.nojekyll
       - uses: actions/configure-pages@v5
         if: steps.setup.outputs.enabled == 'true'

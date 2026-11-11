@@ -1,0 +1,29 @@
+Tool: built-in ImageGen (not CLI).
+Reference images: pizza-lab-editorial-cover.png and pizza-lab-square-white.png, used only as style and series references.
+
+Use case: stylized-concept / premium editorial cover.
+Asset type: a square high-resolution cover for Luca Amore's Computational Kitchen series, new chapter YOGURT LAB.
+Input images: Image 1 is a STYLE AND SERIES IDENTITY REFERENCE: preserve its warm ivory-white background, powerful black typographic hierarchy, sophisticated mathematical editorial composition, photoreal food fused with a fine turquoise computational wireframe. Image 2 is a supporting STYLE REFERENCE for the airy white background and precise delicate mathematical annotations. These are references, not edit targets. Create a NEW artwork about yogurt cake, not pizza.
+
+Primary request: elegant, striking, artistic, very nerdy, beautifully crafted poster with a LIGHT background, immediately recognizable as the companion to the Pizza Lab reference. Square 1:1 composition, ideally 2048x2048 or higher available detail. A gallery-quality scientific food still life rather than a screenshot of an app.
+
+Scene and subject: a spectacular golden yogurt cake, round and moderately tall, viewed in three-quarter perspective with a clean wedge removed to expose the pale ivory, moist, very fine and delicate sponge crumb. The crumb should resemble a real excellent yogurt cake, with SMALL refined pores, not bread cavities or Swiss cheese. A tiny dusting of powdered sugar is acceptable; no frosting. The cake is the large central visual, tactile and delicious, on a clean ivory-white plane with an exquisitely soft grounding shadow. The outer golden crust is thin, softly cracked in a natural way. Transform one side smoothly into a delicate teal/sage triangular finite-element wireframe, with a small cutaway transition showing a restrained population of simulated gas bubbles, fusing real food with computational geometry. Integrate one fine steel thermometer probe elegantly entering the cut cake heart, understated and accurate, no big electronic appliance.
+
+Typography: prominent meticulously set HEAVY black geometric sans-serif at the TOP, like the first reference, on two lines, spelled EXACTLY:
+"COMPUTATIONAL"
+"KITCHEN"
+Below it a smaller widely letterspaced subtitle, EXACTLY:
+"YOGURT LAB"
+All title text fully inside generous outer safe margins, no cropped letters. No extra slogans, no invented branding, no watermark.
+
+Scientific visual language: fine black drafting lines, a partial concentric construction circle around the cake footprint, one clean radius marker, a restrained small rising thermal curve in sage, a subtle bubble population diagram. Precisely typeset mathematical annotations around the cake in elegant scientific serif, sparse and balanced, enough white space:
+"PV = nRT"
+"Δp = 2γ/R"
+"∂T/∂t = α∇²T"
+"k = A/A₀"
+"mᵢ = k mᵢ,₀"
+These are beautiful scientific notations, not a dense textbook page. The graphs are conceptual art, not numerical certification. Use light line weights and excellent typographic alignment.
+
+Palette and lighting: porcelain white / warm ivory background, honey-gold cake, pale cream crumb, black typography, fine muted turquoise and sage mesh accents with tiny warm amber heat traces. Bright soft studio daylight, refined material realism, high micro-detail, premium print-editorial finish. Bold visual impact comes from the heroic cake, geometry and typography, not neon or darkness.
+
+Constraints / avoid: NO pizza, no tomato, no basil, no pizza crust, no dark background, no cyberpunk neon, no circuit-board wallpaper, no generic cooking utensils clutter, no photoreal appliance, no garbled small text, no health or nutritional promises, no huge bread-like holes. Keep the reference series DNA while making this clearly and unmistakably a yogurt-cake computational laboratory.

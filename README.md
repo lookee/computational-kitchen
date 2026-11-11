@@ -1,99 +1,116 @@
 # Computational Kitchen
 
-[![Margherita scientifica tra equazioni e luce — Scientific margherita pizza with equations](assets/images/margherita-scientifica.png)](assets/images/margherita-scientifica.png)
+### Good food. Better questions. A little mathematics.
 
-### 🍕 [Pizza Computational Lab (Bimby / Thermomix) →](https://lookee.github.io/computational-kitchen/pizza-computational-lab.html)
+**Two interactive food-science labs by [Luca Amore](https://www.lucaamore.com). Explore pizza dough and yogurt cake through recipes, visual models and experiments you can repeat in your own kitchen.**
 
-[Italiano](#italiano) · [English](#english)
+**[Open the kitchen →](https://lookee.github.io/computational-kitchen/)** · [Italiano](#italiano) · [English](#english) · [GPL v3](LICENSE)
+
+<table>
+<tr>
+<td width="50%" align="center"><a href="https://lookee.github.io/computational-kitchen/pizza-computational-lab.html"><img src="assets/images/margherita-scientifica.png" alt="Pizza Lab — pizza, mathematical models and fermentation" width="100%"></a><h3>Pizza Computational Lab</h3><p>Dough · fermentation · timing<br>Impasto · lievitazione · orari</p><p><a href="https://lookee.github.io/computational-kitchen/pizza-computational-lab.html"><strong>Open / Apri Pizza Lab →</strong></a></p></td>
+<td width="50%" align="center"><a href="https://lookee.github.io/computational-kitchen/yogurt-computational-lab.html"><img src="assets/images/yogurt-lab-editorial-cover.png" alt="Yogurt Lab — cake, bubble structure, temperature and mathematics" width="100%"></a><h3>Yogurt Computational Lab</h3><p>Crumb · heat · nutrition<br>Mollica · calore · nutrizione</p><p><a href="https://lookee.github.io/computational-kitchen/yogurt-computational-lab.html"><strong>Open / Apri Yogurt Lab →</strong></a></p></td>
+</tr>
+</table>
+
+**Browser-based · Offline-ready · No account or API key · Bimby / Thermomix TM5, TM6 & TM7**
 
 ---
 
 ## Italiano
 
-**Un laboratorio di cucina computazionale: ricette riproducibili, modelli scientifici e strumenti interattivi per esplorare impasti, fermentazioni e cotture.**
+### La ricetta è il punto di partenza. Il laboratorio è quello che succede dopo.
 
-Uno spazio di [Luca Amore](https://www.lucaamore.com) per ideare ricette, costruire piccoli strumenti e mettere alla prova le ipotesi ai fornelli. L’AI aiuta a progettare gli esperimenti; è l’impasto ad avere l’ultima parola.
+Quanto cambia una torta scegliendo un’altra farina? Come si incastrano impasto, frigorifero e prima infornata? Computational Kitchen trasforma queste domande in strumenti da esplorare: modifica un parametro, osserva il modello, prepara la ricetta e confronta il risultato reale.
 
-### 🍕 Pizza Computational Lab
+Il progetto nasce dalla curiosità di unire cucina, matematica e sviluppo software. L’AI aiuta a progettare e costruire gli esperimenti; la prova ai fornelli rimane decisiva. Le app non richiedono un servizio AI durante l’uso.
 
-**Il primo progetto di Computational Kitchen:** un laboratorio interattivo dedicato alla pizza, per progettare l’impasto dalle quantità alla prima infornata.
+### Scegli il tuo esperimento
 
-**[Apri Pizza Computational Lab (Bimby) →](https://lookee.github.io/computational-kitchen/pizza-computational-lab.html)**
+| | 🍕 Pizza Lab | 🍰 Yogurt Lab |
+|---|---|---|
+| **Progetta** | Diretto, poolish e biga; autolisi e frigo opzionali | 11 varianti; stampi tondi, ciambelle e plumcake |
+| **Confronta** | Farine, idratazione e curve di fermentazione | 10 farine commerciali, incluse 4 Caputo; formulazioni e nutrienti |
+| **Esplora** | Formule documentate e finestre di lievitazione indicative | Popolazione 3D di bolle, crescita, coalescenza e consolidamento |
+| **Prepara** | Passaggi Bimby e timeline con orari | Modalità cucina, timer e sonda al cuore opzionale, attiva di default |
+| **Conserva** | Scheda stampabile, PDF e calendario | Quaderno esperimenti, import/export JSON e stampa/PDF |
+| **Interfaccia** | Italiano / English | Italiano; documentazione del progetto bilingue |
+| **Entra** | **[Apri Pizza Lab →](https://lookee.github.io/computational-kitchen/pizza-computational-lab.html)** | **[Apri Yogurt Lab →](https://lookee.github.io/computational-kitchen/yogurt-computational-lab.html)** |
 
-- **Metodi di impasto:** diretto, poolish e biga, con autolisi e frigorifero opzionali.
-- **Dosi e lavorazioni:** ingredienti calcolati, passaggi Bimby TM5/TM6/TM7 e timeline delle lavorazioni.
-- **Esplorazione:** formule documentate, catalogo farine e curve esplorative della fermentazione.
-- **Lingue ed esportazione:** interfaccia italiana e inglese, scheda stampabile, PDF e calendario.
+### Dal grafico alla cucina
 
-#### L’app in azione
+**Pizza: il tempo diventa visibile.** Esplora la curva di fermentazione e pianifica le lavorazioni fino al forno.
 
-**Esplora la lievitazione sul grafico.** La curva mostra sviluppo relativo, finestra consigliata stimata e orario della prima infornata; il cursore permette di esplorare una durata prima di confermarla. Le curve sono simulazioni indicative, non misure o previsioni validate.
+[![Pizza Lab: grafico interattivo della fermentazione](assets/screenshots/pizza-lab-fermentation.jpg)](https://lookee.github.io/computational-kitchen/pizza-computational-lab.html)
 
-[![Grafico interattivo della lievitazione: curva di sviluppo, finestra consigliata e cursore della durata](assets/screenshots/pizza-lab-fermentation.jpg)](assets/screenshots/pizza-lab-fermentation.jpg)
+**Yogurt: guarda dentro la mollica.** Cambia dosi e processo, esplora la popolazione di bolle e confronta tutte le ricette. Le letture reali della sonda restano separate dalle curve simulate.
 
-**Progetta il tuo impasto.** Metodo, idratazione, ingredienti e riepilogo del programma in un’unica interfaccia.
+[![Yogurt Lab: stampo selezionato e simulazione della struttura](assets/screenshots/yogurt-lab-simulation.jpg)](https://lookee.github.io/computational-kitchen/yogurt-computational-lab.html)
 
-[![Panoramica di Pizza Computational Lab con configurazione dell’impasto e ingredienti calcolati](assets/screenshots/pizza-lab-overview.jpg)](assets/screenshots/pizza-lab-overview.jpg)
+### Online in un clic. Offline in un file.
 
-**Segui il viaggio dell’impasto.** Una timeline mette in relazione impasto Bimby, lievitazione, staglio, appretto e forno.
+Apri uno dei laboratori dalla [pagina iniziale](https://lookee.github.io/computational-kitchen/). Per usarlo offline, scarica il relativo HTML con **Download raw file** su GitHub, poi aprilo nel browser:
 
-[![Timeline delle lavorazioni con le fasi dell’impasto e gli orari programmati](assets/screenshots/pizza-lab-timeline.jpg)](assets/screenshots/pizza-lab-timeline.jpg)
+- [Pizza — file HTML](pizza-computational-lab.html)
+- [Yogurt — file HTML](yogurt-computational-lab.html)
 
-*Screenshot dell’app in italiano. Clicca sulle immagini per aprirle a dimensione originale.*
+Ogni app è autonoma: nessuna installazione, account o chiave API. I calcoli avvengono nel browser. Il quaderno Yogurt resta nel browser e nell’origine in cui lo hai creato: esporta un backup JSON per trasferirlo tra versione online e file offline.
 
-#### Online oppure sul tuo PC
+### Scienza aperta, limiti espliciti
 
-Puoi scegliere come utilizzare il laboratorio:
+Le formule e le fonti sono consultabili nelle app. Le simulazioni sono strumenti esplorativi: non sono previsioni validate della fermentazione o dell’alveolatura reale. La nutrizione è stimata da ingredienti e peso cotto, non certificata da un laboratorio. La temperatura al cuore va letta insieme ai segni di cottura. Per il Bimby segui il manuale e i limiti del tuo modello.
 
-- **Online:** [apri Pizza Computational Lab (Bimby)](https://lookee.github.io/computational-kitchen/pizza-computational-lab.html) e usalo direttamente nel browser.
-- **Sul tuo PC, anche offline:** apri la pagina online e premi **↓ Sorgente HTML** in fondo alla pagina. Salva il file [pizza-computational-lab.html](pizza-computational-lab.html) sul computer e aprilo con il browser quando vuoi, anche senza connessione.
-
-L’app è contenuta in un solo file e non richiede installazioni, account o chiavi API.
-
-L’app non integra un servizio AI; le curve sono simulazioni indicative, non previsioni validate.
-
-### Autore e licenza
-
-**[Luca Amore](https://www.lucaamore.com)** · [GNU GPL v3](LICENSE).
-
-Le attribuzioni e la licenza SIL OFL 1.1 dei font PDF sono incluse nell’HTML. Bimby® e Thermomix® sono marchi registrati del gruppo Vorwerk: questo progetto è indipendente e non affiliato.
+Hai provato una variante? [Apri una issue](https://github.com/lookee/computational-kitchen/issues) con dosi, farina, stampo, forno, tempi e risultato: un esperimento riproducibile vale più di una promessa.
 
 ---
 
 ## English
 
-**A computational kitchen lab: reproducible recipes, scientific models, and interactive tools to explore dough, fermentation, and baking.**
+### A recipe is the starting point. The lab is what happens next.
 
-A space by [Luca Amore](https://www.lucaamore.com) to develop recipes, build small tools, and test ideas in the kitchen. AI helps design the experiments; the dough has the final say.
+What changes when you choose a different flour? How do mixing, refrigeration and the first bake fit together? Computational Kitchen turns those questions into hands-on tools: change a parameter, explore the model, bake the recipe and compare it with the real result.
 
-### 🍕 Pizza Computational Lab
+This project brings together cooking, mathematics and software. AI helps design and build the experiments; practical baking remains the deciding test. The apps do not need an AI service at runtime.
 
-**The first project in Computational Kitchen:** an interactive pizza lab for planning your dough, from ingredient quantities to the first bake.
+### Choose your experiment
 
-**[Open Pizza Computational Lab (Thermomix) →](https://lookee.github.io/computational-kitchen/pizza-computational-lab.html)**
+| | 🍕 Pizza Lab | 🍰 Yogurt Lab |
+|---|---|---|
+| **Design** | Direct dough, poolish and biga; optional autolyse and cold fermentation | 11 variations; round, ring and loaf pans |
+| **Compare** | Flours, hydration and fermentation curves | 10 branded flours, including 4 Caputo profiles; formulations and nutrients |
+| **Explore** | Documented formulas and indicative fermentation windows | A 3D bubble population: growth, coalescence and matrix setting |
+| **Bake** | Thermomix steps and a preparation timeline | Cooking mode, manual timers and optional core-temperature readings, enabled by default |
+| **Keep** | Printable recipe, PDF and calendar export | Experiment notebook, JSON import/export and print/PDF |
+| **Interface** | English / Italian | Italian; bilingual project documentation |
+| **Start** | **[Open Pizza Lab →](https://lookee.github.io/computational-kitchen/pizza-computational-lab.html)** | **[Open Yogurt Lab →](https://lookee.github.io/computational-kitchen/yogurt-computational-lab.html)** |
 
-- **Dough methods:** direct dough, poolish, and biga, with optional autolyse and refrigeration.
-- **Quantities and workflow:** calculated ingredients, Bimby/Thermomix TM5/TM6/TM7 instructions, and a preparation timeline.
-- **Exploration:** documented formulas, a flour catalog, and exploratory fermentation curves.
-- **Languages and export:** Italian and English interface, printable recipe sheet, PDF, and calendar export.
+### From the chart to your kitchen
 
-#### See the app in action
+[See the apps in action above](#dal-grafico-alla-cucina): explore Pizza Lab’s fermentation graph and Yogurt Lab’s pan geometry and bubble simulation. Screenshots show the Italian interfaces.
 
-[View the screenshots ↑](#lapp-in-azione): explore the interactive fermentation graph, dough configuration, and preparation timeline. Screenshots show the Italian interface; the app is also available in English. The curves are illustrative simulations, not validated predictions.
+### One click online. One file offline.
 
-#### Online or on your computer
+Choose a lab on the [homepage](https://lookee.github.io/computational-kitchen/). To use it offline, open the [Pizza HTML](pizza-computational-lab.html) or [Yogurt HTML](yogurt-computational-lab.html) on GitHub, select **Download raw file**, then open the saved file in your browser. No installation, account or API key is needed. Calculations run in your browser. Yogurt notebook data is stored per browser and origin; export JSON to move it between the website and your offline copy.
 
-Choose how you want to use the lab:
+### Open science, explicit limits
 
-- **Online:** [open Pizza Computational Lab (Thermomix)](https://lookee.github.io/computational-kitchen/pizza-computational-lab.html) and use it directly in your browser.
-- **On your computer, including offline:** open the online page and click **↓ HTML source** at the bottom. Save [pizza-computational-lab.html](pizza-computational-lab.html) to your computer, then open it in your browser whenever you like, even without an internet connection.
+Both apps expose their formulas and sources. Their simulations are exploratory models, not validated forecasts of fermentation or actual cake crumb. Nutrition is estimated from ingredients and cooked weight, not laboratory-certified. Use thermometer readings alongside structural signs of doneness, and follow the manual and limits of your Thermomix model.
 
-The app is contained in a single file and requires no installation, account, or API keys.
+Tried a variation? [Open an issue](https://github.com/lookee/computational-kitchen/issues) with quantities, flour, pan, oven, timing and results. Reproducible experiments help improve the lab.
 
-The app does not integrate an AI service; its curves are illustrative simulations, not validated predictions.
+---
 
-### Author and license
+### Build, inspect, contribute / Sviluppa, verifica, contribuisci
 
-**[Luca Amore](https://www.lucaamore.com)** · [GNU GPL v3](LICENSE).
+Yogurt’s editable sources and data provenance live in [`yogurt-lab/`](yogurt-lab/). Run its numerical checks with:
 
-Attributions and the SIL OFL 1.1 license for the PDF fonts are included in the HTML. Bimby® and Thermomix® are registered trademarks of the Vorwerk Group. This project is independent and unaffiliated.
+```sh
+node --test yogurt-lab/tests/*.test.cjs
+node yogurt-lab/build.mjs
+```
+
+The build regenerates the standalone HTML. Pizza remains available in its original standalone file. Contributions are welcome through issues and pull requests; include the assumptions and a reproducible case when changing a model.
+
+**[Luca Amore](https://www.lucaamore.com) · [GNU GPL v3](LICENSE)**
+
+Pizza’s embedded PDF fonts retain their SIL OFL 1.1 notices. Editorial covers are AI-generated illustrations. Bimby® and Thermomix® are Vorwerk trademarks; Computational Kitchen is independent and unaffiliated. / I font PDF di Pizza conservano le attribuzioni SIL OFL 1.1. Le copertine editoriali sono illustrazioni generate con AI. Progetto indipendente, non affiliato a Vorwerk.
